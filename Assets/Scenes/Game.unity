@@ -316,7 +316,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 668801904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 559d2ae62e5aef8448ab043dda795d25, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e033a8ea8c96e84bb7aa40af7a78280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPower: 50
@@ -406,7 +406,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668801904}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 79180f511d89441b9aa23ccae1992fe0, type: 3}
@@ -697,7 +697,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c600230e161254088d107363b412dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 114fd8be8ef18b04f83b5264438a70eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &980453287
@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 1005697452}
   - component: {fileID: 1005697451}
   m_Layer: 0
-  m_Name: 1
+  m_Name: i1
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -825,10 +825,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1005697450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89ea1ed61087197498e3830eb428ef0e, type: 3}
+  m_Script: {fileID: 11500000, guid: ad6955c516c10f04f9171be4fa86e886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 40
+  rotateSpeed: 0
 --- !u!136 &1005697452
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -999,7 +999,7 @@ GameObject:
   - component: {fileID: 1348237425}
   - component: {fileID: 1348237424}
   m_Layer: 0
-  m_Name: 2
+  m_Name: i2
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1014,10 +1014,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1348237423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89ea1ed61087197498e3830eb428ef0e, type: 3}
+  m_Script: {fileID: 11500000, guid: ad6955c516c10f04f9171be4fa86e886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 40
+  rotateSpeed: 0
 --- !u!136 &1348237425
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1320,10 +1320,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1591684629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd80e52761c7ff4da16a5a8dbd8a282, type: 3}
+  m_Script: {fileID: 11500000, guid: f4b0588c1f0c2b742a1e99a2a632dcb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalItemCount: 2
+  totalItemCount: 0
   stage: 0
   stageCountText: {fileID: 1203238298}
   playerCountText: {fileID: 2014320174}
