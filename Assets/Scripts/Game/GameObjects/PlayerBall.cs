@@ -91,7 +91,6 @@ public class PlayerBall : MonoBehaviour
     {
         if (other.tag == "wp")
         {
-            Debug.Log(manager.GetGameOverBoolean());
             currentLocation++;
         }
         
