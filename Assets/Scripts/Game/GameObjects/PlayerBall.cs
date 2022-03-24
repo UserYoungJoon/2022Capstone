@@ -49,8 +49,12 @@ public class PlayerBall : MonoBehaviour
         if (hasKeyDown == true)
         {
             checkInput();
-            Debug.Log("Moving to: " + points[currentLocation].ToString());
+            // Debug.Log("Moving to: " + points[currentLocation].ToString());
             transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * 3);
+        }
+
+        if(Input.GetKeyDown(KeyCode.B)){
+            Debug.Log("Current list number is: " + currentLocation);
         }
 
         //오브젝트 회전(x축)
@@ -83,7 +87,7 @@ public class PlayerBall : MonoBehaviour
             itemCount++;
             GetComponent<AudioSource>().Play();
             //other.gameObject.SetActive(false);
-            manager.GetItem(itemCount);
+            // manager.GetItem(itemCount);
             currentLocation++;
             other.gameObject.tag = "ok";
         }
