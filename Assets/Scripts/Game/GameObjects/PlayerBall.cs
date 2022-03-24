@@ -118,7 +118,6 @@ public class PlayerBall : MonoBehaviour
         if (other.tag == "wp")
         {
             Debug.Log("You are Leaving at: " + currentLocation);
-            GetComponent<AudioSource>().Play();
         }
         
     }
