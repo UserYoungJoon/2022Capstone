@@ -14,7 +14,7 @@ public class PlayerBall : MonoBehaviour
     private int currentLocation = 0;
     bool hasKeyDown = false;
 
-    private float moveSpeed = 20.0f;    //이동속도(z축)
+    public float moveSpeed;    //이동속도(z축)
     private float rotateSpeed = 300.0f;  //회전속도
 
     private void Awake()
@@ -27,12 +27,12 @@ public class PlayerBall : MonoBehaviour
 
         points.Add(this.gameObject.transform.position);
 
-        for (int i = 1; i <= 2; i++)
+        for (int i = 1; i <= 17; i++)
         {
-            panel = GameObject.Find("q" + i.ToString());
+            panel = GameObject.Find("p" + i.ToString());
             panelTransform = panel.transform;
             panelPosition = panelTransform.position;
-            panelPosition.y = 0.5f;
+            panelPosition.y = 0;
             points.Add(panelPosition);
         }
     }
@@ -69,27 +69,35 @@ public class PlayerBall : MonoBehaviour
 
     void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        // float h = Input.GetAxisRaw("Horizontal");
+        // float v = Input.GetAxisRaw("Vertical");
 
-        rigid.AddForce(new Vector3(h, 0, v), ForceMode.Impulse);
+        // rigid.AddForce(new Vector3(h, 0, v), ForceMode.Impulse);
     }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Floor")
             isJump = false;
+
+        if (collision.gameObject.tag == "Item")
+        {
+            Debug.Log("Coll");
+            itemCount++;
+            GetComponent<AudioSource>().Play();
+            manager.GetItem(itemCount);
+            isJump = false;
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Item")
+        if (other.tag == "wp")
         {
-            itemCount++;
-            GetComponent<AudioSource>().Play();
-            manager.GetItem(itemCount);
+            Debug.Log("Triggered");
             currentLocation++;
         }
-        else if (other.tag == "Finish")
+        
+        if (other.tag == "Finish")
         {
             if (itemCount == manager.totalItemCount)
             {
