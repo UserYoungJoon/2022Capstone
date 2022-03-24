@@ -29,7 +29,7 @@ public class PlayerBall : MonoBehaviour
 
         for (int i = 1; i <= 2; i++)
         {
-            panel = GameObject.Find(i.ToString());
+            panel = GameObject.Find("q" + i.ToString());
             panelTransform = panel.transform;
             panelPosition = panelTransform.position;
             panelPosition.y = 0.5f;
@@ -86,10 +86,8 @@ public class PlayerBall : MonoBehaviour
         {
             itemCount++;
             GetComponent<AudioSource>().Play();
-            //other.gameObject.SetActive(false);
-            // manager.GetItem(itemCount);
+            manager.GetItem(itemCount);
             currentLocation++;
-            other.gameObject.tag = "ok";
         }
         else if (other.tag == "Finish")
         {
@@ -106,7 +104,6 @@ public class PlayerBall : MonoBehaviour
                 //Restart..
                 SceneManager.LoadScene(manager.stage);
             }
-            //GameObject.FindGameObjectWithTag // find는 cpu많이잡아먹기때문에 잘 안씀
         }
     }
 }
