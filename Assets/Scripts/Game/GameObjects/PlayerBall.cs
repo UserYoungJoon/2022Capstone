@@ -27,7 +27,7 @@ public class PlayerBall : MonoBehaviour
 
         points.Add(this.gameObject.transform.position);
 
-        for (int i = 1; i <= 17; i++)
+        for (int i = 1; i <= 27; i++)
         {
             panel = GameObject.Find("p" + i.ToString());
             panelTransform = panel.transform;
@@ -83,7 +83,6 @@ public class PlayerBall : MonoBehaviour
         {
             Debug.Log("Coll");
             itemCount++;
-            GetComponent<AudioSource>().Play();
             manager.GetItem(itemCount);
             isJump = false;
         }
@@ -113,5 +112,16 @@ public class PlayerBall : MonoBehaviour
                 SceneManager.LoadScene(manager.stage);
             }
         }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "wp")
+        {
+            Debug.Log("You are Leaving at: " + currentLocation);
+            GetComponent<AudioSource>().Play();
+        }
+        
     }
 }
