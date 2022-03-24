@@ -27,7 +27,8 @@ public class PlayerBall : MonoBehaviour
 
         points.Add(this.gameObject.transform.position);
 
-        for(int i=1; i<=2; i++){
+        for (int i = 1; i <= 2; i++)
+        {
             panel = GameObject.Find(i.ToString());
             panelTransform = panel.transform;
             panelPosition = panelTransform.position;
@@ -35,15 +36,18 @@ public class PlayerBall : MonoBehaviour
             points.Add(panelPosition);
         }
     }
-    private void checkInput(){
-        if(Input.GetKeyDown(KeyCode.J)) currentLocation++;
+    private void checkInput()
+    {
+        if (Input.GetKeyDown(KeyCode.J)) currentLocation++;
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.J) && hasKeyDown == false) {
+        if (Input.GetKeyDown(KeyCode.J) && hasKeyDown == false)
+        {
             hasKeyDown = true;
         }
-        if(hasKeyDown == true){
+        if (hasKeyDown == true)
+        {
             checkInput();
             Debug.Log("Moving to: " + points[currentLocation].ToString());
             transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * 3);
@@ -66,8 +70,9 @@ public class PlayerBall : MonoBehaviour
 
         rigid.AddForce(new Vector3(h, 0, v), ForceMode.Impulse);
     }
-    void OnCollisionEnter(Collision collision) { 
-        if(collision.gameObject.tag == "Floor")
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor")
             isJump = false;
     }
 
@@ -85,14 +90,15 @@ public class PlayerBall : MonoBehaviour
         else if (other.tag == "Finish")
         {
             if (itemCount == manager.totalItemCount)
-            {                
+            {
                 //Game Clear!
                 if (manager.stage == 1)
                     SceneManager.LoadScene(0);
                 else
                     SceneManager.LoadScene(manager.stage + 1);
             }
-            else {
+            else
+            {
                 //Restart..
                 SceneManager.LoadScene(manager.stage);
             }
