@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public int stage;
     public Text stageCountText;
     public Text playerCountText;
+    private bool gameOverBoolean = false;
 
     void Awake()
     {
@@ -21,8 +22,20 @@ public class GameManager : MonoBehaviour
         playerCountText.text = count.ToString();
     }
 
+
+    public bool GetGameOverBoolean(){
+        return gameOverBoolean;
+    }
+
     void OnTriggerEnter(Collider other) { 
         if(other.gameObject.tag == "Player")
+        {
+            gameOverBoolean = true;
+            if(gameOverBoolean == true)
+                Debug.Log("GAME OVER");
+            
             SceneManager.LoadScene(stage);
+
+        }
     }
 }

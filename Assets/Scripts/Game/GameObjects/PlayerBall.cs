@@ -81,7 +81,6 @@ public class PlayerBall : MonoBehaviour
 
         if (collision.gameObject.tag == "Item")
         {
-            Debug.Log("Coll");
             itemCount++;
             manager.GetItem(itemCount);
             isJump = false;
@@ -92,7 +91,7 @@ public class PlayerBall : MonoBehaviour
     {
         if (other.tag == "wp")
         {
-            Debug.Log("Triggered");
+            Debug.Log(manager.GetGameOverBoolean());
             currentLocation++;
         }
         
