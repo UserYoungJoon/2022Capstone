@@ -2,7 +2,7 @@
 
 <h2> 코드 규칙</h2>
 - 기본적으로 구글 C# 코딩 컨벤션을 따름 :<a href="https://docs.microsoft.com/ko-kr/dotnet/csharp/fundamentals/coding-style/coding-conventions"> [해당링크] </a> <br>
-- BSD 스타일이 아닌 K&R스타일을 사용할 것 <br>
+- BSD ,K&R스타일은 무관하지만 반드시 각자의 컨벤션을 유지할 것 <br>
 - 메소드의 이름은 접근 제한자 관련 없이 파스칼 표기법을 사용 ex) GiveItem, GetPosition...<br>
 - 메소드의 이름을 설정할 때 가능한 동사로 시작할 것<br>
 - 멤버필드의 명명법은 카멜 스타일 ex) myItem, baseList...<br>
