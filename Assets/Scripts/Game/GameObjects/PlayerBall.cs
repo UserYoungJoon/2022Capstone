@@ -89,7 +89,7 @@ public class PlayerBall : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "wp")
+        if (other.tag == "Way Point")
         {
             currentLocation++;
         }

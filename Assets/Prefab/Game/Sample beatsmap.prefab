@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6513224021695537669}
   m_Layer: 0
   m_Name: p14
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 8122769322974224330}
   m_Layer: 0
   m_Name: p15
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1084,7 +1084,7 @@ GameObject:
   - component: {fileID: 7432501131064950298}
   m_Layer: 0
   m_Name: p13
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1429,7 +1429,7 @@ GameObject:
   - component: {fileID: 9115681518918818260}
   m_Layer: 0
   m_Name: p16
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1679,7 +1679,7 @@ GameObject:
   - component: {fileID: 8324080048129693198}
   m_Layer: 0
   m_Name: p19
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1929,7 +1929,7 @@ GameObject:
   - component: {fileID: 7503256487214744923}
   m_Layer: 0
   m_Name: p26
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2084,7 +2084,7 @@ GameObject:
   - component: {fileID: 940248379205278717}
   m_Layer: 0
   m_Name: p5
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2239,7 +2239,7 @@ GameObject:
   - component: {fileID: 4489017401404140016}
   m_Layer: 0
   m_Name: p2
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2489,7 +2489,7 @@ GameObject:
   - component: {fileID: 7248984600984099593}
   m_Layer: 0
   m_Name: p24
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2644,7 +2644,7 @@ GameObject:
   - component: {fileID: 4102356135583164793}
   m_Layer: 0
   m_Name: p11
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2989,7 +2989,7 @@ GameObject:
   - component: {fileID: 8616351539564169544}
   m_Layer: 0
   m_Name: p21
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3619,7 +3619,7 @@ GameObject:
   - component: {fileID: 8099097975933486113}
   m_Layer: 0
   m_Name: p25
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3774,7 +3774,7 @@ GameObject:
   - component: {fileID: 5818383587730513078}
   m_Layer: 0
   m_Name: p1
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3929,7 +3929,7 @@ GameObject:
   - component: {fileID: 6325320591670356469}
   m_Layer: 0
   m_Name: p12
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4084,7 +4084,7 @@ GameObject:
   - component: {fileID: 7232213197846657247}
   m_Layer: 0
   m_Name: p23
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4239,7 +4239,7 @@ GameObject:
   - component: {fileID: 3438711819356431830}
   m_Layer: 0
   m_Name: p6
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4489,7 +4489,7 @@ GameObject:
   - component: {fileID: 8902126532358254663}
   m_Layer: 0
   m_Name: p9
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4739,7 +4739,7 @@ GameObject:
   - component: {fileID: 6032624195400688391}
   m_Layer: 0
   m_Name: p7
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4894,7 +4894,7 @@ GameObject:
   - component: {fileID: 6468476707520837034}
   m_Layer: 0
   m_Name: p4
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5144,7 +5144,7 @@ GameObject:
   - component: {fileID: 4542146662128006064}
   m_Layer: 0
   m_Name: p8
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5299,7 +5299,7 @@ GameObject:
   - component: {fileID: 3826527914244766867}
   m_Layer: 0
   m_Name: p27
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5549,7 +5549,7 @@ GameObject:
   - component: {fileID: 1344822767638127864}
   m_Layer: 0
   m_Name: p10
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5799,7 +5799,7 @@ GameObject:
   - component: {fileID: 2011580508277938688}
   m_Layer: 0
   m_Name: p18
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5954,7 +5954,7 @@ GameObject:
   - component: {fileID: 6504612374754786608}
   m_Layer: 0
   m_Name: p17
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6204,7 +6204,7 @@ GameObject:
   - component: {fileID: 7164206520917489507}
   m_Layer: 0
   m_Name: p22
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6454,7 +6454,7 @@ GameObject:
   - component: {fileID: 6431762082627785851}
   m_Layer: 0
   m_Name: p3
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6609,7 +6609,7 @@ GameObject:
   - component: {fileID: 2415246729769705904}
   m_Layer: 0
   m_Name: p20
-  m_TagString: wp
+  m_TagString: Way Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

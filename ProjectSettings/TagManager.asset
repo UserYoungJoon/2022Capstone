@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - Item
   - wp
+  - Way Point
   layers:
   - Default
   - TransparentFX
