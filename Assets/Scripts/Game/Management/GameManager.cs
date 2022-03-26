@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Text stageCountText;
     public Text playerCountText;
     private bool gameOverBoolean = false;
+    private int userScore = 0;
 
     void Awake()
     {
@@ -20,6 +21,30 @@ public class GameManager : MonoBehaviour
     public void GetItem(int count)
     {
         playerCountText.text = count.ToString();
+    }
+
+    public void GetPerfect()
+    {
+        Debug.Log("Perfect!");
+        userScore += 300;
+    }
+
+    public void GetGreat()
+    {
+        Debug.Log("Great!");
+        userScore += 200;
+    }
+
+    public void GetGood()
+    {
+        Debug.Log("Good!");
+        userScore += 100;
+    }
+
+    public void GetBad()
+    {
+        Debug.Log("Bad!");
+        userScore += 50;
     }
 
 

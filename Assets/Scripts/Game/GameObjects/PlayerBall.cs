@@ -25,8 +25,10 @@ public class PlayerBall : MonoBehaviour
         Transform panelTransform;
         Vector3 panelPosition;
 
+        // 초기 공의 위치
         points.Add(this.gameObject.transform.position);
 
+        // 생성된 패널의 수를 리스트에 추가, i <= panel
         for (int i = 1; i <= 27; i++)
         {
             panel = GameObject.Find("p" + i.ToString());
@@ -36,6 +38,7 @@ public class PlayerBall : MonoBehaviour
             points.Add(panelPosition);
         }
     }
+    // J키 입력 시 출발 (임시)
     private void checkInput()
     {
         if (Input.GetKeyDown(KeyCode.J)) currentLocation++;
@@ -52,7 +55,7 @@ public class PlayerBall : MonoBehaviour
             // Debug.Log("Moving to: " + points[currentLocation].ToString());
             transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * 3);
         }
-
+        // 디버깅용 패널 위치 확인하기
         if(Input.GetKeyDown(KeyCode.B)){
             Debug.Log("Current list number is: " + currentLocation);
         }
@@ -69,10 +72,7 @@ public class PlayerBall : MonoBehaviour
 
     void FixedUpdate()
     {
-        // float h = Input.GetAxisRaw("Horizontal");
-        // float v = Input.GetAxisRaw("Vertical");
-
-        // rigid.AddForce(new Vector3(h, 0, v), ForceMode.Impulse);
+        
     }
     void OnCollisionEnter(Collision collision)
     {
