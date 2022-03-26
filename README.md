@@ -8,6 +8,7 @@
 - 멤버필드의 명명법은 카멜 스타일 ex) myItem, baseList...<br>
 - 모든 메소드와 필드에 접근 지정자를 명시할 것<br>
 - 대부분의 멤버필드를 public으로 선언하되, 외부에서 접근될 일이 없는 것이 명확한 필드는 private로 선언<br>
+- Enum과 Interface는 각각 eEnum, Interface 식으로 앞에 e,I를 붙일것<br>
 - 햇갈리는 부분은 일단 임의로 작성. 위 사항을 넘어가는 컨벤션은 크게 여의치 않아도 됨.
 
 <br><br>
