@@ -52,11 +52,13 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public bool GetGameOverBoolean(){
+    public bool GetGameOverBoolean()
+    {
         return gameOverBoolean;
     }
 
-    void OnTriggerEnter(Collider other) { 
+    void OnTriggerEnter(Collider other) 
+    { 
         if(other.gameObject.tag == "Player")
         {
             gameOverBoolean = true;
