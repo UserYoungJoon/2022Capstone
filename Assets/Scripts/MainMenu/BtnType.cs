@@ -23,8 +23,8 @@ public class BtnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             case BTNType.New:
                 Debug.Log("새게임");
-                CanvasGroupOn(mainGroup);
-                CanvasGroupoff(songGroup);
+                CanvasGroupOn(songGroup);
+                CanvasGroupoff(mainGroup);
                 break;
             case BTNType.Option:
                 CanvasGroupOn(optionGroup);
@@ -36,23 +36,23 @@ public class BtnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 CanvasGroupoff(optionGroup);
                 Debug.Log("돌아가기");
                 break;
-            case BTNType.Mainback:
-                CanvasGroupOn(songGroup);
-                CanvasGroupoff(mainGroup);
-                Debug.Log("메인화면으로가기");
-                break;
-            case BTNType.Songback:
-                CanvasGroupOn(playGroup);
-                CanvasGroupoff(songGroup);
-                Debug.Log("곡선택창");
-                break;
             case BTNType.Quit:
                 Application.Quit();
                 Debug.Log("나가기");
                 break;
-            case BTNType.Select:
+            case BTNType.Mainback:
+                CanvasGroupOn(mainGroup);
+                CanvasGroupoff(songGroup);
+                Debug.Log("메인화면으로가기");
+                break;
+            case BTNType.Songback:
                 CanvasGroupOn(songGroup);
                 CanvasGroupoff(playGroup);
+                Debug.Log("곡선택창");
+                break;
+            case BTNType.Select:
+                CanvasGroupOn(playGroup);
+                CanvasGroupoff(songGroup);
                 Debug.Log("곡선택");
                 break;
             
