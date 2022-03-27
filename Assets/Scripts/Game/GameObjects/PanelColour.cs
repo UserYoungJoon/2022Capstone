@@ -9,7 +9,7 @@ public class PanelColour : MonoBehaviour
     public Color endColor;
     float startTime;
     private bool isActvieCollide = false;
-    // Start is called before the first frame update
+    public bool repeatable = false;
     void Start()
     {
         startTime = Time.time;
@@ -18,12 +18,8 @@ public class PanelColour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isActvieCollide){
+        if(isActvieCollide)
             ActiveChangeColor();
-            if(GetComponent<Renderer>().material.color == endColor){
-                isActvieCollide = false;
-            }
-        }
     }
 
     private void OnCollisionEnter(Collision other) 
@@ -36,8 +32,17 @@ public class PanelColour : MonoBehaviour
 
     private void ActiveChangeColor()
     {
-        float t = (Time.time - startTime * speed);
-        GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, t);
+        if(!repeatable)
+        {
+            float t = (Time.time - startTime * speed);
+            GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, t);
+        }
+        else
+        {
+            float t = (Mathf.Sin(Time.time - startTime) * speed);
+            GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, t);
+        }
+        
         
     }
 }

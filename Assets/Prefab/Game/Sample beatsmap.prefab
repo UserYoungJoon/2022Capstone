@@ -419,8 +419,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065437731589430
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,8 +531,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065437819598772
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,8 +643,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065437826474154
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,8 +755,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065437827975867
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,8 +867,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065437855236895
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,8 +979,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0.15586233, b: 1, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065437907742880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,8 +1091,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065437986449074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,8 +1203,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438007895200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,8 +1470,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438089560444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,8 +1582,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438091308201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,8 +1849,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438111018970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,8 +2116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438152642110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,8 +2693,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438406497002
 GameObject:
   m_ObjectHideFlags: 0
@@ -3102,8 +3115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438513016385
 GameObject:
   m_ObjectHideFlags: 0
@@ -3213,8 +3227,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438655288924
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,8 +3494,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438681792890
 GameObject:
   m_ObjectHideFlags: 0
@@ -3590,8 +3606,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438720271940
 GameObject:
   m_ObjectHideFlags: 0
@@ -3701,8 +3718,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438776103613
 GameObject:
   m_ObjectHideFlags: 0
@@ -3812,8 +3830,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438823682096
 GameObject:
   m_ObjectHideFlags: 0
@@ -3923,8 +3942,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065438871832540
 GameObject:
   m_ObjectHideFlags: 0
@@ -4809,8 +4829,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065439160524042
 GameObject:
   m_ObjectHideFlags: 0
@@ -5075,8 +5096,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065439192729266
 GameObject:
   m_ObjectHideFlags: 0
@@ -5496,8 +5518,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065439263875122
 GameObject:
   m_ObjectHideFlags: 0
@@ -5917,8 +5940,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065439448095390
 GameObject:
   m_ObjectHideFlags: 0
@@ -6183,8 +6207,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065439483840718
 GameObject:
   m_ObjectHideFlags: 0
@@ -6604,8 +6629,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065439600250237
 GameObject:
   m_ObjectHideFlags: 0
@@ -6870,8 +6896,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 0, g: 1, b: 0.08628178, a: 1}
+  repeatable: 0
 --- !u!1 &1480065439619940276
 GameObject:
   m_ObjectHideFlags: 0

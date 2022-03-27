@@ -13,6 +13,7 @@ public class PlayerBall : MonoBehaviour
     public List<Vector3> points = new List<Vector3>();
     private int currentLocation = 0;
     bool hasKeyDown = false;
+    private bool startedGame = false;
 
     public float moveSpeed;    //이동속도(z축)
     private float rotateSpeed = 300.0f;  //회전속도
@@ -41,7 +42,11 @@ public class PlayerBall : MonoBehaviour
     // J키 입력 시 출발 (임시)
     private void checkInput()
     {
-        if (Input.GetKeyDown(KeyCode.J)) currentLocation++;
+        if (Input.GetKeyDown(KeyCode.J) && !startedGame)
+        {
+            currentLocation++;
+            startedGame = true;
+        }
     }
     void Update()
     {
@@ -81,8 +86,6 @@ public class PlayerBall : MonoBehaviour
 
         if (collision.gameObject.tag == "Item")
         {
-            itemCount++;
-            manager.GetItem(itemCount);
             isJump = false;
         }
     }
@@ -115,10 +118,50 @@ public class PlayerBall : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "wp")
-        {
+        if (other.tag == "Way Point")
+        {   
+            // 점수 계산 테스트
+            manager.GetPerfect();
             Debug.Log("You are Leaving at: " + currentLocation);
         }
         
     }
 }
+
+
+
+//             Algorithm A
+// 플레이어의 위치와 포인트의 거리에 따른 점수계산
+
+// if playerPosition = point or playerPosition - point >= |3|
+//   then Perfect
+// if playerPosition - point >= |5|
+//   then Great
+// if playerPosition - point >= |7|
+//   then good
+// if playerPosition - point >= |10|
+//   then bad
+
+
+//              Algorithm B
+// 패널의 색변화에 따라 점수판정
+
+// if playerStatus = collisionToPanel
+//   then PanelStartedChangeColour
+ 
+// load PanelChaningColour()
+// update(getPanelColour)
+// time = getColourChangeTime()
+
+// if time > 1.0
+//   then Perfect()
+// if time > 2.0
+//   then Great()
+// if time > 3.0
+//   then Good()
+// if time > 4.0
+//   then Bad()
+
+            
+
+

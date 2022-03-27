@@ -21,6 +21,7 @@ public class Panel : MonoBehaviour
       if (other.tag == "Player")
         {
             audio.Play();
-        }      
+
+        }
     }
 }
