@@ -213,8 +213,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 177299669}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -1.99}
-  m_LocalScale: {x: 5, y: 17.200733, z: 0.1}
+  m_LocalPosition: {x: 0, y: 1e-15, z: -1.99}
+  m_LocalScale: {x: 5, y: 18.09861, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -682,13 +682,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.18832526, y: -0.68369234, z: 0.18960454, w: 0.67907923}
-  m_LocalPosition: {x: 8.09, y: 2.2, z: 1.78}
+  m_LocalRotation: {x: 0.26720065, y: -0.016290357, z: 0.004517594, w: 0.96349263}
+  m_LocalPosition: {x: 0.04, y: 2.29, z: -1.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 31, y: -90.388, z: 0}
+  m_LocalEulerAnglesHint: {x: 31, y: -1.937, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,7 +890,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalItemCount: 0
   stage: 0
-  stageCountText: {fileID: 0}
   playerCountText: {fileID: 2014320174}
 --- !u!4 &1591684631
 Transform:

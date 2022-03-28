@@ -8,12 +8,14 @@ public class PlayerBall : MonoBehaviour
     public float jumpPower;
     public int itemCount;
     public GameManager manager;
-    bool isJump;
+    public static bool isJump;
     Rigidbody rigid;
     public List<Vector3> points = new List<Vector3>();
     private int currentLocation = 0;
     bool hasKeyDown = false;
     private bool startedGame = false;
+    private Vector3 playerPosition;
+    private Vector3 calEachPosition;
 
     public float moveSpeed;    //이동속도(z축)
     private float rotateSpeed = 300.0f;  //회전속도
@@ -30,7 +32,7 @@ public class PlayerBall : MonoBehaviour
         points.Add(this.gameObject.transform.position);
 
         // 생성된 패널의 수를 리스트에 추가, i <= panel
-        for (int i = 1; i <= 27; i++)
+        for (int i = 1; i <= 26; i++)
         {
             panel = GameObject.Find("p" + i.ToString());
             panelTransform = panel.transform;
@@ -70,14 +72,10 @@ public class PlayerBall : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && !isJump)
         {
+            Jumped();
             isJump = true;
             rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
         }
-    }
-
-    void FixedUpdate()
-    {
-        
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -120,10 +118,37 @@ public class PlayerBall : MonoBehaviour
     {
         if (other.tag == "Way Point")
         {   
-            // 점수 계산 테스트
-            manager.GetPerfect();
-            Debug.Log("You are Leaving at: " + currentLocation);
+            // Debug.Log("You are Leaving at: " + currentLocation);
         }
+        
+    }
+
+
+    private void Jumped()
+    {
+        playerPosition = transform.position;
+        calEachPosition = (playerPosition - points[currentLocation - 1]);
+        Debug.Log(currentLocation + ", Calculated: " + calEachPosition.z);
+        
+
+         // 점수 계산 테스트
+            // -0.1 < z < 0.1
+            if(calEachPosition.z <= 0.04f && calEachPosition.z >= -0.04f)
+            {
+                manager.GetPerfect();
+            }
+            else if(calEachPosition.z <= 0.08f && calEachPosition.z >= -0.08f)
+            {
+                manager.GetGreat();
+            }
+            else if(calEachPosition.z <= 0.12f && calEachPosition.z >= -0.12f)
+            {
+                manager.GetGood();
+            }
+            else
+            {
+                manager.GetBad();
+            }
         
     }
 }
@@ -132,7 +157,7 @@ public class PlayerBall : MonoBehaviour
 
 //             Algorithm A
 // 플레이어의 위치와 포인트의 거리에 따른 점수계산
-
+// 0.02 0.03 0.05
 // if playerPosition = point or playerPosition - point >= |3|
 //   then Perfect
 // if playerPosition - point >= |5|
