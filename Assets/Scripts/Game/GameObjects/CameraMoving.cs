@@ -7,11 +7,18 @@ public class CameraMoving : MonoBehaviour
     Transform playerTransform;
     Vector3 Offset;
 
-    void Awake()
+    #region Initializing section
+    public void Init()
+    {
+
+    }
+
+    public void Bind()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         Offset = transform.position - playerTransform.position;
     }
+    #endregion
 
     void LateUpdate()
     {
