@@ -802,6 +802,9 @@ MonoBehaviour:
   totalItemCount: 0
   stage: 0
   playerCountText: {fileID: 2014320174}
+  playerBall: {fileID: 668801905}
+  CSVConverter: {fileID: 1591684633}
+  cameraMoving: {fileID: 963194229}
 --- !u!4 &1591684631
 Transform:
   m_ObjectHideFlags: 0

@@ -12,7 +12,8 @@ public class CSVConverter : MonoBehaviour
     public GameObject panel;    //prefab
     public Transform beatMapTransform;
 
-    public void Awake() //makeBeat
+    #region Initializing section
+    public void Init()
     {
         int panelindex = 1;
         List<Dictionary<string, object>> data = CSVReader.Read("Airplane"); //data가 2차월 배열의 형태로 저장됨
@@ -30,5 +31,11 @@ public class CSVConverter : MonoBehaviour
             }
         }
     }
+
+    public void Bind()
+    {
+        
+    }
+    #endregion
 
 }

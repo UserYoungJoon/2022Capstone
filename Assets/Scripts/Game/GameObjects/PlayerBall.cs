@@ -21,26 +21,25 @@ public class PlayerBall : MonoBehaviour
     private float rotateSpeed = 300.0f;  //회전속도
     public Transform BeatMap;
 
-    private void Start()
+    #region Initializing section
+    public void Init()
     {
         isJump = false;
         rigid = GetComponent<Rigidbody>();
-        GameObject panel;
-        Transform panelTransform;
-        Vector3 panelPosition;
-
         points.Add(this.gameObject.transform.position);
+    }
 
-        // 생성된 패널의 수를 리스트에 추가, i <= panel
+    public void Bind()
+    {
+        Vector3 panelPosition;
         for (int i = 1; i <= 36; i++)
         {
-            //panel = BeatMap.Find("panel" + i).gameObject;
-            //panelTransform = panel.transform;
-            panelPosition = BeatMap.Find("panel" + i).Find("p"+i).position;
+            panelPosition = BeatMap.Find("panel" + i).Find("p" + i).position;
             panelPosition.y = 0f;
             points.Add(panelPosition);
         }
     }
+    #endregion
 
     void Update()
     {
@@ -134,7 +133,6 @@ public class PlayerBall : MonoBehaviour
         }
 
     }
-
 }
 
 

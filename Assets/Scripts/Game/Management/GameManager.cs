@@ -12,9 +12,20 @@ public class GameManager : MonoBehaviour
     private bool gameOverBoolean = false;
     private int userScore = 0;
 
+    public PlayerBall   playerBall;
+    public CSVConverter CSVConverter;
+    public CameraMoving cameraMoving;
+
     void Awake()
     {
-        
+        playerBall.Init();
+        CSVConverter.Init();
+        cameraMoving.Init();
+
+        playerBall.Bind();
+        CSVConverter.Bind();
+        cameraMoving.Bind();
+
     }
 
     public void ScoreCal()
