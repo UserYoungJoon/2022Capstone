@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        (new Notes()).Init();//temp code
+        
         playerBall.Init();
         CSVConverter.Init();
         cameraMoving.Init();
@@ -25,7 +27,6 @@ public class GameManager : MonoBehaviour
         playerBall.Bind();
         CSVConverter.Bind();
         cameraMoving.Bind();
-
     }
 
     public void ScoreCal()
