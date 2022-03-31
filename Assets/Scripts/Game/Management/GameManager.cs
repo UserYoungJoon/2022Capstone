@@ -8,21 +8,66 @@ public class GameManager : MonoBehaviour
 {
     public int totalItemCount;
     public int stage;
-    public Text stageCountText;
     public Text playerCountText;
+    private bool gameOverBoolean = false;
+    private int userScore = 0;
 
     void Awake()
     {
-        stageCountText.text = "/ " + totalItemCount;
+        
     }
 
-    public void GetItem(int count)
+    public void ScoreCal()
     {
-        playerCountText.text = count.ToString();
+        playerCountText.text = userScore.ToString();
     }
 
-    void OnTriggerEnter(Collider other) { 
+
+    public void GetPerfect()
+    {
+        Debug.Log("Perfect!");
+        userScore += 300;
+        ScoreCal();
+    }
+
+    public void GetGreat()
+    {
+        Debug.Log("Great!");
+        userScore += 200;
+        ScoreCal();
+    }
+
+    public void GetGood()
+    {
+        Debug.Log("Good!");
+        userScore += 100;
+        ScoreCal();
+    }
+
+    public void GetBad()
+    {
+        Debug.Log("Bad!");
+        userScore += 50;
+        ScoreCal();
+    }
+
+
+    public bool GetGameOverBoolean()
+    {
+        return gameOverBoolean;
+    }
+
+    void OnTriggerEnter(Collider other) 
+    { 
         if(other.gameObject.tag == "Player")
+        {
+            gameOverBoolean = true;
+            if(gameOverBoolean == true)
+                Debug.Log("GAME OVER");
+                Debug.Log("Final Score is: " + userScore);
+            
             SceneManager.LoadScene(stage);
+
+        }
     }
 }
