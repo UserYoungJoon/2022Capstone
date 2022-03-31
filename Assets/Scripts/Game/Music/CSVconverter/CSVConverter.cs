@@ -9,23 +9,26 @@ using UnityEngine.SceneManagement;
  */
 public class CSVConverter : MonoBehaviour
 {
-    public GameObject obj;
-    public void Start()
-    {
-        List<Dictionary<string, object>> data = CSVReader.Read("Airplane"); //data가 2차월 배열의 형태로 저장됨
+    public GameObject panel;    //prefab
+    public Transform beatMapTransform;
 
+    public void Awake() //makeBeat
+    {
+        int panelindex = 1;
+        List<Dictionary<string, object>> data = CSVReader.Read("Airplane"); //data가 2차월 배열의 형태로 저장됨
         for (var i = 0; i < data.Count; i++)    //csv파일 읽기
         {
             if ((int)(data[i]["Speed"]) != 0)   //speed==0 은 노트의 종결을 의미
             {
                 Debug.Log("Note: " + data[i]["Note"] + "Time: " + data[i]["Time"]);
-                newObject("Note"+i, 0,0, (int)(data[i]["Time"])/60);
+
+                var obj = Instantiate(panel, new Vector3(0, 0, (int)data[i]["Time"] / 60), Quaternion.identity, beatMapTransform);
+                obj.name = "panel" + panelindex;
+                var child = obj.GetComponent<Transform>().Find("p");
+                child.name = "p" + panelindex;
+                panelindex++;
             }
         }
     }
 
-    public void newObject(string objName, int x, int y, int z)
-    {
-        GameObject Block = Instantiate (obj, new Vector3(x, y, z), Quaternion.identity) as GameObject;
-    }
 }

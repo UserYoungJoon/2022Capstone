@@ -19,8 +19,9 @@ public class PlayerBall : MonoBehaviour
 
     public float moveSpeed;    //이동속도(z축)
     private float rotateSpeed = 300.0f;  //회전속도
+    public Transform BeatMap;
 
-    private void Awake()
+    private void Start()
     {
         isJump = false;
         rigid = GetComponent<Rigidbody>();
@@ -28,28 +29,19 @@ public class PlayerBall : MonoBehaviour
         Transform panelTransform;
         Vector3 panelPosition;
 
-        // 초기 공의 위치
         points.Add(this.gameObject.transform.position);
 
         // 생성된 패널의 수를 리스트에 추가, i <= panel
-        for (int i = 1; i <= 26; i++)
+        for (int i = 1; i <= 36; i++)
         {
-            panel = GameObject.Find("p" + i.ToString());
-            panelTransform = panel.transform;
-            panelPosition = panelTransform.position;
-            panelPosition.y = 0;
+            //panel = BeatMap.Find("panel" + i).gameObject;
+            //panelTransform = panel.transform;
+            panelPosition = BeatMap.Find("panel" + i).Find("p"+i).position;
+            panelPosition.y = 0f;
             points.Add(panelPosition);
         }
     }
-    // J키 입력 시 출발 (임시)
-    private void checkInput()
-    {
-        if (Input.GetKeyDown(KeyCode.J) && !startedGame)
-        {
-            currentLocation++;
-            startedGame = true;
-        }
-    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.J) && hasKeyDown == false)
@@ -58,12 +50,17 @@ public class PlayerBall : MonoBehaviour
         }
         if (hasKeyDown == true)
         {
-            checkInput();
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                currentLocation++;
+                startedGame = true;
+            }
             // Debug.Log("Moving to: " + points[currentLocation].ToString());
             transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * 3);
         }
-        // 디버깅용 패널 위치 확인하기
-        if(Input.GetKeyDown(KeyCode.B)){
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
             Debug.Log("Current list number is: " + currentLocation);
         }
 
@@ -77,11 +74,9 @@ public class PlayerBall : MonoBehaviour
             rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
         }
     }
+
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Floor")
-            isJump = false;
-
         if (collision.gameObject.tag == "Item")
         {
             isJump = false;
@@ -94,8 +89,7 @@ public class PlayerBall : MonoBehaviour
         {
             currentLocation++;
         }
-        
-        if (other.tag == "Finish")
+        else if (other.tag == "Finish")
         {
             if (itemCount == manager.totalItemCount)
             {
@@ -113,44 +107,34 @@ public class PlayerBall : MonoBehaviour
         }
     }
 
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Way Point")
-        {   
-            // Debug.Log("You are Leaving at: " + currentLocation);
-        }
-        
-    }
-
-
     private void Jumped()
     {
         playerPosition = transform.position;
         calEachPosition = (playerPosition - points[currentLocation - 1]);
         Debug.Log(currentLocation + ", Calculated: " + calEachPosition.z);
-        
 
-         // 점수 계산 테스트
-            // -0.1 < z < 0.1
-            if(calEachPosition.z <= 0.04f && calEachPosition.z >= -0.04f)
-            {
-                manager.GetPerfect();
-            }
-            else if(calEachPosition.z <= 0.08f && calEachPosition.z >= -0.08f)
-            {
-                manager.GetGreat();
-            }
-            else if(calEachPosition.z <= 0.12f && calEachPosition.z >= -0.12f)
-            {
-                manager.GetGood();
-            }
-            else
-            {
-                manager.GetBad();
-            }
-        
+
+        // 점수 계산 테스트
+        // -0.1 < z < 0.1
+        if (calEachPosition.z <= 0.04f && calEachPosition.z >= -0.04f)
+        {
+            manager.GetPerfect();
+        }
+        else if (calEachPosition.z <= 0.08f && calEachPosition.z >= -0.08f)
+        {
+            manager.GetGreat();
+        }
+        else if (calEachPosition.z <= 0.12f && calEachPosition.z >= -0.12f)
+        {
+            manager.GetGood();
+        }
+        else
+        {
+            manager.GetBad();
+        }
+
     }
+
 }
 
 
@@ -173,7 +157,7 @@ public class PlayerBall : MonoBehaviour
 
 // if playerStatus = collisionToPanel
 //   then PanelStartedChangeColour
- 
+
 // load PanelChaningColour()
 // update(getPanelColour)
 // time = getColourChangeTime()
@@ -187,6 +171,6 @@ public class PlayerBall : MonoBehaviour
 // if time > 4.0
 //   then Bad()
 
-            
+
 
 
