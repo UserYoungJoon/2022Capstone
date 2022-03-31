@@ -32,7 +32,7 @@ public class PlayerBall : MonoBehaviour
     public void Bind()
     {
         Vector3 panelPosition;
-        for (int i = 1; i <= 36; i++)
+        for (int i = 1; i <= 36; i++) //고쳐야댐
         {
             panelPosition = BeatMap.Find("panel" + i).Find("p" + i).position;
             panelPosition.y = 0f;
@@ -55,7 +55,7 @@ public class PlayerBall : MonoBehaviour
                 startedGame = true;
             }
             // Debug.Log("Moving to: " + points[currentLocation].ToString());
-            transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * 3);
+            transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * moveSpeed);
         }
 
         if (Input.GetKeyDown(KeyCode.B))
@@ -70,6 +70,7 @@ public class PlayerBall : MonoBehaviour
         {
             Jumped();
             isJump = true;
+            //panelPosition 간격에따른 jumpPower를 수시로? 수정해야함
             rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
         }
     }
