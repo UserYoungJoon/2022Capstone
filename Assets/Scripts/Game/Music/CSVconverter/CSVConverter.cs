@@ -12,11 +12,28 @@ public class CSVConverter : MonoBehaviour
     public GameObject panel;    //prefab
     public Transform beatMapTransform;
     public int[] arrayX = new int[3];
+<<<<<<< Updated upstream
     
     static Vector3 newPanelPos;
     static List<Vector3> panelPositionList = new List<Vector3>();
     static List<float> panelDistanceList = new List<float>();
     static List<Note> noteList = new List<Note>();
+=======
+<<<<<<< Updated upstream
+    static int before = 0;
+    static Vector3 tmpVector;
+    static List<Vector3> panelPosition = new List<Vector3>();
+    static List<float> panelDistance = new List<float>();
+=======
+    
+    static Vector3 newPanelPos;
+
+    //다음 3가지는 CSV converter에서 가지고 있을 이유가 없음 조만간 옮겨갈것
+    public static List<Vector3> panelPositionList = new List<Vector3>();
+    public static List<float> panelDistanceList = new List<float>();
+    public static List<Note> noteList = new List<Note>();
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
     #region Initializing section
     public void Init()

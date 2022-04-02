@@ -8,7 +8,6 @@ public class Panel : MonoBehaviour
     public AudioSource audio;
     private void Awake()
     {
-        audio = GetComponent<AudioSource>();
     }
 
     private void Update()
