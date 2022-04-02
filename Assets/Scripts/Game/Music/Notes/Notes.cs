@@ -30,18 +30,11 @@ public class Notes
 
     }
     #endregion
-<<<<<<< Updated upstream
-
-    public static AudioClip GetTwoNoteByID(int ID)
-    {
-        var res = twoNotes[getRealIndex(ID)];
-=======
     const int OFFSET = 65;
 
     public static AudioClip GetTwoNoteByID(int ID)
     {
         var res = twoNotes[ID-OFFSET];
->>>>>>> Stashed changes
         if (res != null)
         {
             return res;
@@ -56,11 +49,7 @@ public class Notes
     public static AudioClip GetOneNoteByID(int ID)
     {
        // Debug.LogFormat("cnt : {0} and [ID-offset:{1}],[ID:{2}],", twoNotes.Count, ID - 65,ID);
-<<<<<<< Updated upstream
-        var res = oneNotes[getRealIndex(ID)];
-=======
         var res = oneNotes[ID-OFFSET];
->>>>>>> Stashed changes
         if (res != null)
         {
             return res;
@@ -71,21 +60,4 @@ public class Notes
             return null;
         }
     }
-<<<<<<< Updated upstream
-
-    private static int getRealIndex(int ID) //temp method
-    {
-        int res = -1;
-
-        if (ID == 65)
-            res = 0;
-        else if (ID == 67)
-            res = 1;
-        else if (ID == 69)
-            res = 2;
-
-        return res;
-    }
-=======
->>>>>>> Stashed changes
 }
