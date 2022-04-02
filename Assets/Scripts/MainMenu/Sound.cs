@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Sound : MonoBehaviour
 {
-    public string name;
-    public AudioClip clip;
     public Slider sound_slider;
 
     private float prevSouncValue;

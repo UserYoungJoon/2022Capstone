@@ -13,7 +13,7 @@ public class Panel : MonoBehaviour
 
     private void Update()
     {
-      
+
     }
 
     private void OnTriggerExit(Collider other)
