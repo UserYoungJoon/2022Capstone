@@ -10,7 +10,7 @@ public class CameraMoving : MonoBehaviour
     #region Initializing section
     public void Init()
     {
-
+        
     }
 
     public void Bind()
