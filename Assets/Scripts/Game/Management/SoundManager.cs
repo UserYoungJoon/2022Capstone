@@ -1,125 +1,83 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+//ÀÌ °ÔÀÓ¿¡¼­´Â °Å¸®¿¡ ºñ·ÊÇØ »ç¿îµåÀÇ Å©±â¸¦ Á¶ÀıÇÒ ÇÊ¿ä°¡ ¾ø±â¿¡ ÇÏ³ªÀÇ AudioSource·Î AudioClipµéÀ» µ¹·Á°¡¸ç ½ÇÇà½ÃÅ³ °ÍÀÌ´Ù.
+//¹è°æÀ½¾ÇÀ» ½ÇÇàÇÒ AudioSource¿Í È¿°úÀ½À» ½ÇÇàÇÒ AudioSource¸¦ SoundManagerÀÇ ÀÚ½Ä ¿ÀºêÁ§Æ®·Î ¼³Á¤
+
+//https://velog.io/@uchang903/Unity-SoundManager-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    private static SoundManager instance;
+
     public static SoundManager Instance
     {
         get
         {
-            if(instance == null)
+
+            if (instance == null)
             {
                 instance = FindObjectOfType<SoundManager>();
             }
 
-
             return instance;
         }
-    }
-    public enum eSound
+    } // Sound¸¦ °ü¸®ÇØÁÖ´Â ½ºÅ©¸³Æ®´Â ÇÏ³ª¸¸ Á¸ÀçÇØ¾ßÇÏ°í instanceÇÁ·ÎÆÛÆ¼·Î ¾ğÁ¦ ¾îµğ¿¡¼­³ª ºÒ·¯¿À±âÀ§ÇØ ½Ì±ÛÅæ »ç¿ë
+
+    private AudioSource bgmPlayer;
+    private AudioSource sfxPlayer;
+
+    public float masterVolumeSFX = 1f;
+    public float masterVolumeBGM = 1f;
+
+    [SerializeField]
+    private AudioClip mainBgmAudioClip; //¸ŞÀÎÈ­¸é¿¡¼­ »ç¿ëÇÒ BGM
+
+    [SerializeField]
+    private AudioClip[] sfxAudioClips; //È¿°úÀ½µé ÁöÁ¤
+
+    Dictionary<string, AudioClip> audioClipsDic = new Dictionary<string, AudioClip>(); //È¿°úÀ½ µñ¼Å³Ê¸®
+    // AudioClipÀ» Key,Value ÇüÅÂ·Î °ü¸®ÇÏ±â À§ÇØ µñ¼Å³Ê¸® »ç¿ë
+
+    private void Awake()
     {
-        BGM,
-        sfx,
-        MaxCount,
-    }
-
-    public AudioSource[] _audioSources = new AudioSource[(int)eSound.MaxCount];
-    public Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
-
-
-    public void Init()
-    {
-        GameObject root = GameObject.Find("@Sound");
-        if(root == null)
+        if (Instance != this)
         {
-            root = new GameObject { name = "@Sound"};
-            Object.DontDestroyOnLoad(root);
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject); //¿©·¯ ¾À¿¡¼­ »ç¿ëÇÒ °Í.
 
-            string[] soundNames = System.Enum.GetNames(typeof(eSound)); // "BGM", "sfx"
-            for(int i = 0; i < soundNames.Length - 1; i++)
-            {
-                GameObject go = new GameObject { name = soundNames[i]};
-                _audioSources[i] = go.AddComponent<AudioSource>();
-                go.transform.parent = root.transform;
-            }
-            _audioSources[(int)eSound.BGM].loop = true;
+        bgmPlayer = GameObject.Find("BGMSoundPlayer").GetComponent<AudioSource>();
+        sfxPlayer = GameObject.Find("SFXSoundPlayer").GetComponent<AudioSource>();
+
+        foreach (AudioClip audioclip in sfxAudioClips)
+        {
+            audioClipsDic.Add(audioclip.name, audioclip);
         }
     }
 
-    public void Clear()
+    // È¿°ú »ç¿îµå Àç»ı : ÀÌ¸§À» ÇÊ¼ö ¸Å°³º¯¼ö, º¼·ıÀ» ¼±ÅÃÀû ¸Å°³º¯¼ö·Î ÁöÁ¤
+    public void PlaySFXSound(string name, float volume = 1f)
     {
-        // ì¬ìƒê¸° ì „ë¶€ ì¬ìƒ ìŠ¤íƒ‘, ìŒë°˜ ë¹¼ê¸°
-        foreach(AudioSource audioSource in _audioSources)
+        if (audioClipsDic.ContainsKey(name) == false)
         {
-            audioSource.clip = null;
-            audioSource.Stop();
-        }
-        // íš¨ê³¼ìŒ ë”•ì…”ë„ˆë¦¬ ë¹„ìš°ê¸°
-        _audioClips.Clear();
-
-    }
-
-    public void Play(AudioClip audioClip, eSound type = eSound.sfx, float pitch = 1.0f)
-    {
-        if(audioClip == null)
+            Debug.Log(name + " is not Contained audioClipsDic");
             return;
-
-        // BGM ë°°ê²½ìŒì•… ì¬ìƒ
-        if(type == eSound.BGM)
-        {
-            AudioSource audioSource = _audioSources[(int)eSound.BGM];
-            if(audioSource.isPlaying)
-                audioSource.Stop();
-            
-            audioSource.pitch = pitch;
-            audioSource.clip = audioClip;
-            audioSource.Play();
         }
-        else
-        {
-            AudioSource audioSource = _audioSources[(int)eSound.sfx];
-            audioSource.pitch = pitch;
-            audioSource.PlayOneShot(audioClip);
-        }
+        sfxPlayer.PlayOneShot(audioClipsDic[name], volume * masterVolumeSFX);
     }
 
-    public void Play(string path, eSound type = eSound.sfx, float pitch = 1.0f)
+    //BGM »ç¿îµå Àç»ı : º¼·ıÀ» ¼±ÅÃÀû ¸Å°³º¯¼ö·Î ÁöÁ¤
+    public void PlayBGMSound(float volume = 1f)
     {
-        AudioClip audioClip = GetOrAddAudioClip(path, type);
-        Play(audioClip, type, pitch);
+        Debug.Log("PLAY");
+        bgmPlayer.loop = true; //BGM »ç¿îµåÀÌ¹Ç·Î ·çÇÁ¼³Á¤
+        bgmPlayer.volume = volume * masterVolumeBGM;
+
+        bgmPlayer.clip = mainBgmAudioClip;
+        bgmPlayer.Play();
+        
+        //ÇöÀç ¾À¿¡ ¸Â´Â BGM Àç»ı
     }
-
-
-
-    public AudioClip GetOrAddAudioClip(string path, eSound type = eSound.sfx)
-    {
-        if(path.Contains("Resources/") == false)
-            path = $"Resources/{path}"; // Resources í´ë” ì•ˆì— ì €ì¥ë  ìˆ˜ ìˆë„ë¡
-
-        AudioClip audioClip = null;
-
-        if(type == eSound.BGM)
-        {
-            audioClip = Resources.Load<AudioClip>(path);
-            
-        }
-
-        else // sfx íš¨ê³¼ìŒ í´ë¦½ ë¶™ì´ê¸°
-        {
-            if(_audioClips.TryGetValue(path, out audioClip) == false)
-            {
-                audioClip = Resources.Load<AudioClip>(path);
-                _audioClips.Add(path, audioClip);
-            }
-        }
-
-        if(audioClip == null)
-            Debug.Log($"AudioClip Missing ! {path}");
-
-        return audioClip;
-    }
-
-
 }
