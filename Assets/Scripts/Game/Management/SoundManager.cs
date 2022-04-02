@@ -80,4 +80,9 @@ public class SoundManager : MonoBehaviour
         
         //현재 씬에 맞는 BGM 재생
     }
+
+    public void StopBGMSound()
+    {
+        bgmPlayer.Stop();
+    }
 }
