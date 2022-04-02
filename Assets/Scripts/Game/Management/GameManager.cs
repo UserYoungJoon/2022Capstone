@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
             if(gameOverBoolean == true)
                 Debug.Log("GAME OVER");
                 Debug.Log("Final Score is: " + userScore);
+                SoundManager.Instance.StopBGMSound();
             
             SceneManager.LoadScene(stage);
 
