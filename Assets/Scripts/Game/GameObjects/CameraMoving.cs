@@ -20,7 +20,7 @@ public class CameraMoving : MonoBehaviour
     }
     #endregion
 
-    void LateUpdate()
+    public void LateUpdate()
     {
         transform.position = playerTransform.position + Offset;
     }

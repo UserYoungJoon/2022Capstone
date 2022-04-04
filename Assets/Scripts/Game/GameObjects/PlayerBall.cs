@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBall : MonoBehaviour
 {
+    [SerializeField]
     public float jumpPower;
     public int itemCount;
     public GameManager manager;
@@ -17,8 +18,8 @@ public class PlayerBall : MonoBehaviour
     private Vector3 playerPosition;
     private Vector3 calEachPosition;
 
-    public float moveSpeed;    //??????(z??)
-    private float rotateSpeed = 300.0f;  //??????
+    public float moveSpeed;    // 이동속도(z축)
+    private float rotateSpeed = 300.0f;  //회전속도
     public Transform BeatMap;
 
     #region Initializing section
@@ -32,7 +33,7 @@ public class PlayerBall : MonoBehaviour
     public void Bind()
     {
         Vector3 panelPosition;
-        for (int i = 1; i <= 36; i++) //??????
+        for (int i = 1; i <= 36; i++) // 수정필요
         {
             panelPosition = BeatMap.Find("panel" + i).Find("p" + i).position;
             panelPosition.y = 0f;
@@ -44,16 +45,16 @@ public class PlayerBall : MonoBehaviour
 
     void Update()
     {
-
+        // Game start
         if (Input.GetKeyDown(KeyCode.J) && hasKeyDown == false)
         {
             hasKeyDown = true;
-            SoundManager.Instance.PlayBGMSound();
         }
         if (hasKeyDown == true)
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
+                Debug.Log(points[currentLocation]);
                 currentLocation++;
                 startedGame = true;
             }
@@ -61,19 +62,19 @@ public class PlayerBall : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * moveSpeed);
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Debug.Log("Current list number is: " + currentLocation);
-        }
 
-        //??????? ???(x??)
+        // When each panel distance too far
+
+
+
+        // 오브젝트 회전(x축)
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && !isJump)
         {
             Jumped();
             isJump = true;
-            //panelPosition ????????? jumpPower?? ???��?? ?????????
+            //panelPosition 간격에 따른 jumpPower를 수시로 수정해야됨
             rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
         }
     }
@@ -88,10 +89,31 @@ public class PlayerBall : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+
+        if(other.tag == "Way Point" && currentLocation == 1)
+        {
+            SoundManager.Instance.PlayBGMSound();
+        }
         if (other.tag == "Way Point")
         {
             currentLocation++;
         }
+
+        
+        // Panel 12, Panel 13의 z 차는 4, -14 -18
+        if(points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
+        {
+            jumpPower = 100;
+            moveSpeed = 5.0f;
+            Debug.Log("Too far");
+        }
+        else if(points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
+        {
+            jumpPower = 50;
+            moveSpeed = 2.5f;
+        }
+
+
         else if (other.tag == "Finish")
         {
             if (itemCount == manager.totalItemCount)
@@ -110,14 +132,16 @@ public class PlayerBall : MonoBehaviour
         }
     }
 
+
+    // When player jumped
     private void Jumped()
     {
         playerPosition = transform.position;
         calEachPosition = (playerPosition - points[currentLocation - 1]);
-        Debug.Log(currentLocation + ", Calculated: " + calEachPosition.z);
+       // Debug.Log(currentLocation + ", Calculated: " + calEachPosition.z);
 
 
-        // ???? ??? ????
+        // 점수 계산 테스트
         // -0.1 < z < 0.1
         if (calEachPosition.z <= 0.04f && calEachPosition.z >= -0.04f)
         {
@@ -142,7 +166,7 @@ public class PlayerBall : MonoBehaviour
 
 
 //             Algorithm A
-// ?��?????? ????? ??????? ????? ???? ???????
+// 플레이어의 위치와 포인트의 거리에 따른 점수 계산
 // 0.02 0.03 0.05
 // if playerPosition = point or playerPosition - point >= |3|
 //   then Perfect
@@ -155,7 +179,7 @@ public class PlayerBall : MonoBehaviour
 
 
 //              Algorithm B
-// ?��??? ??????? ???? ????????
+// 패널의 색변화에 따라 점수판정
 
 // if playerStatus = collisionToPanel
 //   then PanelStartedChangeColour

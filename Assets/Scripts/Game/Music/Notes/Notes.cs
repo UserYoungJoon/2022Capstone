@@ -27,7 +27,7 @@ public class Notes
 
     public void Bind()
     {
-
+        
     }
     #endregion
     const int OFFSET = 65;
