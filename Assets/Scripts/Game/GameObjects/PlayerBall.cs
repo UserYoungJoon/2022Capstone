@@ -62,11 +62,6 @@ public class PlayerBall : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * moveSpeed);
         }
 
-
-        // When each panel distance too far
-
-
-
         // 오브젝트 회전(x축)
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
