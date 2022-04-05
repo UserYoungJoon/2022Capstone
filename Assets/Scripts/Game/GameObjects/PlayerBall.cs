@@ -7,7 +7,6 @@ public class PlayerBall : MonoBehaviour
 {
     [SerializeField]
     public float jumpPower;
-    public int itemCount;
     public GameManager manager;
     public static bool isJump;
     Rigidbody rigid;
@@ -49,15 +48,12 @@ public class PlayerBall : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J) && hasKeyDown == false)
         {
             hasKeyDown = true;
+            startedGame = true;
+            currentLocation++;
         }
         if (hasKeyDown == true)
         {
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                Debug.Log(points[currentLocation]);
-                currentLocation++;
-                startedGame = true;
-            }
+            
             // Debug.Log("Moving to: " + points[currentLocation].ToString());
             transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * moveSpeed);
         }
@@ -111,19 +107,7 @@ public class PlayerBall : MonoBehaviour
 
         else if (other.tag == "Finish")
         {
-            if (itemCount == manager.totalItemCount)
-            {
-                //Game Clear!
-                if (manager.stage == 1)
-                    SceneManager.LoadScene(0);
-                else
-                    SceneManager.LoadScene(manager.stage + 1);
-            }
-            else
-            {
-                //Restart..
-                SceneManager.LoadScene(manager.stage);
-            }
+            // 게임 성공 판단 여부는 GameManager.cs에 구현이 되있으므로 삭제함.
         }
     }
 
