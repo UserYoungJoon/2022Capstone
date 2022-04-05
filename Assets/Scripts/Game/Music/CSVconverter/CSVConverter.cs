@@ -13,7 +13,8 @@ public class CSVConverter : MonoBehaviour
     public Transform beatMapTransform;
     public int[] arrayX = new int[3];
 
-    static Vector3 newPanelPos;
+    public static int NowPanelCount = -1;
+    private static Vector3 newPanelPos;
 
     //다음 3가지는 CSV converter에서 가지고 있을 이유가 없음 조만간 옮겨갈것
     public static List<Vector3> panelPositionList = new List<Vector3>();
@@ -67,10 +68,11 @@ public class CSVConverter : MonoBehaviour
 
                 int noteValue = (int)data[i]["Time"] - beforeTime + 1;
                 eNoteType noteType = eNoteType.NONE;
-                if      (noteValue == 15) noteType = eNoteType.HALFHALFNOTE;
-                else if (noteValue == 30) noteType = eNoteType.HALFNOTE;
-                else if (noteValue == 60) noteType = eNoteType.ONE_NOTE;
-                else if (noteValue == 90) noteType = eNoteType.TWO_NOTE;
+                if      (noteValue ==  30) noteType = eNoteType.HALFHALFNOTE;
+                else if (noteValue ==  60) noteType = eNoteType.HALFNOTE;
+                else if (noteValue ==  90) noteType = eNoteType.HALF_HH_NOTE;
+                else if (noteValue == 120) noteType = eNoteType.ONE_NOTE;
+                else if (noteValue == 240) noteType = eNoteType.TWO_NOTE;
 
                 if (noteType == eNoteType.NONE)
                 {
@@ -83,12 +85,13 @@ public class CSVConverter : MonoBehaviour
 
                 panelObj = null;
             }
+            NowPanelCount = panelindex;
         }
 
         for (int i = 1; i < panelPositionList.Count; i++)
         {
             panelDistanceList.Add(Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]));
-            Debug.Log("Distance" + panelDistanceList[i - 1]);
+            //Debug.Log("Distance" + panelDistanceList[i - 1]);
         }
     }
 

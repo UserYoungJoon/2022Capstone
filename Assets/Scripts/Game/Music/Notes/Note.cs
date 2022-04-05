@@ -7,6 +7,7 @@ public enum eNoteType
     NONE,
     HALFHALFNOTE,
     HALFNOTE,
+    HALF_HH_NOTE,
     ONE_NOTE,
     TWO_NOTE
 }
