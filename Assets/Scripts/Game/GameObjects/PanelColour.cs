@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class PanelColour : MonoBehaviour
 {
-    public float speed = 1.0f;
     public Color startColor;
     public Color endColor;
     float startTime;
     private bool isActvieCollide = false;
-    public bool repeatable = false;
-    public SpriteRenderer fadeImage;
+    // public SpriteRenderer fadeImage;
     void Start()
     {
         startTime = Time.time;
-        StartCoroutine("ActiveChangeColor");
     }
 
     // Update is called once per frame
@@ -32,7 +29,6 @@ public class PanelColour : MonoBehaviour
             
             if(isActvieCollide)
             {
-                // ActiveChangeColor();
                 StartCoroutine("fade");
             }
         }
@@ -51,7 +47,7 @@ public class PanelColour : MonoBehaviour
     {
         Debug.Log("Enumerator started");
         float timer = 0.0f;
-        float time = 0.5f;
+        float time = 0.3f;
 
         while(timer <= time)
         {
