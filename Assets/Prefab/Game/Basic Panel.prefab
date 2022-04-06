@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 0.7686275, g: 0.7686275, b: 0.7686275, a: 0}
+  endColor: {r: 0.07678461, g: 0, b: 1, a: 0}
   repeatable: 0
 --- !u!1 &8380535398654009538
 GameObject:
