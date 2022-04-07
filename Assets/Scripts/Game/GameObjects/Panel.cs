@@ -17,9 +17,13 @@ public class Panel : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-      if (other.tag == "Player")
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+      if (other.gameObject.tag == "Player")
         {
           audio.Play();
         }
+
     }
 }
