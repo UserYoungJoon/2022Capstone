@@ -81,7 +81,7 @@ public class PlayerBall : MonoBehaviour
             Jumped();
             isJump = true;
             //panelPosition 간격에 따른 jumpPower를 수시로 수정해야됨
-            
+
             // float distance = CSVConverter.panelDistanceList[currentLocation - 1];
             // float jumpAngle = 45;
             // var vel_y = Mathf.Sqrt(((-1)*(distance * (Physics.gravity.y-12))) / Mathf.Sin(2 * jumpAngle));
@@ -90,13 +90,16 @@ public class PlayerBall : MonoBehaviour
             // rigid.velocity = vel;
 
 
-            var velo = points[currentLocation] - playerPosition;
-
+            //var velo = points[currentLocation] - playerPosition;
+            Vector3 velo = 
+                new Vector3(points[currentLocation].x - playerPosition.x, 0, 0) 
+                + new Vector3(0, 0, points[currentLocation].z - playerPosition.z);
+            Debug.Log(velo);
             rigid.velocity = velo;
 
-            
 
-            rigid.AddForce(new Vector3(0, 50, 0), ForceMode.Impulse);
+            //rigid.AddForce(new Vector3(0, 50, 0), ForceMode.Impulse);
+            rigid.AddForce(velo + new Vector3(0, 50, 0), ForceMode.Impulse);
             // Debug.Log("calEachPosition.z = " + points[currentLocation].z * 3.7f);
             // Vector3 fixedCalEachDistance = new Vector3(points[currentLocation].x * 3.7f, points[currentLocation].y, (points[currentLocation + 1].z + 10.0f));
 
@@ -105,7 +108,7 @@ public class PlayerBall : MonoBehaviour
             //     Debug.Log("오른쪽");
             //     fixedCalEachDistance.x += 10;   
             // }
-            
+
             // else if(points[currentLocation].x < 0)
             // {
             //     Debug.Log("왼쪽");

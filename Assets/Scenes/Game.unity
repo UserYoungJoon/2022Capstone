@@ -273,11 +273,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPower: 50
-  itemCount: 0
   manager: {fileID: 1591684630}
   points: []
   moveSpeed: 2.5
   BeatMap: {fileID: 1347408985}
+  playTime: 13
 --- !u!135 &668801906
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -464,7 +464,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &705507993
 GameObject:
@@ -799,15 +799,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8226984445992597859, guid: 562a722286ae7a74892545bf7d86da4a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4898978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8226984445992597859, guid: 562a722286ae7a74892545bf7d86da4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.4595838
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8226984445992597859, guid: 562a722286ae7a74892545bf7d86da4a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.65655
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8226984445992597859, guid: 562a722286ae7a74892545bf7d86da4a, type: 3}
       propertyPath: m_LocalRotation.w
