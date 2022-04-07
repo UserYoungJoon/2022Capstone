@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        (new Notes()).Init();//temp code
+        
         playerBall.Init();
         CSVConverter.Init();
         cameraMoving.Init();
@@ -25,7 +27,6 @@ public class GameManager : MonoBehaviour
         playerBall.Bind();
         CSVConverter.Bind();
         cameraMoving.Bind();
-
     }
 
     public void ScoreCal()
@@ -74,8 +75,11 @@ public class GameManager : MonoBehaviour
         {
             gameOverBoolean = true;
             if(gameOverBoolean == true)
+            {
                 Debug.Log("GAME OVER");
                 Debug.Log("Final Score is: " + userScore);
+                SoundManager.Instance.StopBGMSound();
+            }
             
             SceneManager.LoadScene(stage);
 

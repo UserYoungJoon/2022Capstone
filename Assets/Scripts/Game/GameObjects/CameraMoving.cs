@@ -10,7 +10,7 @@ public class CameraMoving : MonoBehaviour
     #region Initializing section
     public void Init()
     {
-
+        
     }
 
     public void Bind()
@@ -20,8 +20,13 @@ public class CameraMoving : MonoBehaviour
     }
     #endregion
 
-    void LateUpdate()
+    public void LateUpdate()
     {
         transform.position = playerTransform.position + Offset;
     }
 }
+
+
+// Position 0.04, 2.29, -1.18
+// Rotation 31, -1.937, 0
+// Scale 1, 1, 1

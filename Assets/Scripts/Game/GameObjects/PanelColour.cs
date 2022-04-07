@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PanelColour : MonoBehaviour
 {
-    public float speed = 1.0f;
     public Color startColor;
     public Color endColor;
     float startTime;
     private bool isActvieCollide = false;
-    public bool repeatable = false;
+    // public SpriteRenderer fadeImage;
     void Start()
     {
         startTime = Time.time;
@@ -18,8 +17,7 @@ public class PanelColour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isActvieCollide)
-            ActiveChangeColor();
+
     }
 
     private void OnCollisionEnter(Collision other) 
@@ -27,22 +25,38 @@ public class PanelColour : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             isActvieCollide = true;
+
+            
+            if(isActvieCollide)
+            {
+                StartCoroutine("fade");
+            }
         }
     }
 
-    private void ActiveChangeColor()
+    private void OnCollisionExit(Collision other) 
     {
-        if(!repeatable)
+        if(other.gameObject.tag == "Player")
         {
-            float t = (Time.time - startTime * speed);
-            GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, t);
-        }
-        else
+            StopCoroutine("fade");
+        }    
+    }
+
+
+    public IEnumerator fade()
+    {
+        Debug.Log("Enumerator started");
+        float timer = 0.0f;
+        float time = 0.3f;
+
+        while(timer <= time)
         {
-            float t = (Mathf.Sin(Time.time - startTime) * speed);
-            GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, t);
+            timer += Time.deltaTime;
+            float lerp_Percentage = timer / time;
+
+            GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, lerp_Percentage);
+
+            yield return null;
         }
-        
-        
     }
 }

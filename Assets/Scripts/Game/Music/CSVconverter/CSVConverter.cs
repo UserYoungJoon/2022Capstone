@@ -4,72 +4,142 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /*
-    ÂüÁ¶: https://m.blog.naver.com/yoohee2018/220700239540
-    ¼öÁ¤»çÇ×: À½°è/¹ÚÀÚ¿¡µû¸¥ Á¶°Ç ¼¼ºÎÈ­, ¹ÚÀÚÃß°¡, prefebÀ½ Ãß°¡
+    ï¿½ï¿½ï¿½ï¿½: https://m.blog.naver.com/yoohee2018/220700239540
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­, ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½, prefebï¿½ï¿½ ï¿½ß°ï¿½
  */
 public class CSVConverter : MonoBehaviour
 {
     public GameObject panel;    //prefab
     public Transform beatMapTransform;
     public int[] arrayX = new int[3];
-    static int before = 0;
-    static Vector3 tmpVector;
-    static List<Vector3> panelPosition = new List<Vector3>();
-    static List<float> panelDistance = new List<float>();
 
+    public float correctionZ;   //zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+    static Vector3 newPanelPos;
+
+    //ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ CSV converterï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å°Ü°ï¿½ï¿½ï¿½
+    public static List<Vector3> panelPositionList = new List<Vector3>();
+    public static List<float> panelDistanceList = new List<float>();
+    public static List<Note> noteList = new List<Note>();
+    public static int NowPanelCount = 0;
     #region Initializing section
-
-    private int RandomFunction()
-    {
-        int current = arrayX[Random.Range(0, 3)];
-
-        if (Mathf.Abs(before - current) >= 2)
-        {
-            return RandomFunction();
-        }
-        else
-        {    
-            before = current;
-            //Debug.Log("current: " + current);
-            return current;   
-        }
-    }
-
     public void Init()
     {
         arrayX[0] = -1;
         arrayX[1] = 0;
         arrayX[2] = 1;
-        int panelindex = 1;
-        List<Dictionary<string, object>> data = CSVReader.Read("Airplane"); //data°¡ 2Â÷¿ù ¹è¿­ÀÇ ÇüÅÂ·Î ÀúÀåµÊ
-        for (var i = 0; i < data.Count; i++)    //csvÆÄÀÏ ÀÐ±â
-        {
-            if ((int)(data[i]["Speed"]) != 0)   //speed==0 Àº ³ëÆ®ÀÇ Á¾°áÀ» ÀÇ¹Ì
-            {
-                //Debug.Log("Note: " + data[i]["Note"] + "Time: " + data[i]["Time"]);
 
-                tmpVector = new Vector3(RandomFunction(), 0, ((int)data[i]["Time"] / 60) + 1);
-                panelPosition.Add(tmpVector);
-                var obj = Instantiate(panel, tmpVector, Quaternion.identity, beatMapTransform);
-                //Debug.Log("Position" + tmpVector);
-
-                obj.name = "panel" + panelindex;
-                var child = obj.GetComponent<Transform>().Find("p");
-                child.name = "p" + panelindex;
-                panelindex++;
-            }
-        }
-        for (var i = 1; i < panelPosition.Count; i++)
-        {
-            panelDistance.Add(Vector3.Distance(panelPosition[i], panelPosition[i - 1]));
-            Debug.Log("Distance" + panelDistance[i - 1]);
-        }
+        MakeBeatMaps("Airplane");
     }
 
     public void Bind()
     {
-        
+
     }
     #endregion
 
+    public void MakeBeatMaps(string musicName)
+    {
+        int panelindex = 1;
+        List<Dictionary<string, object>> data = CSVReader.Read(musicName); //dataï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
+        int beforeTime = 0;
+        GameObject panelObj = null;
+        for (var i = 0; i < data.Count; i++)    //csvï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½
+        {
+            if ((int)(data[i]["Speed"]) != 0)   //speed==0 ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½
+            {
+                //Debug.Log("Note: " + data[i]["Note"] + "Time: " + data[i]["Time"]);
+                newPanelPos = new Vector3(GetRandomX(data, i), 0, correctionZ);
+                panelObj = Instantiate(panel, newPanelPos, Quaternion.identity, beatMapTransform);
+                panelObj.name = "panel" + panelindex;
+                panelPositionList.Add(newPanelPos);
+
+                var wayPoint = panelObj.GetComponent<Transform>().Find("p");
+                wayPoint.name = "p" + panelindex;
+
+                beforeTime = (int)data[i]["Time"];
+
+                panelindex++;
+            }
+            else
+            {//Note setting section
+                if (panelObj == null)
+                    break;
+
+                int noteValue = (int)data[i]["Time"] - beforeTime + 1;
+                eNoteType noteType = eNoteType.NONE;
+                if      (noteValue ==  30) noteType = eNoteType.HALFHALFNOTE;
+                else if (noteValue ==  60) noteType = eNoteType.HALFNOTE;
+                else if (noteValue ==  90) noteType = eNoteType.HALF_HH_NOTE;
+                else if (noteValue == 120) noteType = eNoteType.ONE_NOTE;
+                else if (noteValue == 240) noteType = eNoteType.TWO_NOTE;
+
+                if (noteType == eNoteType.NONE)
+                {
+                    Debug.LogFormat("Note ERROE : Time[{0}] - Time[{1}] = {2} - {3} || Note valeue : {4}", i + 1, i, (int)data[i]["Time"],beforeTime,noteValue);
+                }
+
+                Note note = panelObj.transform.Find("Note").GetComponent<Note>();
+                note.SetNote(noteType, (int)data[i]["Note"]);
+                noteList.Add(note);
+
+                panelObj = null;
+            }
+            NowPanelCount = panelindex;
+        }
+
+        for (int i = 1; i < panelPositionList.Count; i++)
+        {
+            panelDistanceList.Add(Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]));
+            //Debug.Log("Distance" + panelDistanceList[i - 1]);
+        }
+    }
+
+    private static int before = 0;
+    private int GetRandomX(List<Dictionary<string, object>> data, int i)
+    {
+        int current = arrayX[Random.Range(0, 3)];
+        int z = ((int)data[i]["Time"] / 60) + 1;    //ï¿½ï¿½ï¿½ï¿½ zï¿½ï¿½ ï¿½ï¿½
+
+        if (Mathf.Abs(before - current) >= 2)
+        {
+            return GetRandomX(data, i);
+        }
+        else
+        {
+            if (before != current)
+            {
+                correctionZ = Mathf.Sqrt(Mathf.Pow(z, 2) - 1);   //zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                Debug.Log("correctionZ: " + correctionZ);
+            }
+            else
+            {
+                correctionZ = z;
+            }
+            before = current;
+            //Debug.Log("current: " + current);
+            return current;
+        }
+    }
+
+    private int GetRandomx() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½ ï¿½Ô¼ï¿½
+    {
+        int nowRandom = 0;
+        bool done = true;
+        while(!done)
+        {
+            nowRandom = arrayX[Random.Range(0, 3)];
+            if (Mathf.Abs(before - nowRandom) == 2)
+            {
+                continue;
+            }
+            else
+            {
+                done = true;
+                before = nowRandom;
+            }
+        }
+        return nowRandom;
+    }
 }

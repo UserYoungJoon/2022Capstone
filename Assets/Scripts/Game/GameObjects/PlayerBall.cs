@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBall : MonoBehaviour
 {
+    [SerializeField]
     public float jumpPower;
-    public int itemCount;
     public GameManager manager;
     public static bool isJump;
     Rigidbody rigid;
@@ -17,8 +17,8 @@ public class PlayerBall : MonoBehaviour
     private Vector3 playerPosition;
     private Vector3 calEachPosition;
 
-    public float moveSpeed;    //ÀÌµ¿¼Óµµ(zÃà)
-    private float rotateSpeed = 300.0f;  //È¸Àü¼Óµµ
+    public float moveSpeed;    // ì´ë™ì†ë„(zì¶•)
+    private float rotateSpeed = 300.0f;  //íšŒì „ì†ë„
     public Transform BeatMap;
 
     #region Initializing section
@@ -32,45 +32,41 @@ public class PlayerBall : MonoBehaviour
     public void Bind()
     {
         Vector3 panelPosition;
-        for (int i = 1; i <= 36; i++) //°íÃÄ¾ß´ï
+        for (int i = 1; i < CSVConverter.NowPanelCount; i++) // ìˆ˜ì •í•„ìš”
         {
             panelPosition = BeatMap.Find("panel" + i).Find("p" + i).position;
             panelPosition.y = 0f;
             points.Add(panelPosition);
         }
+        
     }
     #endregion
 
+
     void Update()
     {
+        // Game start
         if (Input.GetKeyDown(KeyCode.J) && hasKeyDown == false)
         {
             hasKeyDown = true;
+            startedGame = true;
+            currentLocation++;
         }
         if (hasKeyDown == true)
         {
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                currentLocation++;
-                startedGame = true;
-            }
+            
             // Debug.Log("Moving to: " + points[currentLocation].ToString());
             transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * moveSpeed);
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Debug.Log("Current list number is: " + currentLocation);
-        }
-
-        //¿ÀºêÁ§Æ® È¸Àü(xÃà)
+        // ì˜¤ë¸Œì íŠ¸ íšŒì „(xì¶•)
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && !isJump)
         {
             Jumped();
             isJump = true;
-            //panelPosition °£°İ¿¡µû¸¥ jumpPower¸¦ ¼ö½Ã·Î? ¼öÁ¤ÇØ¾ßÇÔ
+            //panelPosition ê°„ê²©ì— ë”°ë¥¸ jumpPowerë¥¼ ìˆ˜ì‹œë¡œ ìˆ˜ì •í•´ì•¼ë¨
             rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
         }
     }
@@ -85,40 +81,53 @@ public class PlayerBall : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+
+        if(other.tag == "Way Point" && currentLocation == 1)
+        {
+            SoundManager.Instance.PlayBGMSound();
+        }
         if (other.tag == "Way Point")
         {
             currentLocation++;
         }
+
+        
+        // Panel 12, Panel 13ì˜ z ì°¨ëŠ” 4, -14 -18
+        if(points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
+        {
+            jumpPower = 100;
+            moveSpeed = 5.0f;
+            Debug.Log("Too far");
+        }
+        else if(points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
+        {
+            jumpPower = 50;
+            moveSpeed = 2.5f;
+        }
+
+
         else if (other.tag == "Finish")
         {
-            if (itemCount == manager.totalItemCount)
-            {
-                //Game Clear!
-                if (manager.stage == 1)
-                    SceneManager.LoadScene(0);
-                else
-                    SceneManager.LoadScene(manager.stage + 1);
-            }
-            else
-            {
-                //Restart..
-                SceneManager.LoadScene(manager.stage);
-            }
+            // ê²Œì„ ì„±ê³µ íŒë‹¨ ì—¬ë¶€ëŠ” GameManager.csì— êµ¬í˜„ì´ ë˜ìˆìœ¼ë¯€ë¡œ ì‚­ì œí•¨.
         }
     }
 
+
+    // When player jumped
     private void Jumped()
     {
         playerPosition = transform.position;
         calEachPosition = (playerPosition - points[currentLocation - 1]);
-        Debug.Log(currentLocation + ", Calculated: " + calEachPosition.z);
+       // Debug.Log(currentLocation + ", Calculated: " + calEachPosition.z);
 
 
-        // Á¡¼ö °è»ê Å×½ºÆ®
+        // ì ìˆ˜ ê³„ì‚° í…ŒìŠ¤íŠ¸
         // -0.1 < z < 0.1
         if (calEachPosition.z <= 0.04f && calEachPosition.z >= -0.04f)
         {
-            manager.GetPerfect();
+            Debug.Log("Perfect!");
+            //userScore += 300;
+            manager.ScoreCal();
         }
         else if (calEachPosition.z <= 0.08f && calEachPosition.z >= -0.08f)
         {
@@ -139,7 +148,7 @@ public class PlayerBall : MonoBehaviour
 
 
 //             Algorithm A
-// ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡¿Í Æ÷ÀÎÆ®ÀÇ °Å¸®¿¡ µû¸¥ Á¡¼ö°è»ê
+// í”Œë ˆì´ì–´ì˜ ìœ„ì¹˜ì™€ í¬ì¸íŠ¸ì˜ ê±°ë¦¬ì— ë”°ë¥¸ ì ìˆ˜ ê³„ì‚°
 // 0.02 0.03 0.05
 // if playerPosition = point or playerPosition - point >= |3|
 //   then Perfect
@@ -152,7 +161,7 @@ public class PlayerBall : MonoBehaviour
 
 
 //              Algorithm B
-// ÆĞ³ÎÀÇ »öº¯È­¿¡ µû¶ó Á¡¼öÆÇÁ¤
+// íŒ¨ë„ì˜ ìƒ‰ë³€í™”ì— ë”°ë¼ ì ìˆ˜íŒì •
 
 // if playerStatus = collisionToPanel
 //   then PanelStartedChangeColour
