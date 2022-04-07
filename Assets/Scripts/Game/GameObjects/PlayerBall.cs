@@ -38,7 +38,7 @@ public class PlayerBall : MonoBehaviour
             panelPosition.y = 0f;
             points.Add(panelPosition);
         }
-        
+
     }
     #endregion
 
@@ -54,9 +54,9 @@ public class PlayerBall : MonoBehaviour
         }
         if (hasKeyDown == true)
         {
-            
+            test();
             // Debug.Log("Moving to: " + points[currentLocation].ToString());
-            transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * moveSpeed);
+            //transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * moveSpeed);
         }
 
         // 오브젝트 회전(x축)
@@ -64,12 +64,42 @@ public class PlayerBall : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && !isJump)
         {
-            Jumped();
-            isJump = true;
-            //panelPosition 간격에 따른 jumpPower를 수시로 수정해야됨
-            rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
+            testJump();
+            //Jumped();
+            //isJump = true;
+            ////panelPosition 간격에 따른 jumpPower를 수시로 수정해야됨
+            //rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
         }
     }
+    /// <summary>
+    /// new code below
+    /// </summary>
+    float deltaTime = 1;
+    float forwardSpeed = 1.8f;
+    float halfPanelSize = 0.12f;
+    void testJump()
+    {
+        Debug.Log(currentLocation);
+        deltaTime = (points[currentLocation].z - points[currentLocation - 1].z - halfPanelSize) / forwardSpeed;
+        Vector3 vector = rigid.velocity;
+        vector.x = (points[currentLocation].x - transform.position.x) / deltaTime;
+        vector.y = -Physics.gravity.y * deltaTime / 2;
+        vector.z = forwardSpeed;
+        rigid.velocity = vector;
+
+        isJump = true;
+    }
+    void test()
+    {
+        Debug.Log(currentLocation);
+        deltaTime = (points[currentLocation].z - points[currentLocation - 1].z - halfPanelSize) / forwardSpeed;
+        Vector3 vector = rigid.velocity;
+        vector.z = forwardSpeed;
+        rigid.velocity = vector;
+    }
+    /// <summary>
+    /// new code above
+    /// </summary>
 
     void OnCollisionEnter(Collision collision)
     {
@@ -82,7 +112,7 @@ public class PlayerBall : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        if(other.tag == "Way Point" && currentLocation == 1)
+        if (other.tag == "Way Point" && currentLocation == 1)
         {
             SoundManager.Instance.PlayBGMSound();
         }
@@ -91,15 +121,15 @@ public class PlayerBall : MonoBehaviour
             currentLocation++;
         }
 
-        
+
         // Panel 12, Panel 13의 z 차는 4, -14 -18
-        if(points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
+        if (points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
         {
             jumpPower = 100;
             moveSpeed = 5.0f;
             Debug.Log("Too far");
         }
-        else if(points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
+        else if (points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
         {
             jumpPower = 50;
             moveSpeed = 2.5f;
@@ -118,7 +148,7 @@ public class PlayerBall : MonoBehaviour
     {
         playerPosition = transform.position;
         calEachPosition = (playerPosition - points[currentLocation - 1]);
-       // Debug.Log(currentLocation + ", Calculated: " + calEachPosition.z);
+        // Debug.Log(currentLocation + ", Calculated: " + calEachPosition.z);
 
 
         // 점수 계산 테스트
@@ -178,7 +208,5 @@ public class PlayerBall : MonoBehaviour
 //   then Good()
 // if time > 4.0
 //   then Bad()
-
-
 
 
