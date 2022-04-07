@@ -13,6 +13,8 @@ public class CSVConverter : MonoBehaviour
     public Transform beatMapTransform;
     public int[] arrayX = new int[3];
 
+    public float correctionZ;   //z축 보정
+
     static Vector3 newPanelPos;
 
     //다음 3가지는 CSV converter에서 가지고 있을 이유가 없음 조만간 옮겨갈것
@@ -48,7 +50,7 @@ public class CSVConverter : MonoBehaviour
             if ((int)(data[i]["Speed"]) != 0)   //speed==0 은 노트의 종결을 의미
             {
                 //Debug.Log("Note: " + data[i]["Note"] + "Time: " + data[i]["Time"]);
-                newPanelPos = new Vector3(GetRandomX(), 0, ((int)data[i]["Time"] / 60) + 1);
+                newPanelPos = new Vector3(GetRandomX(data, i), 0, correctionZ);
                 panelObj = Instantiate(panel, newPanelPos, Quaternion.identity, beatMapTransform);
                 panelObj.name = "panel" + panelindex;
                 panelPositionList.Add(newPanelPos);
@@ -93,16 +95,26 @@ public class CSVConverter : MonoBehaviour
     }
 
     private static int before = 0;
-    private int GetRandomX()
+    private int GetRandomX(List<Dictionary<string, object>> data, int i)
     {
         int current = arrayX[Random.Range(0, 3)];
+        int z = ((int)data[i]["Time"] / 60) + 1;    //기존 z축 값
 
         if (Mathf.Abs(before - current) >= 2)
         {
-            return GetRandomX();
+            return GetRandomX(data, i);
         }
         else
         {
+            if (before != current)
+            {
+                correctionZ = Mathf.Sqrt(Mathf.Pow(z, 2) - 1);   //z축 보정
+                Debug.Log("correctionZ: " + correctionZ);
+            }
+            else
+            {
+                correctionZ = z;
+            }
             before = current;
             //Debug.Log("current: " + current);
             return current;
