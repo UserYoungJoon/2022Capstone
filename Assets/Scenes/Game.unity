@@ -348,7 +348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668801904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -1}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -764,7 +764,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.26720065, y: -0.016290357, z: 0.004517594, w: 0.96349263}
-  m_LocalPosition: {x: 0.04, y: 2.29, z: -1.18}
+  m_LocalPosition: {x: 0.04, y: 2.29, z: -2.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -935,7 +935,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375018406}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.0024288297, y: 0.36927366, z: 0.11441803}
+  m_LocalPosition: {x: 0.0024288297, y: 0.36927366, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1259,6 +1259,7 @@ MonoBehaviour:
   panel: {fileID: 7755923429572739986, guid: 8ea95caa905026546a72f2c77fc4f17f, type: 3}
   beatMapTransform: {fileID: 1347408985}
   arrayX: feffffff0000000002000000
+  correctionZ: 0
 --- !u!1 &1627590831
 GameObject:
   m_ObjectHideFlags: 0
