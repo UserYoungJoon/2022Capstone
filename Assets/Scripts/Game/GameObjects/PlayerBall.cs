@@ -36,7 +36,7 @@ public class PlayerBall : MonoBehaviour
         Vector3 panelPosition;
         for (int i = 1; i < CSVConverter.NowPanelCount; i++) // 수정필요
         {
-            panelPosition = BeatMap.Find("panel" + i).Find("p" + i).position;
+            panelPosition = BeatMap.Find("panel" + i).position;
             panelPosition.y = 0f;
             points.Add(panelPosition);
         }
@@ -44,21 +44,31 @@ public class PlayerBall : MonoBehaviour
     }
     #endregion
 
+    private void FixedUpdate() {
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+        //     Debug.Log(points[currentLocation + 1]);
+        //     rigid.AddForce(new Vector3(0, 0, 50), ForceMode.Impulse);
+        }
+    }
 
     void Update()
     {
+
         // Game start
         if (Input.GetKeyDown(KeyCode.J) && hasKeyDown == false)
         {
             hasKeyDown = true;
             startedGame = true;
+            
             currentLocation++;
         }
+
         if (hasKeyDown == true)
         {
             
             // Debug.Log("Moving to: " + points[currentLocation].ToString());
-            transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * moveSpeed);
+            //transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * moveSpeed);
         }
 
         // 오브젝트 회전(x축)
@@ -69,7 +79,42 @@ public class PlayerBall : MonoBehaviour
             Jumped();
             isJump = true;
             //panelPosition 간격에 따른 jumpPower를 수시로 수정해야됨
-            rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
+            
+            // float distance = CSVConverter.panelDistanceList[currentLocation - 1];
+            // float jumpAngle = 45;
+            // var vel_y = Mathf.Sqrt(((-1)*(distance * (Physics.gravity.y-12))) / Mathf.Sin(2 * jumpAngle));
+            // var vel = rigid.velocity;
+            // vel.y = vel_y;
+            // rigid.velocity = vel;
+
+            
+            
+
+            rigid.AddForce(new Vector3(0, 50, 0), ForceMode.Impulse);
+            Debug.Log("calEachPosition.z = " + points[currentLocation].z * 3.7f);
+            Vector3 fixedCalEachDistance = new Vector3(points[currentLocation].x * 3.7f, points[currentLocation].y, (points[currentLocation + 1].z + 10.0f));
+
+            if(points[currentLocation].x > 0)
+            {
+                Debug.Log("오른쪽");
+                fixedCalEachDistance.x += 10;   
+            }
+            
+            else if(points[currentLocation].x < 0)
+            {
+                Debug.Log("왼쪽");
+                fixedCalEachDistance.x -= 10;
+            }
+
+            else if(points[currentLocation].x == 0)
+            {
+                Debug.Log("가운데");
+                fixedCalEachDistance.x = points[currentLocation].x;
+            }
+
+
+            rigid.AddForce(fixedCalEachDistance, ForceMode.Impulse);
+            // rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
         }
     }
 
@@ -92,38 +137,38 @@ public class PlayerBall : MonoBehaviour
 
         // if(other.tag == "Way Point" && currentLocation == 1)
         // {
-        //     SoundManager.Instance.PlayBGMSound();
+        //     SoundManager.Instance.PlayBGMSound();s
         // }
-        // if (other.tag == "Way Point")
-        // {
-        //     SoundManager.Instance.getTime();
-        //     currentLocation++;
-        // }
+        if (other.tag == "Way Point")
+        {
+            SoundManager.Instance.getTime();
+            currentLocation++;
+        }
 
         //기본 공의 속도 계산
         float mapDistance = CSVConverter.mapDistance;
         Debug.Log("mapDistance: " + mapDistance);
         // Panel 12, Panel 13의 z 차는 4, -14 -18
-        if (points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
-        {
-            jumpPower = 100; 
-            moveSpeed = mapDistance / playTime;
-            Debug.Log("Too far");
-        }
-        else if(points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
-        {
-            jumpPower = 70;
-            //moveSpeed = 2.5f;
-            moveSpeed = mapDistance / playTime;
-            Debug.Log("playTime: " + playTime);
-            //Debug.Log("moveSpeed: "+moveSpeed);
-        }
+        // if (points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
+        // {
+        //     jumpPower = 100; 
+        //     moveSpeed = mapDistance / playTime;
+        //     Debug.Log("Too far");
+        // }
+        // else if(points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
+        // {
+        //     jumpPower = 70;
+        //     //moveSpeed = 2.5f;
+        //     moveSpeed = mapDistance / playTime;
+        //     Debug.Log("playTime: " + playTime);
+        //     //Debug.Log("moveSpeed: "+moveSpeed);
+        // }
 
 
-        else if (other.tag == "Finish")
-        {
-            // 게임 성공 판단 여부는 GameManager.cs에 구현이 되있으므로 삭제함.
-        }
+        // else if (other.tag == "Finish")
+        // {
+        //     // 게임 성공 판단 여부는 GameManager.cs에 구현이 되있으므로 삭제함.
+        // }
     }
 
 
@@ -133,6 +178,7 @@ public class PlayerBall : MonoBehaviour
         playerPosition = transform.position;
         calEachPosition = (playerPosition - points[currentLocation - 1]);
        // Debug.Log(currentLocation + ", Calculated: " + calEachPosition.z);
+       
 
 
         // 점수 계산 테스트

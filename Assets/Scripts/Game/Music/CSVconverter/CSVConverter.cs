@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /*
-    ï¿½ï¿½ï¿½ï¿½: https://m.blog.naver.com/yoohee2018/220700239540
-    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­, ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½, prefebï¿½ï¿½ ï¿½ß°ï¿½
+    ????: https://m.blog.naver.com/yoohee2018/220700239540
+    ????????: ????/????????? ???? ?????, ???????, prefeb?? ???
  */
 public class CSVConverter : MonoBehaviour
 {
@@ -13,12 +13,12 @@ public class CSVConverter : MonoBehaviour
     public Transform beatMapTransform;
     public int[] arrayX = new int[3];
 
-    public float correctionZ;   //zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float correctionZ;   //z?? ????
 
     public static float mapDistance = 0;
     static Vector3 newPanelPos;
 
-    //ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ CSV converterï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å°Ü°ï¿½ï¿½ï¿½
+    //???? 3?????? CSV converter???? ?????? ???? ?????? ???? ?????? ??????
     public static List<Vector3> panelPositionList = new List<Vector3>();
     public static List<float> panelDistanceList = new List<float>();
     public static List<Note> noteList = new List<Note>();
@@ -42,13 +42,13 @@ public class CSVConverter : MonoBehaviour
     public void MakeBeatMaps(string musicName)
     {
         int panelindex = 1;
-        List<Dictionary<string, object>> data = CSVReader.Read(musicName); //dataï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        List<Dictionary<string, object>> data = CSVReader.Read(musicName); //data?? 2???? ?ò÷?? ???¡¤? ??????
 
         int beforeTime = 0;
         GameObject panelObj = null;
-        for (var i = 0; i < data.Count; i++)    //csvï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½
+        for (var i = 0; i < data.Count; i++)    //csv???? ?¬Ò?
         {
-            if ((int)(data[i]["Speed"]) != 0)   //speed==0 ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½
+            if ((int)(data[i]["Speed"]) != 0)   //speed==0 ?? ????? ?????? ???
             {
                 //Debug.Log("Note: " + data[i]["Note"] + "Time: " + data[i]["Time"]);
                 newPanelPos = new Vector3(GetRandomX(data, i), 0, correctionZ);
@@ -94,7 +94,7 @@ public class CSVConverter : MonoBehaviour
         {
             panelDistanceList.Add(Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]));
             mapDistance += Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]);
-            Debug.Log(i + "ë²ˆì§¸ íŒ¨ë„ê³¼" + (i-1) +"ë²ˆì§¸ íŒ¨ë„ì‚¬ì´ì˜" + "Distance" + panelDistanceList[i - 1]);
+            // Debug.Log(i + "¹øÂ° ÆÐ³Î°ú" + (i-1) +"¹øÂ° ÆÐ³Î»çÀÌÀÇ" + "Distance" + panelDistanceList[i - 1]);
             
         }
     }
@@ -103,7 +103,7 @@ public class CSVConverter : MonoBehaviour
     private int GetRandomX(List<Dictionary<string, object>> data, int i)
     {
         int current = arrayX[Random.Range(0, 3)];
-        int z = ((int)data[i]["Time"] / 60) + 1;    //ï¿½ï¿½ï¿½ï¿½ zï¿½ï¿½ ï¿½ï¿½
+        int z = ((int)data[i]["Time"] / 40) + 1;    //???? z?? ??
 
         if (Mathf.Abs(before - current) >= 2)
         {
@@ -113,7 +113,7 @@ public class CSVConverter : MonoBehaviour
         {
             if (before != current)
             {
-                correctionZ = Mathf.Sqrt(Mathf.Pow(z, 2) - 1);   //zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                correctionZ = Mathf.Sqrt(Mathf.Pow(z, 2) - 1);   //z?? ????
                 //Debug.Log("correctionZ: " + correctionZ);
             }
             else
@@ -126,7 +126,7 @@ public class CSVConverter : MonoBehaviour
         }
     }
 
-    private int GetRandomx() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½ ï¿½Ô¼ï¿½
+    private int GetRandomx() // ???? ?????? ??????? ???
     {
         int nowRandom = 0;
         bool done = true;
