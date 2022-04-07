@@ -15,6 +15,7 @@ public class CSVConverter : MonoBehaviour
 
     public float correctionZ;   //z�� ����
 
+    public static float mapDistance = 0;
     static Vector3 newPanelPos;
 
     //���� 3������ CSV converter���� ������ ���� ������ ���� ������ �Űܰ���
@@ -92,7 +93,9 @@ public class CSVConverter : MonoBehaviour
         for (int i = 1; i < panelPositionList.Count; i++)
         {
             panelDistanceList.Add(Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]));
-            //Debug.Log("Distance" + panelDistanceList[i - 1]);
+            mapDistance += Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]);
+            Debug.Log(i + "번째 패널과" + (i-1) +"번째 패널사이의" + "Distance" + panelDistanceList[i - 1]);
+            
         }
     }
 
@@ -111,7 +114,7 @@ public class CSVConverter : MonoBehaviour
             if (before != current)
             {
                 correctionZ = Mathf.Sqrt(Mathf.Pow(z, 2) - 1);   //z�� ����
-                Debug.Log("correctionZ: " + correctionZ);
+                //Debug.Log("correctionZ: " + correctionZ);
             }
             else
             {

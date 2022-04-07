@@ -21,6 +21,8 @@ public class PlayerBall : MonoBehaviour
     private float rotateSpeed = 300.0f;  //회전속도
     public Transform BeatMap;
 
+    public float playTime = (2880.0f/120.0f) / (60.0f/105.0f); //2880은 csv파일에서 time의 마지막값+1으로 받아와야함
+ 
     #region Initializing section
     public void Init()
     {
@@ -88,21 +90,25 @@ public class PlayerBall : MonoBehaviour
         }
         if (other.tag == "Way Point")
         {
+            SoundManager.Instance.getTime();
             currentLocation++;
         }
 
-        
+        //기본 공의 속도 계산
+        float mapDistance = CSVConverter.mapDistance;
+        Debug.Log("mapDistance: " + mapDistance);
         // Panel 12, Panel 13의 z 차는 4, -14 -18
-        if(points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
+        if (points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
         {
-            jumpPower = 100;
-            moveSpeed = 5.0f;
+            jumpPower = 120; 
+            moveSpeed = mapDistance / playTime;
             Debug.Log("Too far");
         }
         else if(points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
         {
-            jumpPower = 50;
-            moveSpeed = 2.5f;
+            jumpPower = 100;
+            //moveSpeed = 2.5f;
+            moveSpeed = mapDistance / playTime;
         }
 
 
