@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166518444783678057}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38c7b7fb8f03ac24bb89c9f34cafbfa0, type: 3}
   m_Name: 
@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 166518445782378389}
   - component: {fileID: 166518445782378394}
   - component: {fileID: 1360756674078056034}
+  - component: {fileID: 1012619123144376547}
   m_Layer: 0
   m_Name: Basic Panel
   m_TagString: Item
@@ -170,6 +171,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startColor: {r: 0.7686275, g: 0.7686275, b: 0.7686275, a: 0}
   endColor: {r: 0.07678461, g: 0, b: 1, a: 0}
+--- !u!114 &1012619123144376547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7755923429572739986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c7b7fb8f03ac24bb89c9f34cafbfa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 1584822855588769501}
 --- !u!1 &8380535398654009538
 GameObject:
   m_ObjectHideFlags: 0
