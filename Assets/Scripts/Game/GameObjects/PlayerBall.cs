@@ -22,6 +22,8 @@ public class PlayerBall : MonoBehaviour
     public Transform BeatMap;
 
     public float playTime = 2880 / 120 * 60 / 105; //2880은 csv파일에서 time의 마지막값+1으로 받아와야함
+
+    
  
     #region Initializing section
     public void Init()
@@ -87,34 +89,38 @@ public class PlayerBall : MonoBehaviour
             // vel.y = vel_y;
             // rigid.velocity = vel;
 
-            
+
+            var velo = points[currentLocation] - playerPosition;
+
+            rigid.velocity = velo;
+
             
 
             rigid.AddForce(new Vector3(0, 50, 0), ForceMode.Impulse);
-            Debug.Log("calEachPosition.z = " + points[currentLocation].z * 3.7f);
-            Vector3 fixedCalEachDistance = new Vector3(points[currentLocation].x * 3.7f, points[currentLocation].y, (points[currentLocation + 1].z + 10.0f));
+            // Debug.Log("calEachPosition.z = " + points[currentLocation].z * 3.7f);
+            // Vector3 fixedCalEachDistance = new Vector3(points[currentLocation].x * 3.7f, points[currentLocation].y, (points[currentLocation + 1].z + 10.0f));
 
-            if(points[currentLocation].x > 0)
-            {
-                Debug.Log("오른쪽");
-                fixedCalEachDistance.x += 10;   
-            }
+            // if(points[currentLocation].x > 0)
+            // {
+            //     Debug.Log("오른쪽");
+            //     fixedCalEachDistance.x += 10;   
+            // }
             
-            else if(points[currentLocation].x < 0)
-            {
-                Debug.Log("왼쪽");
-                fixedCalEachDistance.x -= 10;
-            }
+            // else if(points[currentLocation].x < 0)
+            // {
+            //     Debug.Log("왼쪽");
+            //     fixedCalEachDistance.x -= 10;
+            // }
 
-            else if(points[currentLocation].x == 0)
-            {
-                Debug.Log("가운데");
-                fixedCalEachDistance.x = points[currentLocation].x;
-            }
+            // else if(points[currentLocation].x == 0)
+            // {
+            //     Debug.Log("가운데");
+            //     fixedCalEachDistance.x = points[currentLocation].x;
+            // }
 
 
-            rigid.AddForce(fixedCalEachDistance, ForceMode.Impulse);
-            // rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
+            // rigid.AddForce(fixedCalEachDistance, ForceMode.Impulse);
+            // // rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
         }
     }
 
