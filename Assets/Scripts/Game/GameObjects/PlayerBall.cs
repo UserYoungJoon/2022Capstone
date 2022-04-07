@@ -21,7 +21,7 @@ public class PlayerBall : MonoBehaviour
     private float rotateSpeed = 300.0f;  //회전속도
     public Transform BeatMap;
 
-    public float playTime = (2880.0f/120.0f) / (60.0f/105.0f); //2880은 csv파일에서 time의 마지막값+1으로 받아와야함
+    public float playTime = 2880 / 120 * 60 / 105; //2880은 csv파일에서 time의 마지막값+1으로 받아와야함
  
     #region Initializing section
     public void Init()
@@ -115,6 +115,8 @@ public class PlayerBall : MonoBehaviour
             jumpPower = 70;
             //moveSpeed = 2.5f;
             moveSpeed = mapDistance / playTime;
+            Debug.Log("playTime: " + playTime);
+            //Debug.Log("moveSpeed: "+moveSpeed);
         }
 
 
