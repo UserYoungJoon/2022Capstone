@@ -90,7 +90,7 @@ public class CSVConverter : MonoBehaviour
         for (int i = 1; i < panelPositionList.Count; i++)
         {
             panelDistanceList.Add(Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]));
-            //Debug.Log("Distance" + panelDistanceList[i - 1]);
+            Debug.Log("Distance" + panelDistanceList[i - 1]);
         }
     }
 
@@ -98,7 +98,7 @@ public class CSVConverter : MonoBehaviour
     private int GetRandomX(List<Dictionary<string, object>> data, int i)
     {
         int current = arrayX[Random.Range(0, 3)];
-        int z = ((int)data[i]["Time"] / 30) + 1;    //기존 z축 값
+        int z = ((int)data[i]["Time"] / 60) + 1;    //기존 z축 값
 
         if (Mathf.Abs(before - current) >= 2)
         {
@@ -109,7 +109,7 @@ public class CSVConverter : MonoBehaviour
             if (before != current)
             {
                 correctionZ = Mathf.Sqrt(Mathf.Pow(z, 2) - 1);   //z축 보정
-                //Debug.Log("correctionZ: " + correctionZ);
+                Debug.Log("correctionZ: " + correctionZ);
             }
             else
             {

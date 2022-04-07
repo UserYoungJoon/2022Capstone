@@ -87,7 +87,6 @@ public class PlayerBall : MonoBehaviour
         }
         if (other.tag == "Way Point")
         {
-            SoundManager.Instance.getTime();
             currentLocation++;
         }
 
@@ -96,15 +95,13 @@ public class PlayerBall : MonoBehaviour
         if(points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
         {
             jumpPower = 100;
-            //moveSpeed = 5.0f;
-            moveSpeed = 10.0f;
+            moveSpeed = 5.0f;
             Debug.Log("Too far");
         }
         else if(points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
         {
             jumpPower = 50;
-            //moveSpeed = 2.5f;
-            moveSpeed = 5.0f;
+            moveSpeed = 2.5f;
         }
 
 
