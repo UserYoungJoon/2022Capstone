@@ -51,6 +51,7 @@ public class PlayerBall : MonoBehaviour
         {
         //     Debug.Log(points[currentLocation + 1]);
         //     rigid.AddForce(new Vector3(0, 0, 50), ForceMode.Impulse);
+
         }
     }
 
@@ -89,17 +90,16 @@ public class PlayerBall : MonoBehaviour
             // vel.y = vel_y;
             // rigid.velocity = vel;
 
-
             //var velo = points[currentLocation] - playerPosition;
             Vector3 velo = 
                 new Vector3(points[currentLocation].x - playerPosition.x, 0, 0) 
                 + new Vector3(0, 0, points[currentLocation].z - playerPosition.z);
-            Debug.Log(velo);
+            //Debug.Log(velo);
             rigid.velocity = velo;
-
+            
 
             //rigid.AddForce(new Vector3(0, 50, 0), ForceMode.Impulse);
-            rigid.AddForce(velo + new Vector3(0, 50, 0), ForceMode.Impulse);
+            rigid.AddForce(new Vector3(0, 47, 0), ForceMode.Impulse);
             // Debug.Log("calEachPosition.z = " + points[currentLocation].z * 3.7f);
             // Vector3 fixedCalEachDistance = new Vector3(points[currentLocation].x * 3.7f, points[currentLocation].y, (points[currentLocation + 1].z + 10.0f));
 
