@@ -75,24 +75,30 @@ public class PlayerBall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+
+        if(collision.gameObject.tag == "Item" && currentLocation == 1)
+        {
+            SoundManager.Instance.PlayBGMSound();
+        }
         if (collision.gameObject.tag == "Item")
         {
             isJump = false;
+            currentLocation++;
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
 
-        if(other.tag == "Way Point" && currentLocation == 1)
-        {
-            SoundManager.Instance.PlayBGMSound();
-        }
-        if (other.tag == "Way Point")
-        {
-            SoundManager.Instance.getTime();
-            currentLocation++;
-        }
+        // if(other.tag == "Way Point" && currentLocation == 1)
+        // {
+        //     SoundManager.Instance.PlayBGMSound();
+        // }
+        // if (other.tag == "Way Point")
+        // {
+        //     SoundManager.Instance.getTime();
+        //     currentLocation++;
+        // }
 
         //기본 공의 속도 계산
         float mapDistance = CSVConverter.mapDistance;
@@ -100,13 +106,13 @@ public class PlayerBall : MonoBehaviour
         // Panel 12, Panel 13의 z 차는 4, -14 -18
         if (points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
         {
-            jumpPower = 120; 
+            jumpPower = 100; 
             moveSpeed = mapDistance / playTime;
             Debug.Log("Too far");
         }
         else if(points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
         {
-            jumpPower = 100;
+            jumpPower = 70;
             //moveSpeed = 2.5f;
             moveSpeed = mapDistance / playTime;
         }
