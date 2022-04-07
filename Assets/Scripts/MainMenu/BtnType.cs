@@ -12,6 +12,8 @@ public class BtnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public CanvasGroup optionGroup;
     public CanvasGroup songGroup;
     public CanvasGroup playGroup;
+    //public CanvasGroup1 songGroup1;
+    //public CanvasGroup1 playGroup1;
 
     private void Start()
     {
@@ -70,7 +72,18 @@ public class BtnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         cg.interactable = false;
         cg.blocksRaycasts = false;
     }
-
+    //public void CanvasGroupOn(CanvasGroup cg)
+    //{
+    //    cg.alpha = 1;
+    //    cg.interactable = true;
+    //    cg.blocksRaycasts = true;
+    //}
+    //public void CanvasGroupoff(CanvasGroup cg)
+    //{
+    //    cg.alpha = 0;
+    //    cg.interactable = false;
+    //    cg.blocksRaycasts = false;
+    //}
     public void OnPointerEnter(PointerEventData eventData)
     {
         buttonScale.localScale = defaultScale * 1.2f;
