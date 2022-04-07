@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /*
-    ÂüÁ¶: https://m.blog.naver.com/yoohee2018/220700239540
-    ¼öÁ¤»çÇ×: À½°è/¹ÚÀÚ¿¡µû¸¥ Á¶°Ç ¼¼ºÎÈ­, ¹ÚÀÚÃß°¡, prefebÀ½ Ãß°¡
+    ï¿½ï¿½ï¿½ï¿½: https://m.blog.naver.com/yoohee2018/220700239540
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­, ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½, prefebï¿½ï¿½ ï¿½ß°ï¿½
  */
 public class CSVConverter : MonoBehaviour
 {
@@ -13,15 +13,15 @@ public class CSVConverter : MonoBehaviour
     public Transform beatMapTransform;
     public int[] arrayX = new int[3];
 
-    public float correctionZ;   //zÃà º¸Á¤
+    public float correctionZ;   //zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     static Vector3 newPanelPos;
 
-    //´ÙÀ½ 3°¡Áö´Â CSV converter¿¡¼­ °¡Áö°í ÀÖÀ» ÀÌÀ¯°¡ ¾øÀ½ Á¶¸¸°£ ¿Å°Ü°¥°Í
+    //ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ CSV converterï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å°Ü°ï¿½ï¿½ï¿½
     public static List<Vector3> panelPositionList = new List<Vector3>();
     public static List<float> panelDistanceList = new List<float>();
     public static List<Note> noteList = new List<Note>();
-
+    public static int NowPanelCount = 0;
     #region Initializing section
     public void Init()
     {
@@ -29,25 +29,25 @@ public class CSVConverter : MonoBehaviour
         arrayX[1] = 0;
         arrayX[2] = 1;
 
-        MakeBeatMaps("AirPlane");
+        MakeBeatMaps("Airplane");
     }
 
     public void Bind()
     {
-        
+
     }
     #endregion
 
     public void MakeBeatMaps(string musicName)
     {
         int panelindex = 1;
-        List<Dictionary<string, object>> data = CSVReader.Read(musicName); //data°¡ 2Â÷¿ù ¹è¿­ÀÇ ÇüÅÂ·Î ÀúÀåµÊ
+        List<Dictionary<string, object>> data = CSVReader.Read(musicName); //dataï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         int beforeTime = 0;
         GameObject panelObj = null;
-        for (var i = 0; i < data.Count; i++)    //csvÆÄÀÏ ÀÐ±â
+        for (var i = 0; i < data.Count; i++)    //csvï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½
         {
-            if ((int)(data[i]["Speed"]) != 0)   //speed==0 Àº ³ëÆ®ÀÇ Á¾°áÀ» ÀÇ¹Ì
+            if ((int)(data[i]["Speed"]) != 0)   //speed==0 ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½
             {
                 //Debug.Log("Note: " + data[i]["Note"] + "Time: " + data[i]["Time"]);
                 newPanelPos = new Vector3(GetRandomX(data, i), 0, correctionZ);
@@ -62,17 +62,18 @@ public class CSVConverter : MonoBehaviour
 
                 panelindex++;
             }
-            else 
+            else
             {//Note setting section
                 if (panelObj == null)
                     break;
 
                 int noteValue = (int)data[i]["Time"] - beforeTime + 1;
                 eNoteType noteType = eNoteType.NONE;
-                if      (noteValue == 15) noteType = eNoteType.HALFHALFNOTE;
-                else if (noteValue == 30) noteType = eNoteType.HALFNOTE;
-                else if (noteValue == 60) noteType = eNoteType.ONE_NOTE;
-                else if (noteValue == 90) noteType = eNoteType.TWO_NOTE;
+                if      (noteValue ==  30) noteType = eNoteType.HALFHALFNOTE;
+                else if (noteValue ==  60) noteType = eNoteType.HALFNOTE;
+                else if (noteValue ==  90) noteType = eNoteType.HALF_HH_NOTE;
+                else if (noteValue == 120) noteType = eNoteType.ONE_NOTE;
+                else if (noteValue == 240) noteType = eNoteType.TWO_NOTE;
 
                 if (noteType == eNoteType.NONE)
                 {
@@ -85,12 +86,13 @@ public class CSVConverter : MonoBehaviour
 
                 panelObj = null;
             }
+            NowPanelCount = panelindex;
         }
 
         for (int i = 1; i < panelPositionList.Count; i++)
         {
             panelDistanceList.Add(Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]));
-            Debug.Log("Distance" + panelDistanceList[i - 1]);
+            //Debug.Log("Distance" + panelDistanceList[i - 1]);
         }
     }
 
@@ -98,7 +100,7 @@ public class CSVConverter : MonoBehaviour
     private int GetRandomX(List<Dictionary<string, object>> data, int i)
     {
         int current = arrayX[Random.Range(0, 3)];
-        int z = ((int)data[i]["Time"] / 60) + 1;    //±âÁ¸ zÃà °ª
+        int z = ((int)data[i]["Time"] / 60) + 1;    //ï¿½ï¿½ï¿½ï¿½ zï¿½ï¿½ ï¿½ï¿½
 
         if (Mathf.Abs(before - current) >= 2)
         {
@@ -108,7 +110,7 @@ public class CSVConverter : MonoBehaviour
         {
             if (before != current)
             {
-                correctionZ = Mathf.Sqrt(Mathf.Pow(z, 2) - 1);   //zÃà º¸Á¤
+                correctionZ = Mathf.Sqrt(Mathf.Pow(z, 2) - 1);   //zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 Debug.Log("correctionZ: " + correctionZ);
             }
             else
@@ -121,7 +123,7 @@ public class CSVConverter : MonoBehaviour
         }
     }
 
-    private int GetRandomx() // Á¦°¡ ¸¸µé±â¸¦ Èñ¸ÁÇß´ø ÇÔ¼ö
+    private int GetRandomx() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½ ï¿½Ô¼ï¿½
     {
         int nowRandom = 0;
         bool done = true;

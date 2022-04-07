@@ -32,12 +32,13 @@ public class PlayerBall : MonoBehaviour
     public void Bind()
     {
         Vector3 panelPosition;
-        for (int i = 1; i <= 36; i++) // 수정필요
+        for (int i = 1; i < CSVConverter.NowPanelCount; i++) // 수정필요
         {
             panelPosition = BeatMap.Find("panel" + i).Find("p" + i).position;
             panelPosition.y = 0f;
             points.Add(panelPosition);
         }
+        
     }
     #endregion
 
@@ -124,7 +125,9 @@ public class PlayerBall : MonoBehaviour
         // -0.1 < z < 0.1
         if (calEachPosition.z <= 0.04f && calEachPosition.z >= -0.04f)
         {
-            manager.GetPerfect();
+            Debug.Log("Perfect!");
+            //userScore += 300;
+            manager.ScoreCal();
         }
         else if (calEachPosition.z <= 0.08f && calEachPosition.z >= -0.08f)
         {
