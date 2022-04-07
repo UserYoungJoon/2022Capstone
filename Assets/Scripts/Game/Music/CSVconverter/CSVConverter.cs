@@ -21,7 +21,7 @@ public class CSVConverter : MonoBehaviour
     public static List<Vector3> panelPositionList = new List<Vector3>();
     public static List<float> panelDistanceList = new List<float>();
     public static List<Note> noteList = new List<Note>();
-
+    public static int NowPanelCount = 0;
     #region Initializing section
     public void Init()
     {
@@ -29,7 +29,7 @@ public class CSVConverter : MonoBehaviour
         arrayX[1] = 0;
         arrayX[2] = 1;
 
-        MakeBeatMaps("AirPlane");
+        MakeBeatMaps("Airplane");
     }
 
     public void Bind()
