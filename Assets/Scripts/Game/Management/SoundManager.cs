@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour
 
     private AudioSource bgmPlayer;
     private AudioSource sfxPlayer;
+    private AudioSource songPlayer;
 
     public float masterVolumeSFX = 1f;
     public float masterVolumeBGM = 1f;
@@ -34,14 +35,21 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioClip mainBgmAudioClip; //메인화면에서 사용할 BGM
 
+
     [SerializeField]
     private AudioClip[] sfxAudioClips; //효과음들 지정
 
+    [SerializeField]
+    private AudioClip[] songAudioClips; // 곡 리스트 지정
+
     Dictionary<string, AudioClip> audioClipsDic = new Dictionary<string, AudioClip>(); //효과음 딕셔너리
     // AudioClip을 Key,Value 형태로 관리하기 위해 딕셔너리 사용
+    Dictionary<string, AudioClip> audioSongDic = new Dictionary<string, AudioClip>(); // 비트맵 음악 딕셔너리
+    public static string selectedSong; // UI에서 곡 선택 시 입력 될 변수
 
     private void Awake()
     {
+        selectedSong = "AirplaneBGM"; // 초기 설정 Airplane
         if (Instance != this)
         {
             Destroy(this.gameObject);
@@ -50,12 +58,19 @@ public class SoundManager : MonoBehaviour
 
         bgmPlayer = GameObject.Find("BGMSoundPlayer").GetComponent<AudioSource>();
         sfxPlayer = GameObject.Find("SFXSoundPlayer").GetComponent<AudioSource>();
+        songPlayer = GameObject.Find("SongSoundPlayer").GetComponent<AudioSource>();
 
         foreach (AudioClip audioclip in sfxAudioClips)
         {
             audioClipsDic.Add(audioclip.name, audioclip);
         }
+
+        foreach (AudioClip audioclip in songAudioClips)
+        {
+            audioSongDic.Add(audioclip.name, audioclip);
+        }
     }
+
 
     // 효과 사운드 재생 : 이름을 필수 매개변수, 볼륨을 선택적 매개변수로 지정
     public void PlaySFXSound(string name, float volume = 1f)
@@ -71,7 +86,6 @@ public class SoundManager : MonoBehaviour
     //BGM 사운드 재생 : 볼륨을 선택적 매개변수로 지정
     public void PlayBGMSound(float volume = 1f)
     {
-        Debug.Log("PLAY");
         bgmPlayer.loop = true; //BGM 사운드이므로 루프설정
         bgmPlayer.volume = volume * masterVolumeBGM;
 
@@ -79,6 +93,17 @@ public class SoundManager : MonoBehaviour
         bgmPlayer.Play();
         
         //현재 씬에 맞는 BGM 재생
+    }
+
+    public void PlaySongSound(float volume = 1f)
+    {
+        if(audioSongDic.ContainsKey(selectedSong) == false)
+        {
+            Debug.Log((selectedSong + " is not Contained audioSongDic"));
+            return;
+        }
+        songPlayer.clip = audioSongDic[selectedSong];
+        songPlayer.Play();
     }
 
     //현재 BGM의 시간
@@ -91,4 +116,27 @@ public class SoundManager : MonoBehaviour
     {
         bgmPlayer.Stop();
     }
+
+    public void StopSongSound()
+    {
+        songPlayer.Stop();
+    }
+    
+
+    // 사용자가 ESC 키를 입력하여 게임을 멈추었을 때
+    public void PauseSong()
+    {
+        songPlayer.Pause();
+    }
 }
+
+//          Algorithm when player pause the game
+// if Player GetKeyDown KeyCode.ESC and !gameIsStopped
+//     then songPlayer.Pause
+//     set gameIsStopped = true
+// if Player GetKeyDown KeyCode.ESC and gameIsStopped
+//     then songPlayer.Play
+//     set gameIsStopped = false
+
+// UI 버튼 클릭 시 SFX?
+// 노트에 SFX 입히기

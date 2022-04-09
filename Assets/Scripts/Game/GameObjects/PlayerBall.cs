@@ -20,6 +20,7 @@ public class PlayerBall : MonoBehaviour
     public float moveSpeed;    // 이동속도(z축)
     private float rotateSpeed = 300.0f;  //회전속도
     public Transform BeatMap;
+    public string selectedSong;
 
     #region Initializing section
     public void Init()
@@ -101,6 +102,7 @@ public class PlayerBall : MonoBehaviour
     /// new code above
     /// </summary>
 
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Item")
@@ -114,26 +116,27 @@ public class PlayerBall : MonoBehaviour
 
         if (other.tag == "Way Point" && currentLocation == 1)
         {
-            SoundManager.Instance.PlayBGMSound();
+            SoundManager.Instance.PlaySongSound(); // 변수 string selectedSong 로 선택한 곡 플레이 하게끔 만들 예정 
         }
         if (other.tag == "Way Point")
         {
             currentLocation++;
+            other.tag = "wp";
         }
 
 
         // Panel 12, Panel 13의 z 차는 4, -14 -18
-        if (points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
-        {
-            jumpPower = 100;
-            moveSpeed = 5.0f;
-            Debug.Log("Too far");
-        }
-        else if (points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
-        {
-            jumpPower = 50;
-            moveSpeed = 2.5f;
-        }
+        // if (points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
+        // {
+        //     jumpPower = 100;
+        //     moveSpeed = 5.0f;
+        //     Debug.Log("Too far");
+        // }
+        // else if (points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
+        // {
+        //     jumpPower = 50;
+        //     moveSpeed = 2.5f;
+        // }
 
 
         else if (other.tag == "Finish")
