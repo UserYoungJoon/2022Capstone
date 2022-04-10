@@ -79,6 +79,9 @@ public class GameManager : MonoBehaviour
                 Debug.Log("GAME OVER");
                 Debug.Log("Final Score is: " + userScore);
                 SoundManager.Instance.StopSongSound();
+
+                GameObject.Find("Sync").SetActive(false);
+
             }
             
             SceneManager.LoadScene(stage);

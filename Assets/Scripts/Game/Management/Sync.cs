@@ -13,13 +13,11 @@ public class Sync : MonoBehaviour
     float standardTempo = 4f;
     float tikTime = 0;
     float nextTime = 0;
-    // Start is called before the first frame update
     void Start()
     {
         playTik = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         // ( 105 / 60 ) * (2 / 4) 4분의 2박자, 초당 재생수
@@ -32,6 +30,7 @@ public class Sync : MonoBehaviour
             StartCoroutine(PlayTik(tikTime));
             nextTime = 0;
         }
+
     }
 
     IEnumerator PlayTik(float tikTime)
@@ -41,3 +40,7 @@ public class Sync : MonoBehaviour
         yield return new WaitForSeconds(tikTime); // tikTime 만큼 대기
     }
 }
+
+
+// songposition = (float)(AudioSettings.dspTime – dsptimesong) * song.pitch – offset;
+// Offset 공의 속도 조절 or 패널의 위치 조절

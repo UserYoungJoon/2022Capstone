@@ -56,15 +56,16 @@ public class SoundManager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject); //여러 씬에서 사용할 것.
 
-        bgmPlayer = GameObject.Find("BGMSoundPlayer").GetComponent<AudioSource>();
-        sfxPlayer = GameObject.Find("SFXSoundPlayer").GetComponent<AudioSource>();
-        songPlayer = GameObject.Find("SongSoundPlayer").GetComponent<AudioSource>();
+        bgmPlayer = GameObject.Find("MainMenuPlayer").GetComponent<AudioSource>();
+        sfxPlayer = GameObject.Find("SFXPlayer").GetComponent<AudioSource>();
+        songPlayer = GameObject.Find("SongPlayer").GetComponent<AudioSource>();
 
+        // SoundManager AudioClip Element 추가 - SFX
         foreach (AudioClip audioclip in sfxAudioClips)
         {
             audioClipsDic.Add(audioclip.name, audioclip);
         }
-
+        // SoundManager AudioClip Element 추가 - Song
         foreach (AudioClip audioclip in songAudioClips)
         {
             audioSongDic.Add(audioclip.name, audioclip);
@@ -75,7 +76,7 @@ public class SoundManager : MonoBehaviour
     // 효과 사운드 재생 : 이름을 필수 매개변수, 볼륨을 선택적 매개변수로 지정
     public void PlaySFXSound(string name, float volume = 1f)
     {
-        if (audioClipsDic.ContainsKey(name) == false)
+        if (audioClipsDic.ContainsKey(name) == false) // Element에 없을 시
         {
             Debug.Log(name + " is not Contained audioClipsDic");
             return;
@@ -97,7 +98,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySongSound(float volume = 1f)
     {
-        if(audioSongDic.ContainsKey(selectedSong) == false)
+        if(audioSongDic.ContainsKey(selectedSong) == false) // Element에 없을 시
         {
             Debug.Log((selectedSong + " is not Contained audioSongDic"));
             return;
@@ -139,4 +140,4 @@ public class SoundManager : MonoBehaviour
 //     set gameIsStopped = false
 
 // UI 버튼 클릭 시 SFX?
-// 노트에 SFX 입히기
+// 패널에 SFX 입히기
