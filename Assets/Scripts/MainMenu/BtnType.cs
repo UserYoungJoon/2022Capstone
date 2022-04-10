@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class BtnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -52,14 +53,15 @@ public class BtnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 CanvasGroupoff(playGroup);
                 Debug.Log("곡선택창");
                 break;
-            case BTNType.Select:
-                CanvasGroupOn(playGroup);
-                CanvasGroupoff(songGroup);
-                Debug.Log("곡선택");
-                break;
+            
             
         }
     }
+        //public void OnClickNewGame()
+        //{
+        //    SceneManager.LoadScene("Game");
+        //    Debug.Log("게임시작");
+        //}
     public void CanvasGroupOn(CanvasGroup cg)
     {
         cg.alpha = 1;
@@ -72,18 +74,7 @@ public class BtnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         cg.interactable = false;
         cg.blocksRaycasts = false;
     }
-    //public void CanvasGroupOn(CanvasGroup cg)
-    //{
-    //    cg.alpha = 1;
-    //    cg.interactable = true;
-    //    cg.blocksRaycasts = true;
-    //}
-    //public void CanvasGroupoff(CanvasGroup cg)
-    //{
-    //    cg.alpha = 0;
-    //    cg.interactable = false;
-    //    cg.blocksRaycasts = false;
-    //}
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
         buttonScale.localScale = defaultScale * 1.2f;

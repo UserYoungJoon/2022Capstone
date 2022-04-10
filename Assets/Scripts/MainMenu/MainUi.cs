@@ -12,7 +12,9 @@ public enum BTNType
     Quit,
     Select,
     Play,
-    Songback
+    Songback,
+    Pause,
+    LoadGame
 }
 
 public class MainUi : MonoBehaviour

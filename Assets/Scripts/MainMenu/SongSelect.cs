@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SongSelect : MonoBehaviour
+public class SongSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    //public Transform buttonScale;
-    //Vector3 defaultScale;
+    public Transform buttonScale;
+    Vector3 defaultScale;
     public BTNType currentType;
     public CanvasGroup songGroup;
     public CanvasGroup playGroup;
+    private void Start() 
+    {
+        defaultScale = buttonScale.localScale;
+    }
     public void OnBtnClick()
     {
         switch (currentType)
         {
             
-            case BTNType.Songback:
-                CanvasGroupOn(songGroup);
-                CanvasGroupoff(playGroup);
-                Debug.Log("∞Óº±≈√√¢");
-                break;
+            
             case BTNType.Select:
                 CanvasGroupOn(playGroup);
                 CanvasGroupoff(songGroup);
@@ -41,13 +41,13 @@ public class SongSelect : MonoBehaviour
         cg.interactable = true;
         cg.blocksRaycasts = true;
     }
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    buttonScale.localScale = defaultScale * 1.2f;
-    //}
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        buttonScale.localScale = defaultScale * 1.2f;
+    }
 
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    buttonScale.localScale = defaultScale;
-    //}
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        buttonScale.localScale = defaultScale;
+    }
 }

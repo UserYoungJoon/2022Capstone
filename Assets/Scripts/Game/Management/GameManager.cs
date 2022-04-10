@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 144;
         (new Notes()).Init();//temp code
         
         playerBall.Init();
