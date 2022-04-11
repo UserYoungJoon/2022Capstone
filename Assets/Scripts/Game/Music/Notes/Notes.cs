@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Notes
 {
-    private static List<AudioClip> oneNotes;
-    private static List<AudioClip> twoNotes;
+    private List<AudioClip> oneNotes;
+    private List<AudioClip> twoNotes;
 
     #region
     public void Init()
@@ -32,9 +32,19 @@ public class Notes
     #endregion
     const int OFFSET = 65;
 
-    public static AudioClip GetTwoNoteByID(int ID)
+    public AudioClip GetTwoNoteByID(int ID)
     {
-        var res = twoNotes[ID-OFFSET];
+        return Gett(twoNotes,ID);
+    }
+
+    public AudioClip GetOneNoteByID(int ID)
+    {
+        return Gett(oneNotes, ID);
+    }
+
+    public AudioClip Gett(List<AudioClip> list, int ID)
+    {
+        var res = list[ID - OFFSET];
         if (res != null)
         {
             return res;
@@ -42,21 +52,6 @@ public class Notes
         else
         {
             Debug.LogFormat("Can't Find Note ID:{0} from [TwoNotes]", ID);
-            return null;
-        }
-    }
-
-    public static AudioClip GetOneNoteByID(int ID)
-    {
-       // Debug.LogFormat("cnt : {0} and [ID-offset:{1}],[ID:{2}],", twoNotes.Count, ID - 65,ID);
-        var res = oneNotes[ID-OFFSET];
-        if (res != null)
-        {
-            return res;
-        }
-        else
-        {
-            Debug.LogFormat("Can't Find Note ID:{0} from [Notes]", ID);
             return null;
         }
     }

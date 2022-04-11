@@ -5,149 +5,104 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBall : MonoBehaviour
 {
-    [SerializeField]
-    public float jumpPower;
-    public GameManager manager;
-    public static bool isJump;
-    Rigidbody rigid;
     public List<Vector3> points = new List<Vector3>();
-    private int currentLocation = 0;
-    bool hasKeyDown = false;
-    private bool startedGame = false;
-    private Vector3 playerPosition;
-    private Vector3 calEachPosition;
-
-    public float moveSpeed;    // 이동속도(z축)
-    private float rotateSpeed = 300.0f;  //회전속도
+    public GameManager manager;
+    public Transform startPos;
     public Transform BeatMap;
+
+    private float rotateSpeed = 300.0f;  //회전속도
+    private int currentLocation;
+    private Rigidbody rigid;
+    private bool isJumping;
 
     #region Initializing section
     public void Init()
     {
-        isJump = false;
+        isJumping = false;
         rigid = GetComponent<Rigidbody>();
         points.Add(this.gameObject.transform.position);
+        currentLocation = 0;
     }
 
-    public void Bind()
+    public void Bind(List<Vector3> pts)
     {
-        Vector3 panelPosition;
-        for (int i = 1; i < CSVConverter.NowPanelCount; i++) // 수정필요
-        {
-            panelPosition = BeatMap.Find("panel" + i).Find("p" + i).position;
-            panelPosition.y = 0f;
-            points.Add(panelPosition);
-        }
-        
+        points = pts;
     }
     #endregion
 
+    public void SetBeforeRun()
+    {
+        transform.position = new Vector3(startPos.position.x, 0.5f, startPos.position.z);
+        nowPos = startPos.position;
+        nextPos = points[0];
+        currentLocation = 0;
+        isJumping = false;
+    }
 
     void Update()
     {
-        // Game start
-        if (Input.GetKeyDown(KeyCode.J) && hasKeyDown == false)
-        {
-            hasKeyDown = true;
-            startedGame = true;
-            currentLocation++;
-        }
-        if (hasKeyDown == true)
-        {
-            
-            // Debug.Log("Moving to: " + points[currentLocation].ToString());
-            transform.position = Vector3.MoveTowards(transform.position, points[currentLocation], Time.deltaTime * moveSpeed);
-        }
-
-        // 오브젝트 회전(x축)
+        Move();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && !isJump)
+        if (Input.GetButtonDown("Jump") && !isJumping)
         {
-            Jumped();
-            isJump = true;
-            //panelPosition 간격에 따른 jumpPower를 수시로 수정해야됨
-            rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
+            Jump();
         }
     }
+
+    #region Move control section
+    private float deltaTime = 1;
+    private float forwardSpeed = 1.8f;
+    private float halfPanelSize = 0.12f;
+    private Vector3 nowPos;
+    private Vector3 nextPos;
+    void Jump()
+    {
+        deltaTime = (nextPos.z - nowPos.z - halfPanelSize) / forwardSpeed;
+        Vector3 vector = rigid.velocity;
+        vector.x = (nextPos.x - transform.position.x) / deltaTime;
+        vector.y = -Physics.gravity.y * deltaTime / 2;
+        vector.z = forwardSpeed;
+        rigid.velocity = vector;
+
+        isJumping = true;
+        manager.CalculateScore((transform.position - nowPos).z);
+    }
+    void Move()
+    {
+        deltaTime = (nextPos.z - nowPos.z - halfPanelSize) / forwardSpeed;
+        Vector3 vector = rigid.velocity;
+        vector.z = forwardSpeed;
+        rigid.velocity = vector;
+    }
+    #endregion Move control section
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Item")
         {
-            isJump = false;
+            isJumping = false;
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
 
-        if(other.tag == "Way Point" && currentLocation == 1)
+        if (other.tag == "Way Point" && currentLocation == 0)
         {
-            SoundManager.Instance.PlayBGMSound();
+            SoundManager.Instance.PlaySongSound();
+            // 싱크 디버깅용. 싱크 해결 되면 아래 코드 제거할 예정
+            GameObject.Find("SoundManager").transform.Find("Sync").gameObject.SetActive(true);
         }
         if (other.tag == "Way Point")
         {
+            nowPos = points[currentLocation];
+            nextPos = points[currentLocation + 1];
             currentLocation++;
         }
-
-        
-        // Panel 12, Panel 13의 z 차는 4, -14 -18
-        if(points[currentLocation - 1].z - points[currentLocation].z <= -4.0f)
-        {
-            jumpPower = 100;
-            moveSpeed = 5.0f;
-            Debug.Log("Too far");
-        }
-        else if(points[currentLocation - 1].z - points[currentLocation].z >= -4.0f)
-        {
-            jumpPower = 50;
-            moveSpeed = 2.5f;
-        }
-
-
-        else if (other.tag == "Finish")
-        {
-            // 게임 성공 판단 여부는 GameManager.cs에 구현이 되있으므로 삭제함.
-        }
-    }
-
-
-    // When player jumped
-    private void Jumped()
-    {
-        playerPosition = transform.position;
-        calEachPosition = (playerPosition - points[currentLocation - 1]);
-       // Debug.Log(currentLocation + ", Calculated: " + calEachPosition.z);
-
-
-        // 점수 계산 테스트
-        // -0.1 < z < 0.1
-        if (calEachPosition.z <= 0.04f && calEachPosition.z >= -0.04f)
-        {
-            Debug.Log("Perfect!");
-            //userScore += 300;
-            manager.ScoreCal();
-        }
-        else if (calEachPosition.z <= 0.08f && calEachPosition.z >= -0.08f)
-        {
-            manager.GetGreat();
-        }
-        else if (calEachPosition.z <= 0.12f && calEachPosition.z >= -0.12f)
-        {
-            manager.GetGood();
-        }
-        else
-        {
-            manager.GetBad();
-        }
-
     }
 }
 
-
-
-//             Algorithm A
 // 플레이어의 위치와 포인트의 거리에 따른 점수 계산
 // 0.02 0.03 0.05
 // if playerPosition = point or playerPosition - point >= |3|
@@ -178,7 +133,3 @@ public class PlayerBall : MonoBehaviour
 //   then Good()
 // if time > 4.0
 //   then Bad()
-
-
-
-

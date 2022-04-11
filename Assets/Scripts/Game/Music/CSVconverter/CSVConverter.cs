@@ -1,106 +1,122 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 /*
-    ï¿½ï¿½ï¿½ï¿½: https://m.blog.naver.com/yoohee2018/220700239540
-    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­, ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½, prefebï¿½ï¿½ ï¿½ß°ï¿½
+    ????: https://m.blog.naver.com/yoohee2018/220700239540
+    ????????: ????/????????? ???? ?????, ???????, prefeb?? ???
  */
-public class CSVConverter : MonoBehaviour
+public class CSVConverter
 {
     public GameObject panel;    //prefab
-    public Transform beatMapTransform;
+    public Transform beatMap;   //parent obj
     public int[] arrayX = new int[3];
 
-    public float correctionZ;   //zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float correctionZ;   //z?? ????
+    public static float mapDistance = 0;//no use yet
 
-    static Vector3 newPanelPos;
+    public List<Vector3> wayPointsList = new List<Vector3>();
+    private List<Vector3> panelPositionList = new List<Vector3>();
+    private List<float> panelDistanceList = new List<float>();
+    private List<Note> noteList = new List<Note>();
+    private Notes notes;
 
-    //ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ CSV converterï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å°Ü°ï¿½ï¿½ï¿½
-    public static List<Vector3> panelPositionList = new List<Vector3>();
-    public static List<float> panelDistanceList = new List<float>();
-    public static List<Note> noteList = new List<Note>();
-    public static int NowPanelCount = 0;
     #region Initializing section
     public void Init()
     {
         arrayX[0] = -1;
         arrayX[1] = 0;
         arrayX[2] = 1;
-
-        MakeBeatMaps("Airplane");
     }
 
-    public void Bind()
+    public void Bind(GameObject panel, Transform beatMap, Notes notes)
     {
-
+        this.panel = panel;
+        this.beatMap = beatMap;
+        this.notes = notes;
     }
     #endregion
 
+    private const string TIME = "Time";
+    private const string NOTE = "Note";
     public void MakeBeatMaps(string musicName)
     {
         int panelindex = 1;
-        List<Dictionary<string, object>> data = CSVReader.Read(musicName); //dataï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        List<Dictionary<string, object>> data = ReadCSV(musicName);
 
         int beforeTime = 0;
         GameObject panelObj = null;
-        for (var i = 0; i < data.Count; i++)    //csvï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½
+        Vector3 newPanelPos;
+        for (var i = 0; i < data.Count; i++)
         {
-            if ((int)(data[i]["Speed"]) != 0)   //speed==0 ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½
+            if ((int)(data[i]["Speed"]) != 0)   //speed==0 
             {
-                //Debug.Log("Note: " + data[i]["Note"] + "Time: " + data[i]["Time"]);
                 newPanelPos = new Vector3(GetRandomX(data, i), 0, correctionZ);
-                panelObj = Instantiate(panel, newPanelPos, Quaternion.identity, beatMapTransform);
+                panelObj = GameObject.Instantiate(panel, newPanelPos, Quaternion.identity, beatMap);
                 panelObj.name = "panel" + panelindex;
                 panelPositionList.Add(newPanelPos);
 
-                var wayPoint = panelObj.GetComponent<Transform>().Find("p");
+                var wayPoint = panelObj.transform.Find("p");
                 wayPoint.name = "p" + panelindex;
+                wayPointsList.Add(wayPoint.position);
 
-                beforeTime = (int)data[i]["Time"];
+                beforeTime = (int)data[i][TIME];
 
                 panelindex++;
             }
             else
-            {//Note setting section
+            {//Note setting to panelObj...
                 if (panelObj == null)
                     break;
 
-                int noteValue = (int)data[i]["Time"] - beforeTime + 1;
+                int noteValue = (int)data[i][TIME] - beforeTime + 1;
                 eNoteType noteType = eNoteType.NONE;
-                if      (noteValue ==  30) noteType = eNoteType.HALFHALFNOTE;
-                else if (noteValue ==  60) noteType = eNoteType.HALFNOTE;
-                else if (noteValue ==  90) noteType = eNoteType.HALF_HH_NOTE;
+                if (noteValue == 30) noteType = eNoteType.HALFHALFNOTE;
+                else if (noteValue == 60) noteType = eNoteType.HALFNOTE;
+                else if (noteValue == 90) noteType = eNoteType.HALF_HH_NOTE;
                 else if (noteValue == 120) noteType = eNoteType.ONE_NOTE;
                 else if (noteValue == 240) noteType = eNoteType.TWO_NOTE;
 
                 if (noteType == eNoteType.NONE)
-                {
-                    Debug.LogFormat("Note ERROE : Time[{0}] - Time[{1}] = {2} - {3} || Note valeue : {4}", i + 1, i, (int)data[i]["Time"],beforeTime,noteValue);
+                {//Note Setting failed Exception!
+                    Debug.LogFormat("Note ERROE : Time[{0}] - Time[{1}] = {2} - {3} || Note valeue : {4}", i + 1, i, (int)data[i][TIME], beforeTime, noteValue);
                 }
 
-                Note note = panelObj.transform.Find("Note").GetComponent<Note>();
-                note.SetNote(noteType, (int)data[i]["Note"]);
+                //Note Obj Create & Set
+                Note note = panelObj.transform.Find(NOTE).GetComponent<Note>();
+                if (noteType == eNoteType.ONE_NOTE)
+                    note.SetNote(noteType, notes.GetOneNoteByID((int)data[i][NOTE]));
+                else
+                    note.SetNote(noteType, notes.GetTwoNoteByID((int)data[i][NOTE]));
                 noteList.Add(note);
 
                 panelObj = null;
             }
-            NowPanelCount = panelindex;
         }
 
         for (int i = 1; i < panelPositionList.Count; i++)
         {
             panelDistanceList.Add(Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]));
-            //Debug.Log("Distance" + panelDistanceList[i - 1]);
+            mapDistance += Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]);
+            // Debug.Log(i + "¹øÂ° ÆÐ³Î°ú" + (i-1) +"¹øÂ° ÆÐ³Î»çÀÌÀÇ" + "Distance" + panelDistanceList[i - 1]);
+
         }
+    }
+
+    public void Clear()
+    {
+        wayPointsList.Clear();
+        panelDistanceList.Clear();
+        panelPositionList.Clear();
+        noteList.Clear();
     }
 
     private static int before = 0;
     private int GetRandomX(List<Dictionary<string, object>> data, int i)
     {
         int current = arrayX[Random.Range(0, 3)];
-        int z = ((int)data[i]["Time"] / 60) + 1;    //ï¿½ï¿½ï¿½ï¿½ zï¿½ï¿½ ï¿½ï¿½
+        int z = ((int)data[i]["Time"] / 40) + 1;
 
         if (Mathf.Abs(before - current) >= 2)
         {
@@ -110,36 +126,59 @@ public class CSVConverter : MonoBehaviour
         {
             if (before != current)
             {
-                correctionZ = Mathf.Sqrt(Mathf.Pow(z, 2) - 1);   //zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-                Debug.Log("correctionZ: " + correctionZ);
+                correctionZ = Mathf.Sqrt(Mathf.Pow(z, 2) - 1);
             }
             else
             {
                 correctionZ = z;
             }
             before = current;
-            //Debug.Log("current: " + current);
             return current;
         }
     }
 
-    private int GetRandomx() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½ ï¿½Ô¼ï¿½
+    #region CSV Reader
+    private string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
+    private string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
+    private char[] TRIM_CHARS = { '\"' };
+
+    private List<Dictionary<string, object>> ReadCSV(string file)
     {
-        int nowRandom = 0;
-        bool done = true;
-        while(!done)
+        var list = new List<Dictionary<string, object>>();
+        TextAsset data = Resources.Load(file) as TextAsset;
+
+        var lines = Regex.Split(data.text, LINE_SPLIT_RE);
+
+        if (lines.Length <= 1) return list;
+
+        var header = Regex.Split(lines[0], SPLIT_RE);
+        for (var i = 1; i < lines.Length; i++)
         {
-            nowRandom = arrayX[Random.Range(0, 3)];
-            if (Mathf.Abs(before - nowRandom) == 2)
+
+            var values = Regex.Split(lines[i], SPLIT_RE);
+            if (values.Length == 0 || values[0] == "") continue;
+
+            var entry = new Dictionary<string, object>();
+            for (var j = 0; j < header.Length && j < values.Length; j++)
             {
-                continue;
+                string value = values[j];
+                value = value.TrimStart(TRIM_CHARS).TrimEnd(TRIM_CHARS).Replace("\\", "");
+                object finalvalue = value;
+                int n;
+                float f;
+                if (int.TryParse(value, out n))
+                {
+                    finalvalue = n;
+                }
+                else if (float.TryParse(value, out f))
+                {
+                    finalvalue = f;
+                }
+                entry[header[j]] = finalvalue;
             }
-            else
-            {
-                done = true;
-                before = nowRandom;
-            }
+            list.Add(entry);
         }
-        return nowRandom;
+        return list;
     }
+    #endregion CSV Reader
 }
