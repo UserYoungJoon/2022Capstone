@@ -1,46 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
+// Written by https://gist.github.com/bzgeb/c298c6189c73b2cf777c
 public class Sync : MonoBehaviour
 {
+    public double bpm = 105.0F; // 정적 처리, 나중에 곡 정보를 불러와서 이 곳에 bpm 들어갈 예정
 
-    AudioSource playTik;
-    public AudioClip tik;
-    float musicBPM = 105f;
-    float standardBPM = 60f;
-    float musicTempo = 2f;
-    float standardTempo = 4f;
-    float tikTime = 0;
-    float nextTime = 0;
-    void Start()
-    {
-        playTik = GetComponent<AudioSource>();
+    double nextTick = 0.0F; // The next tick in dspTime
+    double sampleRate = 0.0F; 
+    bool ticked = false;
+
+    void Start() {
+        double startTick = AudioSettings.dspTime;
+        sampleRate = AudioSettings.outputSampleRate;
+
+        nextTick = startTick + (60.0 / bpm);
     }
 
-    void Update()
-    {
-        // ( 105 / 60 ) * (2 / 4) 4분의 2박자, 초당 재생수
-        tikTime = (musicBPM / standardBPM) * (musicTempo / standardTempo);
-        
-        nextTime += Time.deltaTime;
+    void LateUpdate() {
+        if ( !ticked && nextTick >= AudioSettings.dspTime ) {
+            ticked = true;
+            BroadcastMessage( "OnTick" );
+        }
+    }
 
-        if(nextTime > tikTime)
-        {
-            StartCoroutine(PlayTik(tikTime));
-            nextTime = 0;
+    // Just an example OnTick here
+    void OnTick() {
+        Debug.Log( "Tick" );
+        GetComponent<AudioSource>().Play();
+    }
+
+    void FixedUpdate() {
+        double timePerTick = 60.0f / bpm;
+        double dspTime = AudioSettings.dspTime;
+
+        while ( dspTime >= nextTick ) {
+            ticked = false;
+            nextTick += timePerTick;
         }
 
     }
-
-    IEnumerator PlayTik(float tikTime)
-    {
-        Debug.Log(nextTime); // 시간 오차 확인용
-        playTik.PlayOneShot(tik);
-        yield return new WaitForSeconds(tikTime); // tikTime 만큼 대기
-    }
 }
-
-
-// songposition = (float)(AudioSettings.dspTime – dsptimesong) * song.pitch – offset;
-// Offset 공의 속도 조절 or 패널의 위치 조절
