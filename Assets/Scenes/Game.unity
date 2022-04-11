@@ -154,9 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterVolumeSFX: 1
   masterVolumeBGM: 1
-  mainBgmAudioClip: {fileID: 8300000, guid: f261f87050c45d644a32c07425dc7ed5, type: 3}
+  mainBgmAudioClip: {fileID: 0}
   sfxAudioClips: []
-  songAudioClips: []
+  songAudioClips:
+  - {fileID: 8300000, guid: f261f87050c45d644a32c07425dc7ed5, type: 3}
 --- !u!4 &108800441
 Transform:
   m_ObjectHideFlags: 0
