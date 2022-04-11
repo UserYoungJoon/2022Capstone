@@ -4,25 +4,44 @@ using UnityEngine;
 
 public class CameraMoving : MonoBehaviour
 {
-    Transform playerTransform;
-    Vector3 Offset;
+    private enum eCameraMode
+    {
+        SELCET_SONG,
+        GAME
+    }
+    private eCameraMode cameraMode;
+    private Transform playerTransform;
+    private Vector3 Offset;
 
     #region Initializing section
     public void Init()
     {
-        
+        cameraMode = eCameraMode.SELCET_SONG;
     }
 
-    public void Bind()
+    public void Bind(Transform playerTransform)
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        this.playerTransform = playerTransform;
         Offset = transform.position - playerTransform.position;
     }
     #endregion
 
+
+    public void SetSelectMode()
+    {
+        cameraMode = eCameraMode.SELCET_SONG;
+    }
+
+    public void SetGameMode()
+    {
+        cameraMode = eCameraMode.GAME;
+    }
+
+
     public void LateUpdate()
     {
-        transform.position = playerTransform.position + Offset;
+        if(cameraMode == eCameraMode.GAME)
+            transform.position = playerTransform.position + Offset;
     }
 }
 

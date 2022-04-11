@@ -17,13 +17,9 @@ public class Note : MonoBehaviour
     public eNoteType noteType = eNoteType.NONE;
     public AudioSource audioSource;
 
-    public void SetNote(eNoteType noteType, int noteID)
+    public void SetNote(eNoteType noteType, AudioClip audio)
     {
         this.noteType = noteType;
-
-        if (noteType == eNoteType.TWO_NOTE)
-            audioSource.clip = Notes.GetTwoNoteByID(noteID);
-        else
-            audioSource.clip = Notes.GetOneNoteByID(noteID);
+        audioSource.clip = audio;
     }
 }
