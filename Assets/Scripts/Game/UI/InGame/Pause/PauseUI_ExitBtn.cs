@@ -15,6 +15,7 @@ public class PauseUI_ExitBtn : UIButton
     public override void ClickEvent()
     {
         Timer.FreezeTime();
+        SoundManager.Instance.StopSongSound();
         uiManager.SwitchGameStateToSelect();
     }
 }

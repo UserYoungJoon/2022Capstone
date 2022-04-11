@@ -91,6 +91,8 @@ public class PlayerBall : MonoBehaviour
         if (other.tag == "Way Point" && currentLocation == 0)
         {
             SoundManager.Instance.PlaySongSound();
+            // 싱크 디버깅용. 싱크 해결 되면 아래 코드 제거할 예정
+            GameObject.Find("SoundManager").transform.Find("Sync").gameObject.SetActive(true);
         }
         if (other.tag == "Way Point")
         {
