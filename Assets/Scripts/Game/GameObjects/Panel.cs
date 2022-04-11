@@ -5,21 +5,13 @@ using UnityEngine;
 public class Panel : MonoBehaviour
 {
 
-    public AudioSource audio;
-    private void Awake()
-    {
-    }
+    public AudioSource audioSource;
 
-    private void Update()
+    private void OnCollisionEnter(Collision other)
     {
-
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-      if (other.tag == "Player")
+      if (other.gameObject.tag == "Player")
         {
-          audio.Play();
+          audioSource.Play();
         }
     }
 }

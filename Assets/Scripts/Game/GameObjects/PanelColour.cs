@@ -6,31 +6,21 @@ public class PanelColour : MonoBehaviour
 {
     public Color startColor;
     public Color endColor;
-    float startTime;
+
+    private const string CorotineName = "Fade";
     private bool isActvieCollide = false;
-    // public SpriteRenderer fadeImage;
-    void Start()
-    {
-        startTime = Time.time;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     private void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Player")
         {
-            isActvieCollide = true;
-
-            
-            if(isActvieCollide)
-            {
-                StartCoroutine("fade");
-            }
+            // 유효하지 않은 코드
+            //isActvieCollide = true;
+            //if(isActvieCollide)
+            //{
+            //}
+            StartCoroutine(CorotineName);
         }
     }
 
@@ -38,14 +28,13 @@ public class PanelColour : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            StopCoroutine("fade");
+            StopCoroutine(CorotineName);
         }    
     }
 
 
-    public IEnumerator fade()
+    private IEnumerator Fade()
     {
-        Debug.Log("Enumerator started");
         float timer = 0.0f;
         float time = 0.3f;
 
