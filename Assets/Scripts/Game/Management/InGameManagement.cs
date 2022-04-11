@@ -32,13 +32,14 @@ public partial class GameManager
             resScore = 50;
         }
 
-        //Ã³¸®µÈ Á¡¼ö¿¡ µû¸¥ Event
+        //Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Event
         userScore += resScore;
         uIManager.UpdateScoreUI(resScore, scoreType);
     }
 
     public void FinishGame(bool isClearedGame)
     {
+        SoundManager.Instance.StopSongSound();
         uIManager.OpenFinishGameUI(userScore, isClearedGame, null);
     }
 }

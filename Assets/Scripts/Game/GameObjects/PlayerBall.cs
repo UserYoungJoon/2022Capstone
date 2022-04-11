@@ -90,7 +90,7 @@ public class PlayerBall : MonoBehaviour
 
         if (other.tag == "Way Point" && currentLocation == 0)
         {
-            SoundManager.Instance.PlayBGMSound();
+            SoundManager.Instance.PlaySongSound();
         }
         if (other.tag == "Way Point")
         {

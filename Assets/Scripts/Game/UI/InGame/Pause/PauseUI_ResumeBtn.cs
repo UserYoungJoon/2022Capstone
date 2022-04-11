@@ -13,6 +13,7 @@ public class PauseUI_ResumeBtn : UIButton
     public override void ClickEvent()
     {
         Timer.MeltTime();
+        SoundManager.Instance.PlaySongSound();
         pauseUI.OpenScoreUI();
         CloseUI(pauseUI.gameObject);
     }
