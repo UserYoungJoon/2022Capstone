@@ -80,7 +80,7 @@ public class CSVConverter
 
                 if (noteType == eNoteType.NONE)
                 {//Note Setting failed Exception!
-                    Debug.LogFormat("Note ERROE : Time[{0}] - Time[{1}] = {2} - {3} || Note valeue : {4}", i + 1, i, (int)data[i][TIME], beforeTime, noteValue);
+                    Debug.LogFormat("Note ERROR : Time[{0}] - Time[{1}] = {2} - {3} || Note value : {4}", i + 1, i, (int)data[i][TIME], beforeTime, noteValue);
                 }
 
                 //Note Obj Create & Set

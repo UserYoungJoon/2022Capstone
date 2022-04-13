@@ -15,11 +15,6 @@ public class PanelColour : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            // 유효하지 않은 코드
-            //isActvieCollide = true;
-            //if(isActvieCollide)
-            //{
-            //}
             StartCoroutine(CorotineName);
         }
     }
