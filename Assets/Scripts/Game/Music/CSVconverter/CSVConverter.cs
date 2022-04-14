@@ -102,6 +102,8 @@ public class CSVConverter
             // Debug.Log(i + "번째 패널과" + (i-1) +"번째 패널사이의" + "Distance" + panelDistanceList[i - 1]);
 
         }
+
+        Debug.Log(mapDistance);
     }
 
     public void Clear()
@@ -116,7 +118,7 @@ public class CSVConverter
     private int GetRandomX(List<Dictionary<string, object>> data, int i)
     {
         int current = arrayX[Random.Range(0, 3)];
-        int z = ((int)data[i]["Time"] / 40) + 1;
+        int z = ((int)data[i]["Time"] / 30) + 1;
 
         if (Mathf.Abs(before - current) >= 2)
         {

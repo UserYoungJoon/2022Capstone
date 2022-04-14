@@ -49,7 +49,7 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        selectedSong = "AirplaneFull"; // 초기 설정 Airplane
+        selectedSong = "60AirplaneBGM"; // 초기 설정 Airplane
         if (Instance != this)
         {
             Destroy(this.gameObject);
@@ -104,6 +104,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
         songPlayer.clip = audioSongDic[selectedSong];
+        songPlayer.volume = volume + 10;    
         songPlayer.Play();
     }
 

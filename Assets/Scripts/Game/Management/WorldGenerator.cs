@@ -25,13 +25,14 @@ public partial class GameManager
 
     }
 
-    string SELECT_SONG;
+    string SELECT_SONG; // will be dynamic variable
     const string AIRPLANE = "Airplane";//temp code pls modify to make dynamically
     const string TWINKLE_STAR = "TTLS";
+    const string SLOWAIR = "60Airplane";
     public void SetBeforeGenerate()
     {
         ClearWorld();
-        CSVConverter.MakeBeatMaps(TWINKLE_STAR);
+        CSVConverter.MakeBeatMaps(SLOWAIR);
         floor.SetBeforeRun();
     }
 
