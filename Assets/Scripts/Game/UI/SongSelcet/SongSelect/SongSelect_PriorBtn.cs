@@ -5,11 +5,14 @@ using UnityEngine;
 
 namespace SongSelctBtn
 {
-    [System.Obsolete("¹Ì±¸Çö ¹öÆ°")]
+    [System.Obsolete("ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°")]
     public class SongSelect_PriorBtn : UIButton
     {
         public override void ClickEvent()
-        {/*
+        {
+            
+            SoundManager.Instance.PlaySFXSound("metronome_tick");
+            /*
             //AudioManager.intance.PlaySFX("Touch");
             Debug.Log("Prior Song");
 

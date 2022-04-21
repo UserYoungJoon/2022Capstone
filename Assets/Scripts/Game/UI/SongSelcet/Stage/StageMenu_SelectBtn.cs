@@ -12,6 +12,8 @@ public class StageMenu_SelectBtn : UIButton
 
     public override void ClickEvent()
     {
+        
+        SoundManager.Instance.PlaySFXSound("metronome_tick"); // 꼭 SoundManager에 SFX Elements List에 추가해야되요!!
         uIManager.SwitchGameStateToGame();
     }
 }

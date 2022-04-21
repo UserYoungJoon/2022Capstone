@@ -155,7 +155,8 @@ MonoBehaviour:
   masterVolumeSFX: 1
   masterVolumeBGM: 3
   mainBgmAudioClip: {fileID: 0}
-  sfxAudioClips: []
+  sfxAudioClips:
+  - {fileID: 8300000, guid: 1451e8f4a5f07ee499ee275da444d540, type: 3}
   songAudioClips:
   - {fileID: 8300000, guid: f261f87050c45d644a32c07425dc7ed5, type: 3}
   - {fileID: 8300000, guid: 379e84e03917b4242896f9242f2cbe62, type: 3}
