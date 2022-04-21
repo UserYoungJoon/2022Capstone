@@ -42,6 +42,7 @@ public class PlayerBall : MonoBehaviour
     void Update()
     {
         Move();
+        autoMoving();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && !isJumping)
@@ -53,14 +54,15 @@ public class PlayerBall : MonoBehaviour
     #region Move control section
     private float deltaTime = 1;
     //private float forwardSpeed = 1.8f;
-    private float forwardSpeed = 3.877308f; // 5.13512f
+    private float forwardSpeed =  5.43f; // 5.13512f; // BPM60 = 3.877308f
     private float halfPanelSize = 0.12f;
     private Vector3 nowPos;
     private Vector3 nextPos;
 
     private void autoMoving()
     {
-        Jump();
+        if(!isJumping)
+            Jump();
     }
     void Jump()
     {
@@ -108,6 +110,12 @@ public class PlayerBall : MonoBehaviour
             nextPos = points[currentLocation + 1];
             currentLocation++;
         }
+    }
+
+    private void OnTriggerExit(Collider other) 
+    {
+        if(other.tag == "Way Point")
+            isJumping = false;    
     }
 }
 

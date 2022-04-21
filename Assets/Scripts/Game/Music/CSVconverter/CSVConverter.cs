@@ -99,7 +99,7 @@ public class CSVConverter
         {
             panelDistanceList.Add(Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]));
             mapDistance += Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]);
-            // Debug.Log(i + "¹øÂ° ÆÐ³Î°ú" + (i-1) +"¹øÂ° ÆÐ³Î»çÀÌÀÇ" + "Distance" + panelDistanceList[i - 1]);
+            // Debug.Log(i + "ï¿½ï¿½Â° ï¿½Ð³Î°ï¿½" + (i-1) +"ï¿½ï¿½Â° ï¿½Ð³Î»ï¿½ï¿½ï¿½ï¿½ï¿½" + "Distance" + panelDistanceList[i - 1]);
 
         }
 
@@ -118,7 +118,7 @@ public class CSVConverter
     private int GetRandomX(List<Dictionary<string, object>> data, int i)
     {
         int current = arrayX[Random.Range(0, 3)];
-        int z = ((int)data[i]["Time"] / 30) + 1;
+        int z = ((int)data[i]["Time"] / 40) + 1;
 
         if (Mathf.Abs(before - current) >= 2)
         {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//ÀÌ °ÔÀÓ¿¡¼­´Â °Å¸®¿¡ ºñ·ÊÇØ »ç¿îµåÀÇ Å©±â¸¦ Á¶ÀýÇÒ ÇÊ¿ä°¡ ¾ø±â¿¡ ÇÏ³ªÀÇ AudioSource·Î AudioClipµéÀ» µ¹·Á°¡¸ç ½ÇÇà½ÃÅ³ °ÍÀÌ´Ù.
-//¹è°æÀ½¾ÇÀ» ½ÇÇàÇÒ AudioSource¿Í È¿°úÀ½À» ½ÇÇàÇÒ AudioSource¸¦ SoundManagerÀÇ ÀÚ½Ä ¿ÀºêÁ§Æ®·Î ¼³Á¤
+//ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ä°¡ ï¿½ï¿½ï¿½â¿¡ ï¿½Ï³ï¿½ï¿½ï¿½ AudioSourceï¿½ï¿½ AudioClipï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å³ ï¿½ï¿½ï¿½Ì´ï¿½.
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ AudioSourceï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ AudioSourceï¿½ï¿½ SoundManagerï¿½ï¿½ ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 //https://velog.io/@uchang903/Unity-SoundManager-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8
 public class SoundManager : MonoBehaviour
@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
 
             return instance;
         }
-    } // Sound¸¦ °ü¸®ÇØÁÖ´Â ½ºÅ©¸³Æ®´Â ÇÏ³ª¸¸ Á¸ÀçÇØ¾ßÇÏ°í instanceÇÁ·ÎÆÛÆ¼·Î ¾ðÁ¦ ¾îµð¿¡¼­³ª ºÒ·¯¿À±âÀ§ÇØ ½Ì±ÛÅæ »ç¿ë
+    } // Soundï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½Ï°ï¿½ instanceï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ð¿¡¼ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
     private AudioSource bgmPlayer;
     private AudioSource sfxPlayer;
@@ -33,39 +33,39 @@ public class SoundManager : MonoBehaviour
     public float masterVolumeBGM = 1f;
 
     [SerializeField]
-    private AudioClip mainBgmAudioClip; //¸ÞÀÎÈ­¸é¿¡¼­ »ç¿ëÇÒ BGM
+    private AudioClip mainBgmAudioClip; //ï¿½ï¿½ï¿½ï¿½È­ï¿½é¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ BGM
 
 
     [SerializeField]
-    private AudioClip[] sfxAudioClips; //È¿°úÀ½µé ÁöÁ¤
+    private AudioClip[] sfxAudioClips; //È¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     [SerializeField]
-    private AudioClip[] songAudioClips; // °î ¸®½ºÆ® ÁöÁ¤
+    private AudioClip[] songAudioClips; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 
-    Dictionary<string, AudioClip> audioClipsDic = new Dictionary<string, AudioClip>(); //È¿°úÀ½ µñ¼Å³Ê¸®
-    // AudioClipÀ» Key,Value ÇüÅÂ·Î °ü¸®ÇÏ±â À§ÇØ µñ¼Å³Ê¸® »ç¿ë
-    Dictionary<string, AudioClip> audioSongDic = new Dictionary<string, AudioClip>(); // ºñÆ®¸Ê À½¾Ç µñ¼Å³Ê¸®
-    public static string selectedSong; // UI¿¡¼­ °î ¼±ÅÃ ½Ã ÀÔ·Â µÉ º¯¼ö
+    Dictionary<string, AudioClip> audioClipsDic = new Dictionary<string, AudioClip>(); //È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³Ê¸ï¿½
+    // AudioClipï¿½ï¿½ Key,Value ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³Ê¸ï¿½ ï¿½ï¿½ï¿½
+    Dictionary<string, AudioClip> audioSongDic = new Dictionary<string, AudioClip>(); // ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³Ê¸ï¿½
+    public static string selectedSong; // UIï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private void Awake()
     {
-        selectedSong = "60AirplaneBGM"; // ÃÊ±â ¼³Á¤ Airplane
+        selectedSong = "AirplaneFull"; // ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ Airplane
         if (Instance != this)
         {
             Destroy(this.gameObject);
         }
-        DontDestroyOnLoad(this.gameObject); //¿©·¯ ¾À¿¡¼­ »ç¿ëÇÒ °Í.
+        DontDestroyOnLoad(this.gameObject); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
 
         bgmPlayer = GameObject.Find("MainMenuPlayer").GetComponent<AudioSource>();
         sfxPlayer = GameObject.Find("SFXPlayer").GetComponent<AudioSource>();
         songPlayer = GameObject.Find("SongPlayer").GetComponent<AudioSource>();
 
-        // SoundManager AudioClip Element Ãß°¡ - SFX
+        // SoundManager AudioClip Element ï¿½ß°ï¿½ - SFX
         foreach (AudioClip audioclip in sfxAudioClips)
         {
             audioClipsDic.Add(audioclip.name, audioclip);
         }
-        // SoundManager AudioClip Element Ãß°¡ - Song
+        // SoundManager AudioClip Element ï¿½ß°ï¿½ - Song
         foreach (AudioClip audioclip in songAudioClips)
         {
             audioSongDic.Add(audioclip.name, audioclip);
@@ -73,10 +73,10 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    // È¿°ú »ç¿îµå Àç»ý : ÀÌ¸§À» ÇÊ¼ö ¸Å°³º¯¼ö, º¼·ýÀ» ¼±ÅÃÀû ¸Å°³º¯¼ö·Î ÁöÁ¤
+    // È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void PlaySFXSound(string name, float volume = 1f)
     {
-        if (audioClipsDic.ContainsKey(name) == false) // Element¿¡ ¾øÀ» ½Ã
+        if (audioClipsDic.ContainsKey(name) == false) // Elementï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         {
             Debug.Log(name + " is not Contained audioClipsDic");
             return;
@@ -84,21 +84,21 @@ public class SoundManager : MonoBehaviour
         sfxPlayer.PlayOneShot(audioClipsDic[name], volume * masterVolumeSFX);
     }
 
-    //BGM »ç¿îµå Àç»ý : º¼·ýÀ» ¼±ÅÃÀû ¸Å°³º¯¼ö·Î ÁöÁ¤
+    //BGM ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void PlayBGMSound(float volume = 1f)
     {
-        bgmPlayer.loop = true; //BGM »ç¿îµåÀÌ¹Ç·Î ·çÇÁ¼³Á¤
+        bgmPlayer.loop = true; //BGM ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         bgmPlayer.volume = volume * masterVolumeBGM;
 
         bgmPlayer.clip = mainBgmAudioClip;
         bgmPlayer.Play();
         
-        //ÇöÀç ¾À¿¡ ¸Â´Â BGM Àç»ý
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ BGM ï¿½ï¿½ï¿½
     }
 
     public void PlaySongSound(float volume = 1f)
     {
-        if(audioSongDic.ContainsKey(selectedSong) == false) // Element¿¡ ¾øÀ» ½Ã
+        if(audioSongDic.ContainsKey(selectedSong) == false) // Elementï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         {
             Debug.Log((selectedSong + " is not Contained audioSongDic"));
             return;
@@ -108,7 +108,7 @@ public class SoundManager : MonoBehaviour
         songPlayer.Play();
     }
 
-    //ÇöÀç BGMÀÇ ½Ã°£
+    //ï¿½ï¿½ï¿½ï¿½ BGMï¿½ï¿½ ï¿½Ã°ï¿½
     public void getTime()
     {
         Debug.Log("current Time: " + bgmPlayer.time);
@@ -125,7 +125,7 @@ public class SoundManager : MonoBehaviour
     }
     
 
-    // »ç¿ëÀÚ°¡ ESC Å°¸¦ ÀÔ·ÂÇÏ¿© °ÔÀÓÀ» ¸ØÃß¾úÀ» ¶§
+    // ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ESC Å°ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¾ï¿½ï¿½ï¿½ ï¿½ï¿½
     public void PauseSong()
     {
         songPlayer.Pause();
@@ -140,5 +140,5 @@ public class SoundManager : MonoBehaviour
 //     then songPlayer.Play
 //     set gameIsStopped = false
 
-// UI ¹öÆ° Å¬¸¯ ½Ã SFX?
-// ÆÐ³Î¿¡ SFX ÀÔÈ÷±â
+// UI ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½ SFX?
+// ï¿½Ð³Î¿ï¿½ SFX ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½

@@ -32,7 +32,7 @@ public partial class GameManager
     public void SetBeforeGenerate()
     {
         ClearWorld();
-        CSVConverter.MakeBeatMaps(SLOWAIR);
+        CSVConverter.MakeBeatMaps(AIRPLANE);
         floor.SetBeforeRun();
     }
 
