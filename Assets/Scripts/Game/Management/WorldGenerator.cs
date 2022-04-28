@@ -28,11 +28,11 @@ public partial class GameManager
     string SELECT_SONG; // will be dynamic variable
     const string AIRPLANE = "Airplane";//temp code pls modify to make dynamically
     const string TWINKLE_STAR = "TTLS";
-    const string SLOWAIR = "60Airplane";
+    const string SLOWAIRPLANE = "60Airplane";
     public void SetBeforeGenerate()
     {
         ClearWorld();
-        CSVConverter.MakeBeatMaps(AIRPLANE);
+        CSVConverter.MakeBeatMaps(SLOWAIRPLANE);
         floor.SetBeforeRun();
     }
 
@@ -43,8 +43,10 @@ public partial class GameManager
         {
             for(int i = 1; i <= CSVConverter.wayPointsList.Count;i++)
             {
-                var panel = beatMap.Find("panel" +i ).gameObject;
+                var panel = beatMap.Find("panel" + i ).gameObject;
                 Destroy(panel);
+                if(i == CSVConverter.wayPointsList.Count - 1)
+                    break;
             }
             CSVConverter.Clear();
             Timer.MeltTime();

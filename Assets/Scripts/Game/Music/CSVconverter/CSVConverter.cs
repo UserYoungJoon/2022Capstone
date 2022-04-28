@@ -102,7 +102,7 @@ public class CSVConverter
             // Debug.Log(i + "��° �гΰ�" + (i-1) +"��° �гλ�����" + "Distance" + panelDistanceList[i - 1]);
 
         }
-
+        
         Debug.Log(mapDistance);
     }
 
@@ -118,7 +118,7 @@ public class CSVConverter
     private int GetRandomX(List<Dictionary<string, object>> data, int i)
     {
         int current = arrayX[Random.Range(0, 3)];
-        int z = ((int)data[i]["Time"] / 40) + 1;
+        int z = ((int)data[i]["Time"] / 60) + 1;
 
         if (Mathf.Abs(before - current) >= 2)
         {

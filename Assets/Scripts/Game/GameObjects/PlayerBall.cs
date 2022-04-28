@@ -37,24 +37,31 @@ public class PlayerBall : MonoBehaviour
         nextPos = points[0];
         currentLocation = 0;
         isJumping = false;
+        points.Add(GameObject.FindWithTag("Finish").transform.position);
     }
+
 
     void Update()
     {
         Move();
-        autoMoving();
+        //autoMoving();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && !isJumping)
         {
             Jump();
         }
+        else if(Input.GetButtonDown("Jump") && isJumping)
+        {
+            Debug.Log("OOPS");
+            rigid.velocity = new Vector3(0, -10, 0);
+        }
     }
 
     #region Move control section
     private float deltaTime = 1;
     //private float forwardSpeed = 1.8f;
-    private float forwardSpeed =  5.43f; // 5.13512f; // BPM60 = 3.877308f
+    private float forwardSpeed =  2.12f; // 5.13512f; // BPM60 = 3.877308f
     private float halfPanelSize = 0.12f;
     private Vector3 nowPos;
     private Vector3 nextPos;
@@ -70,13 +77,14 @@ public class PlayerBall : MonoBehaviour
         Vector3 vector = rigid.velocity;
         vector.x = (nextPos.x - transform.position.x) / deltaTime;
         vector.y = -Physics.gravity.y * deltaTime / 2;
-        Debug.Log("여기가 포워드 스피드" + forwardSpeed);
+       //  Debug.Log("여기가 포워드 스피드" + forwardSpeed);
         vector.z = forwardSpeed;
         rigid.velocity = vector;
 
         isJumping = true;
-        Debug.Log((transform.position - nowPos).z);
-        manager.CalculateScore((transform.position - nowPos).z);
+        // Debug.Log((transform.position - nowPos).z);
+        Debug.Log(transform.position.y);
+        manager.CalculateScore(transform.position.y);
     }
     void Move()
     {
@@ -89,11 +97,11 @@ public class PlayerBall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Item")
-        {
-            isJumping = false;
-        }
-    }
+    //     if (collision.gameObject.tag == "Item")
+    //     {
+    //         isJumping = false;
+    //     }
+     }
 
     void OnTriggerEnter(Collider other)
     {
@@ -106,6 +114,7 @@ public class PlayerBall : MonoBehaviour
         }
         if (other.tag == "Way Point")
         {
+            isJumping = false;
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
             currentLocation++;
@@ -114,8 +123,8 @@ public class PlayerBall : MonoBehaviour
 
     private void OnTriggerExit(Collider other) 
     {
-        if(other.tag == "Way Point")
-            isJumping = false;    
+        // if(other.tag == "Way Point")
+        //     isJumping = false;    
     }
 }
 
