@@ -33,7 +33,15 @@ public class ScoreUI : MonoBehaviour
         nowScore += addScore;
         score.text = nowScore.ToString();
 
-        //Effect �߻� �ڵ� �̱���
+        if(scoreType == eScoreType.PERFECT)
+        {
+            // perfect effect
+            Debug.Log("퍼펙트 판정에 대한 이펙트 효과");
+           // GameObject.Find("Canvas").transform.Find("Score").transform.Find("ScoreEffect").transform.Find("perfect").gameObject.SetActive(true);
+           // GameObject.Find("Canvas").transform.Find("Score").transform.Find("perfect").gameObject.SetActive(true);
+        }
+
+        //Effect �߻� �ڵ� �̱���
         //scoreEffects[scoreType].SetActive(true);
     }
 }

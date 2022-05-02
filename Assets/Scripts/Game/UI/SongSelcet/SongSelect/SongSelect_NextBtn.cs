@@ -1,17 +1,27 @@
 using UnityEngine;
+
+
+
 namespace SongSelctBtn
 {
-    [System.Obsolete("�̱��� ��ư")]
+    [System.Obsolete("미구현 버튼")]
     public class SongSelect_NextBtn : UIButton
     {
+       
         public override void ClickEvent()
         {
+
             SoundManager.Instance.PlaySFXSound("metronome_tick");
-            /*        //AudioManager.intance.PlaySFX("Touch");
-        Debug.Log("Next Song");
-        if (++currentSong > songList.Length - 1)
-            currentSong = 0;
-        SettingSong();*/
+
+            GameObject.Find("Canvas")
+                .transform.Find("Select")
+                .transform.Find("Disk")
+                .transform.Find("Mask")
+                .transform.Find("SongImage").GetComponent<SongSelect>().currentSong += 1;
+
+                // Hierachy 내의 Canvas의 자식의 Select의 자식의 Disk의 자식의 Mask의 자식의 SongImage의 SongSelect 컴포넌트 갖고오기
+
+            Debug.Log("Next Song");
         }
     }
 }

@@ -41,12 +41,10 @@ public partial class GameManager
     {
         if (!isCleared)
         {
-            for(int i = 1; i <= CSVConverter.wayPointsList.Count;i++)
+            for(int i = 1; i <= CSVConverter.wayPointsList.Count - 1;i++)
             {
                 var panel = beatMap.Find("panel" + i ).gameObject;
                 Destroy(panel);
-                if(i == CSVConverter.wayPointsList.Count - 1)
-                    break;
             }
             CSVConverter.Clear();
             Timer.MeltTime();

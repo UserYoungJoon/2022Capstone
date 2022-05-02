@@ -9,7 +9,7 @@ public class Song
 {
     public string name;
     public string composer;
-    public int bpm; //bpmÀÌ ½ÇÁúÀûÀ¸·Î °ÔÀÓ ³» ºñÆ®¸¦ °áÁ¤
+    public int bpm; //bpmì´ ì‹¤ì§ˆì ìœ¼ë¡œ ê²Œì„ ë‚´ ë¹„íŠ¸ë¥¼ ê²°ì •
     public Sprite sprite;
 }
 public class StageMenu : MonoBehaviour
@@ -21,7 +21,11 @@ public class StageMenu : MonoBehaviour
     public TMP_Text maxScore;
     public Image imgDisk = null;
 
-    int currentSong = 0;
+    public int currentSong = 0;
+    //public void Start()
+    //{
+    //    SettingSong();
+    //}
 
     public StageMenu_SelectBtn selectBtn;
     UIManager uiManager;
@@ -31,8 +35,7 @@ public class StageMenu : MonoBehaviour
         selectBtn.Bind(mgr);
     }
 
-
-    void SettingSong()
+    public void SettingSong()
     {
         name.text = songList[currentSong].name;
         composer.text = songList[currentSong].composer;
@@ -41,3 +44,4 @@ public class StageMenu : MonoBehaviour
         //AudioManager.instance.PlayBGM("BGM" + currentSong);
     }
 }
+
