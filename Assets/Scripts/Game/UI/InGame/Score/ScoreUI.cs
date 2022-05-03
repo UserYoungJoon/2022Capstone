@@ -18,9 +18,19 @@ public class ScoreUI : MonoBehaviour
     public TMP_Text score;
 
     private int nowScore = 0;
+    private Dictionary<eScoreType, Sprite> scoreEffectSprites = new Dictionary<eScoreType, Sprite>(4);
+    public List<Sprite> sprites = new List<Sprite>();
+    public void Awake()
+    {
+        scoreEffectSprites.Add(eScoreType.BAD, sprites[0]);
+        scoreEffectSprites.Add(eScoreType.GOOD, sprites[1]);
+        scoreEffectSprites.Add(eScoreType.GREAT, sprites[2]);
+        scoreEffectSprites.Add(eScoreType.PERFECT, sprites[3]);
+
+        sprites = null;
+    }
 
     // expectint to read [Resources.LoadAll<GameObject>("Effect")]...
-    private Dictionary<eScoreType, GameObject> scoreEffects = new Dictionary<eScoreType, GameObject>(4);
 
     public void SetBeforeStart()
     {
@@ -28,12 +38,13 @@ public class ScoreUI : MonoBehaviour
         score.text = nowScore.ToString();
     }
 
-    public void UpdateUI(int addScore,eScoreType scoreType)
+    public Animator effect;
+    public void UpdateUI(int addScore, eScoreType scoreType)
     {
         nowScore += addScore;
         score.text = nowScore.ToString();
 
-        //Effect 발생 코드 미구현
-        //scoreEffects[scoreType].SetActive(true);
+        //effect.sprite = scoreEffectSprites[scoreType];
+        //effect.Open();
     }
 }

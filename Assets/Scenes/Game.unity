@@ -2165,6 +2165,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1544370890}
     m_Modifications:
+    - target: {fileID: 3980382733469262982, guid: 0b191d86ef41da54b8ecccfaef82620c, type: 3}
+      propertyPath: sprites.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3980382733469262982, guid: 0b191d86ef41da54b8ecccfaef82620c, type: 3}
+      propertyPath: sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: e623e62e578db3045941fdff8ba787ad, type: 3}
+    - target: {fileID: 3980382733469262982, guid: 0b191d86ef41da54b8ecccfaef82620c, type: 3}
+      propertyPath: sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b1d55dc3cd85934ebad15e0d1936ce4, type: 3}
+    - target: {fileID: 3980382733469262982, guid: 0b191d86ef41da54b8ecccfaef82620c, type: 3}
+      propertyPath: sprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: ced8df321688bb44c982110d68cbf9bb, type: 3}
+    - target: {fileID: 3980382733469262982, guid: 0b191d86ef41da54b8ecccfaef82620c, type: 3}
+      propertyPath: sprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: a601649145d26be4ea7baf1eb541f453, type: 3}
     - target: {fileID: 5530984163673344622, guid: 0b191d86ef41da54b8ecccfaef82620c, type: 3}
       propertyPath: m_Name
       value: Score
