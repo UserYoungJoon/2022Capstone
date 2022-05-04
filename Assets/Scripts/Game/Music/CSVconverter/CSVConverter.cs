@@ -17,6 +17,7 @@ public class CSVConverter
     public static float mapDistance = 0;//no use yet
 
     public List<Vector3> wayPointsList = new List<Vector3>();
+    public List<string> panelsSideList = new List<string>();
     private List<Vector3> panelPositionList = new List<Vector3>();
     private List<float> panelDistanceList = new List<float>();
     private List<Note> noteList = new List<Note>();
@@ -55,6 +56,22 @@ public class CSVConverter
                 newPanelPos = new Vector3(GetRandomX(data, i), 0, correctionZ);
                 panelObj = GameObject.Instantiate(panel, newPanelPos, Quaternion.identity, beatMap);
                 panelObj.name = "panel" + panelindex;
+
+                // decide side
+                switch(panelObj.transform.position.x)
+                {
+                    case -1:
+                        panelObj.tag = "Left";
+                        break;
+                    case 0:
+                        panelObj.tag = "Center";
+                        break;
+                    case 1:
+                        panelObj.tag = "Right";
+                        break;
+                }
+
+                panelsSideList.Add(panelObj.tag);
                 panelPositionList.Add(newPanelPos);
 
                 var wayPoint = panelObj.transform.Find("p");

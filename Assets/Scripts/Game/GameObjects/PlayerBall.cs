@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerBall : MonoBehaviour
 {
     public List<Vector3> points = new List<Vector3>();
+    public List<string> sides = new List<string>();
     public GameManager manager;
     public Transform startPos;
     public Transform BeatMap;
@@ -24,9 +25,10 @@ public class PlayerBall : MonoBehaviour
         currentLocation = 0;
     }
 
-    public void Bind(List<Vector3> pts)
+    public void Bind(List<Vector3> pts, List<string> sds)
     {
         points = pts;
+        sides = sds;
     }
     #endregion
 
@@ -44,15 +46,30 @@ public class PlayerBall : MonoBehaviour
     void Update()
     {
         Move();
-        // autoMoving();
+        autoMoving();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && !isJumping)
+        if (Input.GetKeyDown(KeyCode.F) && !isJumping)
         {
-            Jump();
+            // Left side panel pos.x = -1
+            manager.CalculateScore(transform.position.y);
         }
-        else if(Input.GetButtonDown("Jump") && isJumping)
+
+        else if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
+            // Center panel pos.x = 0
+            manager.CalculateScore(transform.position.y);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.J) && !isJumping)
+        {
+            // Right side panel pos.x = 1
+            manager.CalculateScore(transform.position.y);
+        }
+        else if((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J))
+                 && isJumping)
+        {
+            // if player tried while jump
             Debug.Log("OOPS");
             rigid.velocity = new Vector3(0, -10, 0);
         }
@@ -84,6 +101,7 @@ public class PlayerBall : MonoBehaviour
         // Debug.Log((transform.position - nowPos).z);
         Debug.Log(transform.position.y);
         manager.CalculateScore(transform.position.y);
+        Debug.Log(sides[currentLocation]);
     }
     void Move()
     {
@@ -122,8 +140,8 @@ public class PlayerBall : MonoBehaviour
 
     private void OnTriggerExit(Collider other) 
     {
-        // if(other.tag == "Way Point")
-        //     isJumping = false;    
+    //      if(other.tag == "Way Point")
+    //          isJumping = true; 
     }
 }
 
