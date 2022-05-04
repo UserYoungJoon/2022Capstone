@@ -51,32 +51,36 @@ public class PlayerBall : MonoBehaviour
         autoMoving();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.F) && inputTiming)
+        if (Input.GetKeyDown(KeyCode.F) && inputTiming && sides[currentLocation].Equals("Left"))
         {
             // Left side panel pos.x = -1
             inputTiming = false;
             manager.CalculateScore(transform.position.y);
         }
+        
 
-        else if (Input.GetKeyDown(KeyCode.Space) && inputTiming)
+        else if (Input.GetKeyDown(KeyCode.Space) && inputTiming && sides[currentLocation].Equals("Center"))
         {
             // Center panel pos.x = 0
             inputTiming = false;
             manager.CalculateScore(transform.position.y);
         }
+        
 
-        else if (Input.GetKeyDown(KeyCode.J) && inputTiming)
+        else if (Input.GetKeyDown(KeyCode.J) && inputTiming && sides[currentLocation].Equals("Right"))
         {
             // Right side panel pos.x = 1
             inputTiming = false;
             manager.CalculateScore(transform.position.y);
         }
+
         else if((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J)) && !inputTiming)
         {
             // if player tried while jump
             Debug.Log("OOPS");
             rigid.velocity = new Vector3(0, -10, 0);
         }
+
     }
 
     #region Move control section
@@ -104,8 +108,7 @@ public class PlayerBall : MonoBehaviour
         isJumping = true;
         // Debug.Log((transform.position - nowPos).z);
         // Debug.Log(transform.position.y);
-        manager.CalculateScore(transform.position.y);
-        // Debug.Log(sides[currentLocation]);
+        // manager.CalculateScore(transform.position.y);
     }
     void Move()
     {
@@ -137,10 +140,13 @@ public class PlayerBall : MonoBehaviour
         {
             isJumping = false;
             inputTiming = true;
+            Debug.Log("Now!!");
+
+            // next vs current
+            Debug.Log(sides[currentLocation]);
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
             currentLocation++;
-            Debug.Log("Now!!");
         }
     }
 
