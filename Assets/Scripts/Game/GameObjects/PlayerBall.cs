@@ -15,11 +15,13 @@ public class PlayerBall : MonoBehaviour
     private int currentLocation;
     private Rigidbody rigid;
     private bool isJumping;
+    private bool inputTiming;
 
     #region Initializing section
     public void Init()
     {
         isJumping = false;
+        inputTiming = false;
         rigid = GetComponent<Rigidbody>();
         points.Add(this.gameObject.transform.position);
         currentLocation = 0;
@@ -49,25 +51,27 @@ public class PlayerBall : MonoBehaviour
         autoMoving();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.F) && !isJumping)
+        if (Input.GetKeyDown(KeyCode.F) && inputTiming)
         {
             // Left side panel pos.x = -1
+            inputTiming = false;
             manager.CalculateScore(transform.position.y);
         }
 
-        else if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        else if (Input.GetKeyDown(KeyCode.Space) && inputTiming)
         {
             // Center panel pos.x = 0
+            inputTiming = false;
             manager.CalculateScore(transform.position.y);
         }
 
-        else if (Input.GetKeyDown(KeyCode.J) && !isJumping)
+        else if (Input.GetKeyDown(KeyCode.J) && inputTiming)
         {
             // Right side panel pos.x = 1
+            inputTiming = false;
             manager.CalculateScore(transform.position.y);
         }
-        else if((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J))
-                 && isJumping)
+        else if((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J)) && !inputTiming)
         {
             // if player tried while jump
             Debug.Log("OOPS");
@@ -99,9 +103,9 @@ public class PlayerBall : MonoBehaviour
 
         isJumping = true;
         // Debug.Log((transform.position - nowPos).z);
-        Debug.Log(transform.position.y);
+        // Debug.Log(transform.position.y);
         manager.CalculateScore(transform.position.y);
-        Debug.Log(sides[currentLocation]);
+        // Debug.Log(sides[currentLocation]);
     }
     void Move()
     {
@@ -132,9 +136,11 @@ public class PlayerBall : MonoBehaviour
         if (other.tag == "Way Point")
         {
             isJumping = false;
+            inputTiming = true;
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
             currentLocation++;
+            Debug.Log("Now!!");
         }
     }
 
