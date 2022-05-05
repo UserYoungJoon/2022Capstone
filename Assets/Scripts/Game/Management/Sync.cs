@@ -42,3 +42,7 @@ public class Sync : MonoBehaviour
 
     }
 }
+
+
+
+// 직접 비트맵, 패널 찍어보고 싱크 맞추는걸 오늘 목표로

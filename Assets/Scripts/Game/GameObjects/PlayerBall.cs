@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerBall : MonoBehaviour
 {
     public List<Vector3> points = new List<Vector3>();
+    public List<string> sides = new List<string>();
     public GameManager manager;
     public Transform startPos;
     public Transform BeatMap;
@@ -14,19 +15,22 @@ public class PlayerBall : MonoBehaviour
     private int currentLocation;
     private Rigidbody rigid;
     private bool isJumping;
+    private bool inputTiming;
 
     #region Initializing section
     public void Init()
     {
         isJumping = false;
+        inputTiming = false;
         rigid = GetComponent<Rigidbody>();
         points.Add(this.gameObject.transform.position);
         currentLocation = 0;
     }
 
-    public void Bind(List<Vector3> pts)
+    public void Bind(List<Vector3> pts, List<string> sds)
     {
         points = pts;
+        sides = sds;
     }
     #endregion
 
@@ -37,36 +41,74 @@ public class PlayerBall : MonoBehaviour
         nextPos = points[0];
         currentLocation = 0;
         isJumping = false;
+        points.Add(GameObject.FindWithTag("Finish").transform.position);
     }
+
 
     void Update()
     {
         Move();
+        autoMoving();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && !isJumping)
+        if (Input.GetKeyDown(KeyCode.F) && inputTiming && sides[currentLocation].Equals("Left"))
         {
-            Jump();
+            // Left side panel pos.x = -1
+            inputTiming = false;
+            manager.CalculateScore(transform.position.y);
         }
+        
+
+        else if (Input.GetKeyDown(KeyCode.Space) && inputTiming && sides[currentLocation].Equals("Center"))
+        {
+            // Center panel pos.x = 0
+            inputTiming = false;
+            manager.CalculateScore(transform.position.y);
+        }
+        
+
+        else if (Input.GetKeyDown(KeyCode.J) && inputTiming && sides[currentLocation].Equals("Right"))
+        {
+            // Right side panel pos.x = 1
+            inputTiming = false;
+            manager.CalculateScore(transform.position.y);
+        }
+
+        else if((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J)) && !inputTiming)
+        {
+            // if player tried while jump
+            Debug.Log("OOPS");
+            rigid.velocity = new Vector3(0, -10, 0);
+        }
+
     }
 
     #region Move control section
     private float deltaTime = 1;
-    private float forwardSpeed = 1.8f;
+    private float forwardSpeed =  3.23f;// BPM30 1.8f; // 5.13512f; // BPM60 = 3.877308f
     private float halfPanelSize = 0.12f;
     private Vector3 nowPos;
     private Vector3 nextPos;
+
+    private void autoMoving()
+    {
+        if(!isJumping)
+            Jump();
+    }
     void Jump()
     {
         deltaTime = (nextPos.z - nowPos.z - halfPanelSize) / forwardSpeed;
         Vector3 vector = rigid.velocity;
         vector.x = (nextPos.x - transform.position.x) / deltaTime;
         vector.y = -Physics.gravity.y * deltaTime / 2;
+       //  Debug.Log("여기가 포워드 스피드" + forwardSpeed);
         vector.z = forwardSpeed;
         rigid.velocity = vector;
 
         isJumping = true;
-        manager.CalculateScore((transform.position - nowPos).z);
+        // Debug.Log((transform.position - nowPos).z);
+        // Debug.Log(transform.position.y);
+        // manager.CalculateScore(transform.position.y);
     }
     void Move()
     {
@@ -79,11 +121,13 @@ public class PlayerBall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Item")
-        {
-            isJumping = false;
-        }
-    }
+        // if (collision.gameObject.tag == "Left" || 
+        //     collision.gameObject.tag == "Center" ||
+        //     collision.gameObject.tag == "Right") 
+        // {
+        //     isJumping = false;
+        // }
+     }
 
     void OnTriggerEnter(Collider other)
     {
@@ -92,44 +136,30 @@ public class PlayerBall : MonoBehaviour
         {
             SoundManager.Instance.PlaySongSound();
             // 싱크 디버깅용. 싱크 해결 되면 아래 코드 제거할 예정
-            GameObject.Find("SoundManager").transform.Find("Sync").gameObject.SetActive(true);
+            //GameObject.Find("SoundManager").transform.Find("Sync").gameObject.SetActive(true);
         }
         if (other.tag == "Way Point")
         {
+            isJumping = false;
+            inputTiming = true;
+            Debug.Log("Now!!");
+
+            // next vs current
+            Debug.Log(sides[currentLocation]);
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
             currentLocation++;
         }
     }
+
+    private void OnTriggerExit(Collider other) 
+    {
+        //  if(other.tag == "Way Point")
+        //      isJumping = true; 
+    }
 }
 
-// 플레이어의 위치와 포인트의 거리에 따른 점수 계산
-// 0.02 0.03 0.05
-// if playerPosition = point or playerPosition - point >= |3|
-//   then Perfect
-// if playerPosition - point >= |5|
-//   then Great
-// if playerPosition - point >= |7|
-//   then good
-// if playerPosition - point >= |10|
-//   then bad
-
-
-//              Algorithm B
-// 패널의 색변화에 따라 점수판정
-
-// if playerStatus = collisionToPanel
-//   then PanelStartedChangeColour
-
-// load PanelChaningColour()
-// update(getPanelColour)
-// time = getColourChangeTime()
-
-// if time > 1.0
-//   then Perfect()
-// if time > 2.0
-//   then Great()
-// if time > 3.0
-//   then Good()
-// if time > 4.0
-//   then Bad()
+// 별도의 보고서 필요 없음, PPT 발표 자료만 준비해라, 수정된 사항이나 추진 계획 포맷은 과제방에 공유할꺼임
+// 4월 28일 중간발표 논문 5월 10일까지
+// 안된 팀 교수랑 매칭인가? 추후에 통보함
+// 물품신청 마감

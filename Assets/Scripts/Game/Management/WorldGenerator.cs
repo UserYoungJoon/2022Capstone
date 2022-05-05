@@ -25,11 +25,14 @@ public partial class GameManager
 
     }
 
+    string SELECT_SONG; // will be dynamic variable
     const string AIRPLANE = "Airplane";//temp code pls modify to make dynamically
+    const string TWINKLE_STAR = "TTLS";
+    const string SLOWAIRPLANE = "60Airplane";
     public void SetBeforeGenerate()
     {
         ClearWorld();
-        CSVConverter.MakeBeatMaps(AIRPLANE);
+        CSVConverter.MakeBeatMaps(SLOWAIRPLANE);
         floor.SetBeforeRun();
     }
 
@@ -38,9 +41,9 @@ public partial class GameManager
     {
         if (!isCleared)
         {
-            for(int i = 1; i <= CSVConverter.wayPointsList.Count;i++)
+            for(int i = 1; i <= CSVConverter.wayPointsList.Count - 1;i++)
             {
-                var panel = beatMap.Find("panel" +i ).gameObject;
+                var panel = beatMap.Find("panel" + i ).gameObject;
                 Destroy(panel);
             }
             CSVConverter.Clear();
@@ -56,7 +59,7 @@ public partial class GameManager
         // 1. Generate street to goals
         const int START_STREET_POS = 10;
         float nowStreetLen = START_STREET_POS;
-        while ((wholeStreetLen - nowStreetLen) > 25)// until [Street.Length > ³²Àº ±æÀÌ]ÀÏ ¶§±îÁö
+        while ((wholeStreetLen - nowStreetLen) > 25)// until [Street.Length > ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             GameObject nowStreet = Instantiate(streets[Random.Range(0, streets.Count)], environmentIndexer);
             var pos = nowStreet.transform.position;
@@ -78,8 +81,8 @@ public partial class GameManager
         // 3. Generate Goal
         //   - 
 
-        // Ãß°¡ ¸ñÇ¥ : ¹Ù¶÷¿¡ µû¶ó ¶³¾îÁö´Â ³ª¹µÀÙ?
-        // ÁöÈ¥ÀÚ µ¹¾Æ´Ù´Ï´Â »õ?
+        // ï¿½ß°ï¿½ ï¿½ï¿½Ç¥ : ï¿½Ù¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
+        // ï¿½ï¿½È¥ï¿½ï¿½ ï¿½ï¿½ï¿½Æ´Ù´Ï´ï¿½ ï¿½ï¿½?
 
         isCleared = false;
     }

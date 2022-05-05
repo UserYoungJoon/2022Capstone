@@ -5,17 +5,23 @@ using UnityEngine;
 
 namespace SongSelctBtn
 {
-    [System.Obsolete("¹Ì±¸Çö ¹öÆ°")]
+    [System.Obsolete("ë¯¸êµ¬í˜„ ë²„íŠ¼")]
     public class SongSelect_PriorBtn : UIButton
     {
         public override void ClickEvent()
-        {/*
-            //AudioManager.intance.PlaySFX("Touch");
-            Debug.Log("Prior Song");
+        {
+            
+            SoundManager.Instance.PlaySFXSound("metronome_tick");
+       
+            GameObject.Find("Canvas")
+                .transform.Find("Select")
+                .transform.Find("Disk")
+                .transform.Find("Mask")
+                .transform.Find("SongImage").GetComponent<SongSelect>().currentSong -= 1;
+                
 
-            if (--currentSong < 0)
-                currentSong = songList.Length - 1;
-            SettingSong(); */
+
+            Debug.Log("Preivous Song");
         }
     }
 }

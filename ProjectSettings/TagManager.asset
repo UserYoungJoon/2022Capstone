@@ -8,6 +8,9 @@ TagManager:
   - Item
   - wp
   - Way Point
+  - Left
+  - Center
+  - Right
   layers:
   - Default
   - TransparentFX

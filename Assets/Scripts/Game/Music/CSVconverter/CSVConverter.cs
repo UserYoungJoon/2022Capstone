@@ -17,6 +17,7 @@ public class CSVConverter
     public static float mapDistance = 0;//no use yet
 
     public List<Vector3> wayPointsList = new List<Vector3>();
+    public List<string> panelsSideList = new List<string>();
     private List<Vector3> panelPositionList = new List<Vector3>();
     private List<float> panelDistanceList = new List<float>();
     private List<Note> noteList = new List<Note>();
@@ -55,6 +56,22 @@ public class CSVConverter
                 newPanelPos = new Vector3(GetRandomX(data, i), 0, correctionZ);
                 panelObj = GameObject.Instantiate(panel, newPanelPos, Quaternion.identity, beatMap);
                 panelObj.name = "panel" + panelindex;
+
+                // decide side
+                switch(panelObj.transform.position.x)
+                {
+                    case -1:
+                        panelObj.tag = "Left";
+                        break;
+                    case 0:
+                        panelObj.tag = "Center";
+                        break;
+                    case 1:
+                        panelObj.tag = "Right";
+                        break;
+                }
+
+                panelsSideList.Add(panelObj.tag);
                 panelPositionList.Add(newPanelPos);
 
                 var wayPoint = panelObj.transform.Find("p");
@@ -80,7 +97,7 @@ public class CSVConverter
 
                 if (noteType == eNoteType.NONE)
                 {//Note Setting failed Exception!
-                    Debug.LogFormat("Note ERROE : Time[{0}] - Time[{1}] = {2} - {3} || Note valeue : {4}", i + 1, i, (int)data[i][TIME], beforeTime, noteValue);
+                    Debug.LogFormat("Note ERROR : Time[{0}] - Time[{1}] = {2} - {3} || Note value : {4}", i + 1, i, (int)data[i][TIME], beforeTime, noteValue);
                 }
 
                 //Note Obj Create & Set
@@ -99,9 +116,11 @@ public class CSVConverter
         {
             panelDistanceList.Add(Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]));
             mapDistance += Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]);
-            // Debug.Log(i + "¹øÂ° ÆÐ³Î°ú" + (i-1) +"¹øÂ° ÆÐ³Î»çÀÌÀÇ" + "Distance" + panelDistanceList[i - 1]);
+            // Debug.Log(i + "ï¿½ï¿½Â° ï¿½Ð³Î°ï¿½" + (i-1) +"ï¿½ï¿½Â° ï¿½Ð³Î»ï¿½ï¿½ï¿½ï¿½ï¿½" + "Distance" + panelDistanceList[i - 1]);
 
         }
+        
+        Debug.Log(mapDistance);
     }
 
     public void Clear()
@@ -116,8 +135,9 @@ public class CSVConverter
     private int GetRandomX(List<Dictionary<string, object>> data, int i)
     {
         int current = arrayX[Random.Range(0, 3)];
-        int z = ((int)data[i]["Time"] / 40) + 1;
-
+        // int z = ((int)data[i]["Time"] / 60) + 1;
+        float tmp = ((int)data[i]["Time"] / 40.0f);
+        float z = (tmp) + 1;
         if (Mathf.Abs(before - current) >= 2)
         {
             return GetRandomX(data, i);
