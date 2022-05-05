@@ -162,6 +162,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 379e84e03917b4242896f9242f2cbe62, type: 3}
   - {fileID: 8300000, guid: 84bdc97ec35ee8a4ab6cc8a8d70a7a00, type: 3}
   - {fileID: 8300000, guid: 8b5deca971ce4d24094d9ab728f07787, type: 3}
+  - {fileID: 8300000, guid: 7fa50b5d72db6b44889eeaedb855e042, type: 3}
 --- !u!4 &108800441
 Transform:
   m_ObjectHideFlags: 0
@@ -344,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: []
+  sides: []
   manager: {fileID: 1591684630}
   startPos: {fileID: 1375018410}
   BeatMap: {fileID: 1347408985}
@@ -368,7 +370,7 @@ ConstantForce:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668801904}
   m_Enabled: 1
-  m_Force: {x: 0, y: 0, z: 0}
+  m_Force: {x: 0, y: -1, z: 0}
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}

@@ -85,7 +85,7 @@ public class PlayerBall : MonoBehaviour
 
     #region Move control section
     private float deltaTime = 1;
-    private float forwardSpeed =  2.21f; // 5.13512f; // BPM60 = 3.877308f
+    private float forwardSpeed =  3.23f;// BPM30 1.8f; // 5.13512f; // BPM60 = 3.877308f
     private float halfPanelSize = 0.12f;
     private Vector3 nowPos;
     private Vector3 nextPos;
@@ -121,7 +121,9 @@ public class PlayerBall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // if (collision.gameObject.tag == "Item")
+        // if (collision.gameObject.tag == "Left" || 
+        //     collision.gameObject.tag == "Center" ||
+        //     collision.gameObject.tag == "Right") 
         // {
         //     isJumping = false;
         // }
@@ -152,8 +154,8 @@ public class PlayerBall : MonoBehaviour
 
     private void OnTriggerExit(Collider other) 
     {
-    //      if(other.tag == "Way Point")
-    //          isJumping = true; 
+        //  if(other.tag == "Way Point")
+        //      isJumping = true; 
     }
 }
 

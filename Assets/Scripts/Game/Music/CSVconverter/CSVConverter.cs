@@ -135,8 +135,9 @@ public class CSVConverter
     private int GetRandomX(List<Dictionary<string, object>> data, int i)
     {
         int current = arrayX[Random.Range(0, 3)];
-        int z = ((int)data[i]["Time"] / 60) + 1;
-
+        // int z = ((int)data[i]["Time"] / 60) + 1;
+        float tmp = ((int)data[i]["Time"] / 40.0f);
+        float z = (tmp) + 1;
         if (Mathf.Abs(before - current) >= 2)
         {
             return GetRandomX(data, i);

@@ -14,8 +14,6 @@ public class SongSelect : UIButton
     private void Awake() 
     {
         currentSong = 0;
-        Debug.Log(imageList[currentSong]);
-        Debug.Log(imageList.Count);
     }
 
     private void Update() 
