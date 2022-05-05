@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public enum eScoreType
 {
@@ -15,22 +16,23 @@ public enum eScoreType
 
 public class ScoreUI : MonoBehaviour
 {
+    public List<Sprite> sprites = new List<Sprite>();
+    public Animator animator;
+    public Image image;
     public TMP_Text score;
 
     private int nowScore = 0;
     private Dictionary<eScoreType, Sprite> scoreEffectSprites = new Dictionary<eScoreType, Sprite>(4);
-    public List<Sprite> sprites = new List<Sprite>();
+    private const string hit = "Hit";
+    
+    
     public void Awake()
     {
         scoreEffectSprites.Add(eScoreType.BAD, sprites[0]);
         scoreEffectSprites.Add(eScoreType.GOOD, sprites[1]);
         scoreEffectSprites.Add(eScoreType.GREAT, sprites[2]);
         scoreEffectSprites.Add(eScoreType.PERFECT, sprites[3]);
-
-        sprites = null;
     }
-
-    // expectint to read [Resources.LoadAll<GameObject>("Effect")]...
 
     public void SetBeforeStart()
     {
@@ -38,13 +40,12 @@ public class ScoreUI : MonoBehaviour
         score.text = nowScore.ToString();
     }
 
-    public Animator effect;
     public void UpdateUI(int addScore, eScoreType scoreType)
     {
         nowScore += addScore;
         score.text = nowScore.ToString();
 
-        //effect.sprite = scoreEffectSprites[scoreType];
-        //effect.Open();
+        image.sprite = scoreEffectSprites[scoreType];
+        animator.SetTrigger(hit);
     }
 }
