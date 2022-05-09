@@ -15,7 +15,7 @@ public class PlayerBall : MonoBehaviour
     private int currentLocation;
     private Rigidbody rigid;
     private bool isJumping;
-    private bool inputTiming;
+    public static bool inputTiming;
 
     #region Initializing section
     public void Init()
@@ -145,7 +145,7 @@ public class PlayerBall : MonoBehaviour
             Debug.Log("Now!!");
 
             // next vs current
-            Debug.Log(sides[currentLocation]);
+            // Debug.Log(sides[currentLocation]);
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
             currentLocation++;

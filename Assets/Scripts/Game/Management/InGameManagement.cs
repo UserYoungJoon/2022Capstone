@@ -39,6 +39,7 @@ public partial class GameManager
         //ó���� ������ ���� Event
         userScore += resScore;
         uIManager.UpdateScoreUI(resScore, scoreType);
+        panelColour.ChangePanelColor(scoreType);
     }
 
     public void FinishGame(bool isClearedGame)
