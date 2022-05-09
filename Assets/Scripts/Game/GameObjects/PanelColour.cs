@@ -9,6 +9,7 @@ public class PanelColour : MonoBehaviour
     private const string CorotineName = "Fade";
     private bool isActvieCollide = false;
     public Material color;
+    public GameObject panel;
 
     public void Init()
     {
@@ -18,15 +19,9 @@ public class PanelColour : MonoBehaviour
     {
         
     }
-    public void TimingColor()
-    {
-        if(PlayerBall.inputTiming == true)
-        {
-            GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-        }
-    }
     public void ChangePanelColor(eScoreType scoreType)
     {
+        // 판정에 따른 패널 색 변화
         if(scoreType == eScoreType.PERFECT)
         {
             color.SetColor("_Color", Color.blue);
@@ -48,6 +43,18 @@ public class PanelColour : MonoBehaviour
         }
     }
     
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            if(PlayerBall.inputTiming == true)
+            {
+                Debug.Log("인풋 타이밍 트루고 지금 누르셈");
+                panel.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            }
+        }
+    }
 
     private void OnCollisionEnter(Collision other) 
     {

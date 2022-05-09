@@ -101,7 +101,6 @@ public class PlayerBall : MonoBehaviour
         Vector3 vector = rigid.velocity;
         vector.x = (nextPos.x - transform.position.x) / deltaTime;
         vector.y = -Physics.gravity.y * deltaTime / 2;
-       //  Debug.Log("여기가 포워드 스피드" + forwardSpeed);
         vector.z = forwardSpeed;
         rigid.velocity = vector;
 
@@ -142,7 +141,6 @@ public class PlayerBall : MonoBehaviour
         {
             isJumping = false;
             inputTiming = true;
-            Debug.Log("Now!!");
 
             // next vs current
             // Debug.Log(sides[currentLocation]);
@@ -158,8 +156,3 @@ public class PlayerBall : MonoBehaviour
         //      isJumping = true; 
     }
 }
-
-// 별도의 보고서 필요 없음, PPT 발표 자료만 준비해라, 수정된 사항이나 추진 계획 포맷은 과제방에 공유할꺼임
-// 4월 28일 중간발표 논문 5월 10일까지
-// 안된 팀 교수랑 매칭인가? 추후에 통보함
-// 물품신청 마감
