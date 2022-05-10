@@ -74,12 +74,12 @@ public class PlayerBall : MonoBehaviour
             manager.CalculateScore(transform.position.y);
         }
 
-        else if((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J)) && !inputTiming)
-        {
-            // if player tried while jump
-            Debug.Log("OOPS");
-            rigid.velocity = new Vector3(0, -10, 0);
-        }
+        // else if((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J)) && !inputTiming)
+        // {
+        //     // if player tried while jump
+        //     Debug.Log("OOPS");
+        //     rigid.velocity = new Vector3(0, -10, 0);
+        // }
 
     }
 
@@ -120,17 +120,11 @@ public class PlayerBall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // if (collision.gameObject.tag == "Left" || 
-        //     collision.gameObject.tag == "Center" ||
-        //     collision.gameObject.tag == "Right") 
-        // {
-        //     isJumping = false;
-        // }
-     }
+        
+    }
 
     void OnTriggerEnter(Collider other)
     {
-
         if (other.tag == "Way Point" && currentLocation == 0)
         {
             SoundManager.Instance.PlaySongSound();
@@ -152,7 +146,8 @@ public class PlayerBall : MonoBehaviour
 
     private void OnTriggerExit(Collider other) 
     {
-        //  if(other.tag == "Way Point")
-        //      isJumping = true; 
+          // if(other.tag == "Way Point")
+            
+            
     }
 }

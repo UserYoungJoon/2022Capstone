@@ -1608,7 +1608,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraMoving: {fileID: 963194229}
   playerBall: {fileID: 668801905}
-  panelColour: {fileID: 1360756674078056034, guid: 8ea95caa905026546a72f2c77fc4f17f, type: 3}
   beatMap: {fileID: 1347408985}
   panelPrefab: {fileID: 7755923429572739986, guid: 8ea95caa905026546a72f2c77fc4f17f, type: 3}
   uIManager: {fileID: 118172891}

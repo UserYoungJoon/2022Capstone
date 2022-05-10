@@ -10,7 +10,6 @@ public partial class GameManager : MonoBehaviour
 
     // Game Mode
     public PlayerBall playerBall;
-    public PanelColour panelColour;
     public Transform beatMap;
     public GameObject panelPrefab;
     public UIManager uIManager;
@@ -32,7 +31,6 @@ public partial class GameManager : MonoBehaviour
         notes.Init();
         CSVConverter.Init();
         cameraMoving.Init();
-        panelColour.Init();
 
         //Bind
         playerBall.Bind(CSVConverter.wayPointsList, CSVConverter.panelsSideList);

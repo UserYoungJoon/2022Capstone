@@ -36,7 +36,6 @@ public class ScoreUI : MonoBehaviour
         if(scoreType == eScoreType.PERFECT)
         {
             // perfect effect
-            Debug.Log("퍼펙트 판정에 대한 이펙트 효과");
            // GameObject.Find("Canvas").transform.Find("Score").transform.Find("ScoreEffect").transform.Find("perfect").gameObject.SetActive(true);
            // GameObject.Find("Canvas").transform.Find("Score").transform.Find("perfect").gameObject.SetActive(true);
         }
