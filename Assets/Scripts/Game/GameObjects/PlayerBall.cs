@@ -16,6 +16,8 @@ public class PlayerBall : MonoBehaviour
     private Rigidbody rigid;
     private bool isJumping;
     public static bool inputTiming;
+    // !! TEST !!
+    public GameObject testImage;
 
     #region Initializing section
     public void Init()
@@ -44,9 +46,22 @@ public class PlayerBall : MonoBehaviour
         points.Add(GameObject.FindWithTag("Finish").transform.position);
     }
 
+    public void testingInputTiming(){
+        if(inputTiming){
+            Debug.Log("TRUE");
+            testImage.SetActive(true);
+        }
+        if(!inputTiming){
+            Debug.Log("FALSE");
+            testImage.SetActive(false);
+        }
+    }
+
 
     void Update()
     {
+        // !! TEST FUNCTION !!
+        testingInputTiming();
         Move();
         autoMoving();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
@@ -146,8 +161,8 @@ public class PlayerBall : MonoBehaviour
 
     private void OnTriggerExit(Collider other) 
     {
-          // if(other.tag == "Way Point")
-            
+        if(other.tag == "Way Point")
+            inputTiming = false;
             
     }
 }
