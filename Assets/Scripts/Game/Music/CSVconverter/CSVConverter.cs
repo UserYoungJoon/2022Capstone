@@ -15,6 +15,7 @@ public class CSVConverter
 
     public float correctionZ;   //z?? ????
     public static float mapDistance = 0;//no use yet
+    public List<GameObject> panelList = new List<GameObject>();
 
     public List<Vector3> wayPointsList = new List<Vector3>();
     public List<string> panelsSideList = new List<string>();
@@ -73,6 +74,7 @@ public class CSVConverter
 
                 panelsSideList.Add(panelObj.tag);
                 panelPositionList.Add(newPanelPos);
+                panelList.Add(panelObj);
 
                 var wayPoint = panelObj.transform.Find("p");
                 wayPoint.name = "p" + panelindex;

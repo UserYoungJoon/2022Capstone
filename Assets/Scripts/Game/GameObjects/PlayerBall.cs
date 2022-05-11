@@ -7,6 +7,7 @@ public class PlayerBall : MonoBehaviour
 {
     public List<Vector3> points = new List<Vector3>();
     public List<string> sides = new List<string>();
+    public List<GameObject> panelList = new List<GameObject>();
     public GameManager manager;
     public Transform startPos;
     public Transform BeatMap;
@@ -29,10 +30,11 @@ public class PlayerBall : MonoBehaviour
         currentLocation = 0;
     }
 
-    public void Bind(List<Vector3> pts, List<string> sds)
+    public void Bind(List<Vector3> pts, List<string> sds, List<GameObject> plist)
     {
         points = pts;
         sides = sds;
+        panelList = plist;
     }
     #endregion
 
@@ -48,11 +50,11 @@ public class PlayerBall : MonoBehaviour
 
     public void testingInputTiming(){
         if(inputTiming){
-            Debug.Log("TRUE");
+            //Debug.Log("TRUE");
             testImage.SetActive(true);
         }
         if(!inputTiming){
-            Debug.Log("FALSE");
+            //Debug.Log("FALSE");
             testImage.SetActive(false);
         }
     }
@@ -148,9 +150,10 @@ public class PlayerBall : MonoBehaviour
         }
         if (other.tag == "Way Point")
         {
+            
             isJumping = false;
             inputTiming = true;
-
+            panelList[currentLocation + 1].GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
             // next vs current
             // Debug.Log(sides[currentLocation]);
             nowPos = points[currentLocation];

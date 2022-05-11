@@ -33,7 +33,7 @@ public partial class GameManager : MonoBehaviour
         cameraMoving.Init();
 
         //Bind
-        playerBall.Bind(CSVConverter.wayPointsList, CSVConverter.panelsSideList);
+        playerBall.Bind(CSVConverter.wayPointsList, CSVConverter.panelsSideList, CSVConverter.panelList);
         cameraMoving.Bind(playerBall.transform);
         CSVConverter.Bind(panelPrefab, beatMap, notes);
         uIManager.Bind(this);
