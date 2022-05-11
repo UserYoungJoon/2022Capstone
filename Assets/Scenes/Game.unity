@@ -296,6 +296,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &474454601 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2486402247384553566, guid: 562a722286ae7a74892545bf7d86da4a, type: 3}
+  m_PrefabInstance: {fileID: 1347408984}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c7b7fb8f03ac24bb89c9f34cafbfa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &660884369 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9191533397595011271, guid: dba8c7d684ed6aa469091dd7555d9835, type: 3}
@@ -1608,12 +1619,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraMoving: {fileID: 963194229}
   playerBall: {fileID: 668801905}
+  panel: {fileID: 0}
   beatMap: {fileID: 1347408985}
   panelPrefab: {fileID: 7755923429572739986, guid: 8ea95caa905026546a72f2c77fc4f17f, type: 3}
   uIManager: {fileID: 118172891}
   environmentIndexer: {fileID: 1217483470}
   goal: {fileID: 1627590836}
   floor: {fileID: 796012288}
+  panels: {fileID: 474454601}
 --- !u!4 &1591684631
 Transform:
   m_ObjectHideFlags: 0

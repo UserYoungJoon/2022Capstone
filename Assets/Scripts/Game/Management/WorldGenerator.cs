@@ -10,6 +10,7 @@ public partial class GameManager
     public Transform environmentIndexer; // not binding yet
     public Goal goal;
     public Floor floor;
+    public Panel panels;
     public void InitWorldGenerator()
     {
         streets         = new List<GameObject>();
@@ -34,6 +35,7 @@ public partial class GameManager
         ClearWorld();
         CSVConverter.MakeBeatMaps(SLOWAIRPLANE);
         floor.SetBeforeRun();
+        panels.SetBeforeRun();
     }
 
     private bool isCleared = true;
