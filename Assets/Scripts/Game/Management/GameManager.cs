@@ -17,7 +17,7 @@ public partial class GameManager : MonoBehaviour
     private CSVConverter CSVConverter;
     private Notes notes;
 
-    private int userScore = 0; // ���� ���� �� ������ 0���� �ʱ�ȭ
+    private int userScore = 0; // 게임 시작 될 때마다 0으로 초기화
 
     void Awake()
     {
@@ -41,7 +41,7 @@ public partial class GameManager : MonoBehaviour
         //Clear
         playerBall.gameObject.SetActive(false);
 
-        //���⼭ �������� ���� �뷡 ���� UI �����ִٰ� �����ϸ� �� �� �����ϵ��� �ϱ�
+        // 여기서 생성하지 말고 노래 선택 UI 보여주다가 선택하면 그 때 생성하도록 하기
         SwitchGameState(eGameState.SELECT_SONG);
     }
 
@@ -71,12 +71,13 @@ public partial class GameManager : MonoBehaviour
     {
         gameState = to;
         switch (gameState)
-        {//Ȱ��ȭ�� ��Ȱ��ȭ 
+        {// 활성화와 비활성화
             case eGameState.SELECT_SONG:
                 {
                     //plz Destroy ingame world....
                     uIManager.SetSelectMode();
                     cameraMoving.SetSelectMode();
+                    
                 }
                 break;
             case eGameState.GAME:

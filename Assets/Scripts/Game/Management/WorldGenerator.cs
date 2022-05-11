@@ -59,7 +59,7 @@ public partial class GameManager
         // 1. Generate street to goals
         const int START_STREET_POS = 10;
         float nowStreetLen = START_STREET_POS;
-        while ((wholeStreetLen - nowStreetLen) > 25)// until [Street.Length > ���� ����]�� ������
+        while ((wholeStreetLen - nowStreetLen) > 25)// until [Street.Length > 남은 길이]일 때까지
         {
             GameObject nowStreet = Instantiate(streets[Random.Range(0, streets.Count)], environmentIndexer);
             var pos = nowStreet.transform.position;
@@ -81,8 +81,8 @@ public partial class GameManager
         // 3. Generate Goal
         //   - 
 
-        // �߰� ��ǥ : �ٶ��� ���� �������� ������?
-        // ��ȥ�� ���ƴٴϴ� ��?
+        // 추가 목표 : 바람에 따라 떨어지는 나뭇잎?
+        // 지혼자 돌아다니는 새?
 
         isCleared = false;
     }
