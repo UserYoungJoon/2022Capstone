@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {fileID: 0}
-  panel: {fileID: 0}
+  panel: {fileID: 7755923429572739986}
 --- !u!1 &7755923429572739986
 GameObject:
   m_ObjectHideFlags: 0

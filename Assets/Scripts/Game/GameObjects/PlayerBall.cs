@@ -46,6 +46,7 @@ public class PlayerBall : MonoBehaviour
         currentLocation = 0;
         isJumping = false;
         points.Add(GameObject.FindWithTag("Finish").transform.position);
+        panelList.Add(GameObject.FindWithTag("Finish"));
     }
 
     public void testingInputTiming(){
@@ -150,7 +151,7 @@ public class PlayerBall : MonoBehaviour
         }
         if (other.tag == "Way Point")
         {
-            
+
             isJumping = false;
             inputTiming = true;
             panelList[currentLocation + 1].GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
