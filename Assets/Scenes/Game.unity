@@ -369,17 +369,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 832fcdf931863814093055864b4d4eca, type: 3}
---- !u!114 &474454601 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2486402247384553566, guid: 562a722286ae7a74892545bf7d86da4a, type: 3}
-  m_PrefabInstance: {fileID: 1347408984}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c7b7fb8f03ac24bb89c9f34cafbfa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &660884369 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9191533397595011271, guid: dba8c7d684ed6aa469091dd7555d9835, type: 3}
@@ -1698,7 +1687,7 @@ MonoBehaviour:
   environmentIndexer: {fileID: 1217483470}
   goal: {fileID: 1627590836}
   floor: {fileID: 796012288}
-  panels: {fileID: 474454601}
+  beatsmap: {fileID: 2063407778}
 --- !u!4 &1591684631
 Transform:
   m_ObjectHideFlags: 0
@@ -2022,6 +2011,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &2063407777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5952230303926020557, guid: 562a722286ae7a74892545bf7d86da4a, type: 3}
+  m_PrefabInstance: {fileID: 1347408984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2063407778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063407777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9570a78d69112f9489e9c158417fcf6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelObjs: []
 --- !u!4 &2077148100 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c41fb4685aa88574ca3a87f5fd19c666, type: 3}

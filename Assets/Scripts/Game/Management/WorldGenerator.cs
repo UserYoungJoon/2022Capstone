@@ -10,7 +10,7 @@ public partial class GameManager
     public Transform environmentIndexer; // not binding yet
     public Goal goal;
     public Floor floor;
-    public Panel panels;
+    public Beatsmap beatsmap;
     public void InitWorldGenerator()
     {
         streets         = new List<GameObject>();
@@ -35,8 +35,7 @@ public partial class GameManager
         ClearWorld();
         CSVConverter.MakeBeatMaps(SLOWAIRPLANE);
         floor.SetBeforeRun();
-        panels.Clear();
-        panels.SetBeforeRun();
+        beatsmap.SetBeforeRun();
     }
 
     private bool isCleared = true;
@@ -44,11 +43,7 @@ public partial class GameManager
     {
         if (!isCleared)
         {
-            for(int i = 1; i <= CSVConverter.wayPointsList.Count - 1;i++)
-            {
-                var panel = beatMap.Find("panel" + i ).gameObject;
-                Destroy(panel);
-            }
+            beatsmap.Clear();
             CSVConverter.Clear();
             Timer.MeltTime();
             isCleared = true;
@@ -62,7 +57,7 @@ public partial class GameManager
         // 1. Generate street to goals
         const int START_STREET_POS = 10;
         float nowStreetLen = START_STREET_POS;
-        while ((wholeStreetLen - nowStreetLen) > 25)// until [Street.Length > ���� ����]�� ������
+        while ((wholeStreetLen - nowStreetLen) > 25)// until [Street.Length > ... ]
         {
             GameObject nowStreet = Instantiate(streets[Random.Range(0, streets.Count)], environmentIndexer);
             var pos = nowStreet.transform.position;
@@ -83,9 +78,6 @@ public partial class GameManager
 
         // 3. Generate Goal
         //   - 
-
-        // �߰� ��ǥ : �ٶ��� ���� �������� ������?
-        // ��ȥ�� ���ƴٴϴ� ��?
 
         isCleared = false;
     }

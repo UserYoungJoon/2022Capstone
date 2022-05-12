@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBall : MonoBehaviour
 {
-    public List<Vector3> points = new List<Vector3>();
-    public List<string> sides = new List<string>();
+    public List<Vector3> points = null;
+    public List<string> sides = null;
     public GameManager manager;
     public Transform startPos;
     public Transform BeatMap;
@@ -36,12 +36,13 @@ public class PlayerBall : MonoBehaviour
 
     public void SetBeforeRun()
     {
-        transform.position = new Vector3(startPos.position.x, 0.5f, startPos.position.z);
         nowPos = startPos.position;
+        transform.position = nowPos;
         nextPos = points[0];
         currentLocation = 0;
         isJumping = false;
-        points.Add(GameObject.FindWithTag("Finish").transform.position);
+        points.Add(GameObject.FindWithTag(TagType.FINISH).transform.position);
+        gameObject.SetActive(true);
     }
 
 
@@ -132,22 +133,24 @@ public class PlayerBall : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Way Point" && currentLocation == 0)
+        if (other.tag == TagType.WAY_POINT && currentLocation == 0)
         {
             SoundManager.Instance.PlaySongSound();
             // 싱크 디버깅용. 싱크 해결 되면 아래 코드 제거할 예정
             //GameObject.Find("SoundManager").transform.Find("Sync").gameObject.SetActive(true);
         }
-        if (other.tag == "Way Point")
+        if (other.tag == TagType.WAY_POINT)
         {
             isJumping = false;
             inputTiming = true;
             Debug.Log("Now!!");
 
             // next vs current
-            Debug.Log(sides[currentLocation]);
+            //Debug.Log(sides[currentLocation]);
+            
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
+            //Debug.LogFormat("{0}, {1}", nextPos.x, nextPos.z);
             currentLocation++;
         }
     }
@@ -158,8 +161,3 @@ public class PlayerBall : MonoBehaviour
         //      isJumping = true; 
     }
 }
-
-// 별도의 보고서 필요 없음, PPT 발표 자료만 준비해라, 수정된 사항이나 추진 계획 포맷은 과제방에 공유할꺼임
-// 4월 28일 중간발표 논문 5월 10일까지
-// 안된 팀 교수랑 매칭인가? 추후에 통보함
-// 물품신청 마감

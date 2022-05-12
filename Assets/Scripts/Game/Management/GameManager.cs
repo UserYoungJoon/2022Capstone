@@ -17,7 +17,7 @@ public partial class GameManager : MonoBehaviour
     private CSVConverter CSVConverter;
     private Notes notes;
 
-    private int userScore = 0; // ���� ���� �� ������ 0���� �ʱ�ȭ
+    private int userScore = 0;
 
     void Awake()
     {
@@ -33,15 +33,15 @@ public partial class GameManager : MonoBehaviour
         cameraMoving.Init();
 
         //Bind
-        playerBall.Bind(CSVConverter.wayPointsList, CSVConverter.panelsSideList);
+        playerBall.Bind(CSVConverter.panelPositionList, CSVConverter.panelsSideList);
         cameraMoving.Bind(playerBall.transform);
         CSVConverter.Bind(panelPrefab, beatMap, notes);
         uIManager.Bind(this);
+        beatsmap.Bind(CSVConverter.panelObjs);
 
         //Clear
         playerBall.gameObject.SetActive(false);
 
-        //���⼭ �������� ���� �뷡 ���� UI �����ִٰ� �����ϸ� �� �� �����ϵ��� �ϱ�
         SwitchGameState(eGameState.SELECT_SONG);
     }
 
@@ -71,7 +71,7 @@ public partial class GameManager : MonoBehaviour
     {
         gameState = to;
         switch (gameState)
-        {//Ȱ��ȭ�� ��Ȱ��ȭ 
+        {
             case eGameState.SELECT_SONG:
                 {
                     //plz Destroy ingame world....
@@ -88,7 +88,6 @@ public partial class GameManager : MonoBehaviour
                     GenerateWorld();
 
                     userScore = 0;
-                    playerBall.gameObject.SetActive(true);
                     playerBall.SetBeforeRun();
                 }
                 break;
