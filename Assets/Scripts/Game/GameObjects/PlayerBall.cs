@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBall : MonoBehaviour
 {
-    public List<Vector3> points = new List<Vector3>();
-    public List<string> sides = new List<string>();
-    public List<GameObject> panelList = new List<GameObject>();
+    public List<Vector3> points = null;
+    public List<string> sides = null;
+    public List<GameObject> panelList = null;
     public GameManager manager;
     public Transform startPos;
     public Transform BeatMap;
@@ -40,25 +40,13 @@ public class PlayerBall : MonoBehaviour
 
     public void SetBeforeRun()
     {
-        transform.position = new Vector3(startPos.position.x, 0.5f, startPos.position.z);
         nowPos = startPos.position;
+        transform.position = nowPos;
         nextPos = points[0];
         currentLocation = 0;
         isJumping = false;
-        points.Add(GameObject.FindWithTag("Finish").transform.position);
-        panelList.Add(GameObject.FindWithTag("Finish"));
-    }
-
-    // !! TEST FOR USER INPUT DURING TIME
-    public void testingInputTiming(){
-        if(inputTiming){
-            //Debug.Log("TRUE");
-            testImage.SetActive(true);
-        }
-        if(!inputTiming){
-            //Debug.Log("FALSE");
-            testImage.SetActive(false);
-        }
+        points.Add(GameObject.FindWithTag(TagType.FINISH).transform.position);
+        gameObject.SetActive(true);
     }
 
 
@@ -139,20 +127,23 @@ public class PlayerBall : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Way Point" && currentLocation == 0)
+
+        if (other.tag == TagType.WAY_POINT && currentLocation == 0)
         {
             SoundManager.Instance.PlaySongSound();
             // 싱크 디버깅용. 싱크 해결 되면 아래 코드 제거할 예정
             //GameObject.Find("SoundManager").transform.Find("Sync").gameObject.SetActive(true);
         }
-        if (other.tag == "Way Point")
+        if (other.tag == TagType.WAY_POINT)
         {
             isJumping = false;
             panelList[currentLocation + 1].GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
             // next vs current
-            // Debug.Log(sides[currentLocation]);
+            //Debug.Log(sides[currentLocation]);
+            
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
+            //Debug.LogFormat("{0}, {1}", nextPos.x, nextPos.z);
             currentLocation++;
         }
     }

@@ -17,9 +17,9 @@ public class CSVConverter
     public static float mapDistance = 0;//no use yet
     public List<GameObject> panelList = new List<GameObject>();
 
-    public List<Vector3> wayPointsList = new List<Vector3>();
     public List<string> panelsSideList = new List<string>();
-    private List<Vector3> panelPositionList = new List<Vector3>();
+    public List<Vector3> panelPositionList = new List<Vector3>();
+    public List<GameObject> panelObjs = new List<GameObject>();
     private List<float> panelDistanceList = new List<float>();
     private List<Note> noteList = new List<Note>();
     private Notes notes;
@@ -57,9 +57,11 @@ public class CSVConverter
                 newPanelPos = new Vector3(GetRandomX(data, i), 0, correctionZ);
                 panelObj = GameObject.Instantiate(panel, newPanelPos, Quaternion.identity, beatMap);
                 panelObj.name = "panel" + panelindex;
+                panelObjs.Add(panelObj);
+
 
                 // decide side
-                switch(panelObj.transform.position.x)
+                switch (panelObj.transform.position.x)
                 {
                     case -1:
                         panelObj.tag = "Left";
@@ -78,7 +80,6 @@ public class CSVConverter
 
                 var wayPoint = panelObj.transform.Find("p");
                 wayPoint.name = "p" + panelindex;
-                wayPointsList.Add(wayPoint.position);
 
                 beforeTime = (int)data[i][TIME];
 
@@ -118,18 +119,14 @@ public class CSVConverter
         {
             panelDistanceList.Add(Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]));
             mapDistance += Vector3.Distance(panelPositionList[i], panelPositionList[i - 1]);
-            // Debug.Log(i + "��° �гΰ�" + (i-1) +"��° �гλ�����" + "Distance" + panelDistanceList[i - 1]);
-
         }
-        
-        Debug.Log(mapDistance);
     }
 
     public void Clear()
     {
-        wayPointsList.Clear();
         panelDistanceList.Clear();
         panelPositionList.Clear();
+        panelObjs.Clear();
         noteList.Clear();
         panelList.Clear();
     }
@@ -160,7 +157,7 @@ public class CSVConverter
         }
     }
 
-    #region CSV Reader
+    #region CSV Read
     private string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
     private string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
     private char[] TRIM_CHARS = { '\"' };
@@ -203,5 +200,5 @@ public class CSVConverter
         }
         return list;
     }
-    #endregion CSV Reader
+    #endregion CSV Read
 }

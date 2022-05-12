@@ -17,7 +17,7 @@ public partial class GameManager : MonoBehaviour
     private CSVConverter CSVConverter;
     private Notes notes;
 
-    private int userScore = 0; // 게임 시작 될 때마다 0으로 초기화
+    private int userScore = 0;
 
     void Awake()
     {
@@ -33,15 +33,15 @@ public partial class GameManager : MonoBehaviour
         cameraMoving.Init();
 
         //Bind
-        playerBall.Bind(CSVConverter.wayPointsList, CSVConverter.panelsSideList, CSVConverter.panelList);
+        playerBall.Bind(CSVConverter.panelPositionList, CSVConverter.panelsSideList, CSVConverter.panelList);
         cameraMoving.Bind(playerBall.transform);
         CSVConverter.Bind(panelPrefab, beatMap, notes);
         uIManager.Bind(this);
+        beatsmap.Bind(CSVConverter.panelObjs);
 
         //Clear
         playerBall.gameObject.SetActive(false);
 
-        // 여기서 생성하지 말고 노래 선택 UI 보여주다가 선택하면 그 때 생성하도록 하기
         SwitchGameState(eGameState.SELECT_SONG);
     }
 
@@ -71,7 +71,7 @@ public partial class GameManager : MonoBehaviour
     {
         gameState = to;
         switch (gameState)
-        {// 활성화와 비활성화
+        {
             case eGameState.SELECT_SONG:
                 {
                     //plz Destroy ingame world....
@@ -89,7 +89,6 @@ public partial class GameManager : MonoBehaviour
                     GenerateWorld();
 
                     userScore = 0;
-                    playerBall.gameObject.SetActive(true);
                     playerBall.SetBeforeRun();
                 }
                 break;

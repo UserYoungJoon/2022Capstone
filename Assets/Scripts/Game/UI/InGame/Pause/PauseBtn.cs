@@ -18,7 +18,6 @@ public class PauseBtn : UIButton
     {
         OpenUI(pauseUI);
         CloseUI(scoreUI.gameObject);
-        Debug.Log("Game Pause");
         SoundManager.Instance.PauseSong();
         Timer.FreezeTime();
     }
