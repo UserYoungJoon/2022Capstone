@@ -65,7 +65,7 @@ public class PlayerBall : MonoBehaviour
     void Update()
     {
         // !! TEST FUNCTION !!
-        testingInputTiming();
+        // testingInputTiming();
         Move();
         autoMoving();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
@@ -137,11 +137,6 @@ public class PlayerBall : MonoBehaviour
     }
     #endregion Move control section
 
-    void OnCollisionEnter(Collision collision)
-    {
-        
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Way Point" && currentLocation == 0)
@@ -153,13 +148,17 @@ public class PlayerBall : MonoBehaviour
         if (other.tag == "Way Point")
         {
             isJumping = false;
-            inputTiming = true;
             panelList[currentLocation + 1].GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
             // next vs current
             // Debug.Log(sides[currentLocation]);
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
             currentLocation++;
+        }
+    }
+    private void OnTriggerStay(Collider other) {
+        if(other.tag == "Item"){
+            inputTiming = true;
         }
     }
 
