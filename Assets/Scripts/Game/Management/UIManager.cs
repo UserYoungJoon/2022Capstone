@@ -82,6 +82,7 @@ public class UIManager : MonoBehaviour
         //Deactivate
         selectUI.SetActive(false);
         stageUI.gameObject.SetActive(false);
+        finishGameUI.gameObject.SetActive(false);
 
         //Activate
         pauseBtn.gameObject.SetActive(true);
