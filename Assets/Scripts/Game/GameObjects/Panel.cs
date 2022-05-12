@@ -11,15 +11,20 @@ public class Panel : MonoBehaviour
     public void SetBeforeRun()
     {
         Beatsmap = GameObject.Find("Beatsmap");
-        //for(int i in Beatsmap) {
-          //  Beatsmap.transform.GetChild(i).gameObject.SetActive(true);
-        //}
         //5번부터 판넬 다 끔(판넬 5개가 켜진 상태)
         for (index = 5; index < Beatsmap.transform.childCount; index++) 
         {
             Beatsmap.transform.GetChild(index).gameObject.SetActive(false);
         }
         index = 5;
+    }
+    public void Clear()
+    {
+        Beatsmap = GameObject.Find("Beatsmap");
+        for (int i = 0; i < Beatsmap.transform.childCount; i++)
+        {
+            Beatsmap.transform.GetChild(i).gameObject.SetActive(true);
+        }
     }
 
     private void OnCollisionEnter(Collision other)

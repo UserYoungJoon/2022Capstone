@@ -35,6 +35,7 @@ public partial class GameManager
         ClearWorld();
         CSVConverter.MakeBeatMaps(SLOWAIRPLANE);
         floor.SetBeforeRun();
+        panels.Clear();
         panels.SetBeforeRun();
     }
 
