@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterVolumeSFX: 1
   masterVolumeBGM: 3
+  volume: 1
   mainBgmAudioClip: {fileID: 0}
   sfxAudioClips:
   - {fileID: 8300000, guid: 1451e8f4a5f07ee499ee275da444d540, type: 3}
@@ -163,6 +164,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 84bdc97ec35ee8a4ab6cc8a8d70a7a00, type: 3}
   - {fileID: 8300000, guid: 8b5deca971ce4d24094d9ab728f07787, type: 3}
   - {fileID: 8300000, guid: 7fa50b5d72db6b44889eeaedb855e042, type: 3}
+  selectedSong: 
 --- !u!4 &108800441
 Transform:
   m_ObjectHideFlags: 0
@@ -2030,7 +2032,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9570a78d69112f9489e9c158417fcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelObjs: []
 --- !u!4 &2077148100 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c41fb4685aa88574ca3a87f5fd19c666, type: 3}
@@ -2045,6 +2046,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2130233263}
+  - component: {fileID: 2130233264}
   m_Layer: 0
   m_Name: ---Management---
   m_TagString: Untagged
@@ -2069,6 +2071,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2130233264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130233262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354f02bb5d3aafa4d8172219391de881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1682989479718840691
 PrefabInstance:
   m_ObjectHideFlags: 0

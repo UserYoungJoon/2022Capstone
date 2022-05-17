@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 
 public class Sound : MonoBehaviour
@@ -11,6 +11,10 @@ public class Sound : MonoBehaviour
 
     private float prevSouncValue;
 
+
+    private void Awake() {
+        sound_slider.value = SoundManager.Instance.volume;
+    }
     public void OnMuteClieck(bool isOn)
     {
         if (isOn)
@@ -23,5 +27,9 @@ public class Sound : MonoBehaviour
         {
             sound_slider.value = prevSouncValue;
         }
+    }
+    public float GetSliderValue()
+    {
+        return sound_slider.value;
     }
 }
