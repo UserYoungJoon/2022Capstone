@@ -46,6 +46,8 @@ public class PlayerBall : MonoBehaviour
         currentLocation = 0;
         isJumping = false;
         points.Add(GameObject.FindWithTag(TagType.FINISH).transform.position);
+        panelList.Add(GameObject.FindWithTag(TagType.FINISH));
+        sides.Add(TagType.FINISH);
         gameObject.SetActive(true);
     }
 
