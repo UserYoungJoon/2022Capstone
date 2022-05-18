@@ -138,8 +138,6 @@ public class PlayerBall : MonoBehaviour
         {
             isJumping = false;
             panelList[currentLocation + 1].GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
-            // next vs current
-            //Debug.Log(sides[currentLocation]);
             
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
