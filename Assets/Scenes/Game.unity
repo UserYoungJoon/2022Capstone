@@ -2032,6 +2032,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9570a78d69112f9489e9c158417fcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
+  panelObjs: []
+>>>>>>> Develop
 --- !u!4 &2077148100 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c41fb4685aa88574ca3a87f5fd19c666, type: 3}
@@ -2413,6 +2417,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1544370890}
     m_Modifications:
+    - target: {fileID: 5039575391137405074, guid: 0b191d86ef41da54b8ecccfaef82620c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039575391137405074, guid: 0b191d86ef41da54b8ecccfaef82620c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5384473489854671439, guid: 0b191d86ef41da54b8ecccfaef82620c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5530984163673344622, guid: 0b191d86ef41da54b8ecccfaef82620c, type: 3}
       propertyPath: m_Name
       value: Score

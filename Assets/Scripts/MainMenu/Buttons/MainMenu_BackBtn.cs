@@ -13,8 +13,7 @@ namespace MainMenuBtn
 
         public override void ClickEvent()
         {
-            
-            SoundManager.Instance.SetVolumne(slider.value);
+            SoundManager.Instance.SetVolume(slider.value);
             Debug.Log("Set " + slider.value);
             CloseUI(OptionUI);
         }

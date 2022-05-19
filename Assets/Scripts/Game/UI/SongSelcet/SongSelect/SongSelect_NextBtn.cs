@@ -4,24 +4,39 @@ using UnityEngine;
 
 namespace SongSelctBtn
 {
-    [System.Obsolete("미구현 버튼")]
+    [System.Obsolete("誘멸뎄 踰")]
     public class SongSelect_NextBtn : UIButton
     {
-       
+
+        public StageMenu stagemenu;
         public override void ClickEvent()
         {
+            /*        //AudioManager.intance.PlaySFX("Touch");
+            Debug.Log("Next Song");*/
+            //if (++currentSong > songList.Length - 1)
+            //    currentSong = 0;
+            //    SettingSong();
 
-            SoundManager.Instance.PlaySFXSound("metronome_tick");
+            //SoundManager.Instance.PlaySFXSound("metronome_tick");
+
+            //GameObject.Find("Canvas")
+            //    .transform.Find("Select")
+            //    .transform.Find("Disk")
+            //    .transform.Find("Mask")
+            //    .transform.Find("SongImage").GetComponent<SongSelect>().currentSong += 1;
+
+            //5/05
+            //GetComponent<StageMenu>();
+            //GameObject.Find("Text").GetComponent<StageMenu>();
 
             GameObject.Find("Canvas")
-                .transform.Find("Select")
-                .transform.Find("Disk")
-                .transform.Find("Mask")
-                .transform.Find("SongImage").GetComponent<SongSelect>().currentSong += 1;
+                .transform.Find("Select").GetComponent<StageMenu>().currentSong += 1;
+            //이미지만 안바뀜..
+            //stagemenu = GameObject.Find("StageMenu").GetComponent<StageMenu>();
 
-                // Hierachy 내의 Canvas의 자식의 Select의 자식의 Disk의 자식의 Mask의 자식의 SongImage의 SongSelect 컴포넌트 갖고오기
 
             Debug.Log("Next Song");
+                
         }
     }
 }
