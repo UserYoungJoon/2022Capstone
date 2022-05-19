@@ -15,7 +15,6 @@ public class CSVConverter
 
     public float correctionZ;   //z?? ????
     public static float mapDistance = 0;//no use yet
-    public List<GameObject> panelList = new List<GameObject>();
 
     public List<string> panelsSideList = new List<string>();
     public List<Vector3> panelPositionList = new List<Vector3>();
@@ -42,11 +41,8 @@ public class CSVConverter
 
     private const string TIME = "Time";
     private const string NOTE = "Note";
-    
-    public static float lastTime;
     public void MakeBeatMaps(string musicName)
     {
-        mapDistance = 0;
         int panelindex = 1;
         List<Dictionary<string, object>> data = ReadCSV(musicName);
 
@@ -79,7 +75,6 @@ public class CSVConverter
 
                 panelsSideList.Add(panelObj.tag);
                 panelPositionList.Add(newPanelPos);
-                panelList.Add(panelObj);
 
                 var wayPoint = panelObj.transform.Find("p");
                 wayPoint.name = "p" + panelindex;
@@ -116,8 +111,6 @@ public class CSVConverter
 
                 panelObj = null;
             }
-            lastTime = (int)data[data.Count-2]["Time"]+1;
-            
         }
 
         for (int i = 1; i < panelPositionList.Count; i++)
@@ -133,7 +126,6 @@ public class CSVConverter
         panelPositionList.Clear();
         panelObjs.Clear();
         noteList.Clear();
-        panelList.Clear();
     }
 
     private static int before = 0;

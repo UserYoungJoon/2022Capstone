@@ -15,7 +15,7 @@ public class PauseUI_RestartBtn : UIButton
     public override void ClickEvent()
     {
         //Restart Code
-        uiManager.SwitchGameStateToSelect();
+        uiManager.SwitchGameStateToSelect(); //현재 판넬들을 중복생성하고있음. 생성하기전 삭제해야됨, 맵도 중복생성중
         SoundManager.Instance.StopSongSound();
         uiManager.SwitchGameStateToGame();
         Timer.MeltTime();

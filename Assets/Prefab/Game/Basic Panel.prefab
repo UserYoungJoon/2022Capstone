@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166518444783678057}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 8.34, z: 0.02}
+  m_LocalScale: {x: 0.02, y: 18, z: 0.02}
   m_Children: []
   m_Father: {fileID: 4635061135384092449}
   m_RootOrder: 0
@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 166518445782378388}
   - component: {fileID: 166518445782378389}
   - component: {fileID: 166518445782378394}
+  - component: {fileID: 1360756674078056034}
   - component: {fileID: 1012619123144376547}
   m_Layer: 0
   m_Name: Basic Panel
@@ -132,11 +133,10 @@ Transform:
   m_GameObject: {fileID: 7755923429572739986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.05, z: 0.8}
+  m_LocalScale: {x: 0.5, y: 0.05, z: 0.5}
   m_Children:
   - {fileID: 166518444783678056}
   - {fileID: 1789750376651448200}
-  - {fileID: 133220838357754864}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -197,11 +197,25 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7755923429572739986}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1360756674078056034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7755923429572739986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd8e609726fab04eb67cca493e3eb8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startColor: {r: 0.7686275, g: 0.7686275, b: 0.7686275, a: 0}
+  endColor: {r: 0.07678461, g: 0, b: 1, a: 0}
 --- !u!114 &1012619123144376547
 MonoBehaviour:
   m_ObjectHideFlags: 0
