@@ -10,8 +10,9 @@ public class Panel : MonoBehaviour
     private void Start()
     {
         beatsmap = GameObject.Find("Beatsmap").GetComponent<Beatsmap>();
+        transform.GetChild(1).GetComponent<AudioSource>().volume = SoundManager.Instance.volume;
     }
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == TagType.PLAYER)
         {

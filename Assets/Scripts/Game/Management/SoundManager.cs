@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//�� ���ӿ����� �Ÿ��� ����� ������ ũ�⸦ ������ �ʿ䰡 ���⿡ �ϳ��� AudioSource�� AudioClip���� �������� �����ų ���̴�.
-//��������� ������ AudioSource�� ȿ������ ������ AudioSource�� SoundManager�� �ڽ� ������Ʈ�� ����
 
-//https://velog.io/@uchang903/Unity-SoundManager-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8
+// https://velog.io/@uchang903/Unity-SoundManager-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8
 public class SoundManager : MonoBehaviour
 {
     private static SoundManager instance;
@@ -23,49 +21,49 @@ public class SoundManager : MonoBehaviour
 
             return instance;
         }
-    } // Sound�� �������ִ� ��ũ��Ʈ�� �ϳ��� �����ؾ��ϰ� instance������Ƽ�� ���� ��𿡼��� �ҷ��������� �̱��� ���
-
+    }
     private AudioSource bgmPlayer;
     private AudioSource sfxPlayer;
     private AudioSource songPlayer;
 
     public float masterVolumeSFX = 1f;
     public float masterVolumeBGM = 1f;
+    public float volume = 1f;
 
     [SerializeField]
-    private AudioClip mainBgmAudioClip; //����ȭ�鿡�� ����� BGM
+    private AudioClip mainBgmAudioClip;
 
 
     [SerializeField]
-    private AudioClip[] sfxAudioClips; //ȿ������ ����
+    private AudioClip[] sfxAudioClips; 
 
     [SerializeField]
-    private AudioClip[] songAudioClips; // �� ����Ʈ ����
+    private AudioClip[] songAudioClips; 
 
-    Dictionary<string, AudioClip> audioClipsDic = new Dictionary<string, AudioClip>(); //ȿ���� ��ųʸ�
-    // AudioClip�� Key,Value ���·� �����ϱ� ���� ��ųʸ� ���
-    Dictionary<string, AudioClip> audioSongDic = new Dictionary<string, AudioClip>(); // ��Ʈ�� ���� ��ųʸ�
-    public static string selectedSong; // UI���� �� ���� �� �Է� �� ����
+    Dictionary<string, AudioClip> audioClipsDic = new Dictionary<string, AudioClip>(); 
+
+    Dictionary<string, AudioClip> audioSongDic = new Dictionary<string, AudioClip>();
+    public string selectedSong; 
 
     private void Awake()
     {
-        selectedSong = "60AirplaneBGM"; // �ʱ� ���� Airplane
+        selectedSong = "60AirplaneBGM";
         if (Instance != this)
         {
             Destroy(this.gameObject);
         }
-        DontDestroyOnLoad(this.gameObject); //���� ������ ����� ��.
+        DontDestroyOnLoad(this.gameObject); 
 
         bgmPlayer = GameObject.Find("MainMenuPlayer").GetComponent<AudioSource>();
         sfxPlayer = GameObject.Find("SFXPlayer").GetComponent<AudioSource>();
         songPlayer = GameObject.Find("SongPlayer").GetComponent<AudioSource>();
 
-        // SoundManager AudioClip Element �߰� - SFX
+        // SoundManager AudioClip Element  - SFX
         foreach (AudioClip audioclip in sfxAudioClips)
         {
             audioClipsDic.Add(audioclip.name, audioclip);
         }
-        // SoundManager AudioClip Element �߰� - Song
+        // SoundManager AudioClip Element  - Song
         foreach (AudioClip audioclip in songAudioClips)
         {
             audioSongDic.Add(audioclip.name, audioclip);
@@ -77,10 +75,8 @@ public class SoundManager : MonoBehaviour
         this.volume = volume;
     }
     public void PlaySFXSound(string name)
-
-    // ȿ�� ���� ��� : �̸��� �ʼ� �Ű�����, ������ ������ �Ű������� ����
     {
-        if (audioClipsDic.ContainsKey(name) == false) // Element�� ���� ��
+        if (audioClipsDic.ContainsKey(name) == false)
         {
             Debug.Log(name + " is not Contained audioClipsDic");
             return;
@@ -88,31 +84,28 @@ public class SoundManager : MonoBehaviour
         sfxPlayer.PlayOneShot(audioClipsDic[name], volume * masterVolumeSFX);
     }
 
-    //BGM ���� ��� : ������ ������ �Ű������� ����
-    public void PlayBGMSound(float volume = 1f)
+    public void PlayBGMSound()
     {
-        bgmPlayer.loop = true; //BGM �����̹Ƿ� ��������
+        bgmPlayer.loop = true; 
         bgmPlayer.volume = volume * masterVolumeBGM;
 
         bgmPlayer.clip = mainBgmAudioClip;
         bgmPlayer.Play();
         
-        //���� ���� �´� BGM ���
     }
 
-    public void PlaySongSound(float volume = 1f)
+    public void PlaySongSound()
     {
-        if(audioSongDic.ContainsKey(selectedSong) == false) // Element�� ���� ��
+        if(audioSongDic.ContainsKey(selectedSong) == false) 
         {
             Debug.Log((selectedSong + " is not Contained audioSongDic"));
             return;
         }
         songPlayer.clip = audioSongDic[selectedSong];
-        songPlayer.volume = volume + 10;    
+        songPlayer.volume = volume;
         songPlayer.Play();
     }
 
-    //���� BGM�� �ð�
     public void getTime()
     {
         Debug.Log("current Time: " + bgmPlayer.time);
@@ -129,7 +122,6 @@ public class SoundManager : MonoBehaviour
     }
     
 
-    // ����ڰ� ESC Ű�� �Է��Ͽ� ������ ���߾��� ��
     public void PauseSong()
     {
         songPlayer.Pause();
@@ -143,6 +135,3 @@ public class SoundManager : MonoBehaviour
 // if Player GetKeyDown KeyCode.ESC and gameIsStopped
 //     then songPlayer.Play
 //     set gameIsStopped = false
-
-// UI ��ư Ŭ�� �� SFX?
-// �гο� SFX ������
