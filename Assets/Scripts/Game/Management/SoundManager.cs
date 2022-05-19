@@ -72,9 +72,13 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void SetVolume(float volume)
+    {
+        this.volume = volume;
+    }
+    public void PlaySFXSound(string name)
 
     // ȿ�� ���� ��� : �̸��� �ʼ� �Ű�����, ������ ������ �Ű������� ����
-    public void PlaySFXSound(string name, float volume = 1f)
     {
         if (audioClipsDic.ContainsKey(name) == false) // Element�� ���� ��
         {

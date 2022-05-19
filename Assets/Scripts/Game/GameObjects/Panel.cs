@@ -15,7 +15,8 @@ public class Panel : MonoBehaviour
     {
         if (other.gameObject.tag == TagType.PLAYER)
         {
-          audioSource.Play(0);
+            //Debug.Log("Note Volume: " + transform.GetChild(1).GetComponent<AudioSource>().volume);
+            audioSource.Play();
         }
         beatsmap.ShowNextBlock();
     }
