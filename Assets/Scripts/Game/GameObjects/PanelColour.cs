@@ -4,20 +4,43 @@ using UnityEngine;
 
 public class PanelColour : MonoBehaviour
 {
+    public Color startColor;
+    public Color endColor;
+
     private const string CorotineName = "Fade";
     private bool isActvieCollide = false;
-    public Material color;
-    public GameObject panel;
+    
 
-    private void OnTriggerStay(Collider other) 
+    private void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Player")
         {
-            if(PlayerBall.inputTiming == true)
-            {
-                panel.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-            }
+            StartCoroutine(CorotineName);
         }
     }
 
+    private void OnCollisionExit(Collision other) 
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            StopCoroutine(CorotineName);
+        }    
+    }
+
+
+    private IEnumerator Fade()
+    {
+        float timer = 0.0f;
+        float time = 0.3f;
+
+        while(timer <= time)
+        {
+            timer += Time.deltaTime;
+            float lerp_Percentage = timer / time;
+
+            GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, lerp_Percentage);
+
+            yield return null;
+        }
+    }
 }

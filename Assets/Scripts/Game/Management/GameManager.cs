@@ -33,7 +33,7 @@ public partial class GameManager : MonoBehaviour
         cameraMoving.Init();
 
         //Bind
-        playerBall.Bind(CSVConverter.panelPositionList, CSVConverter.panelsSideList, CSVConverter.panelList);
+        playerBall.Bind(CSVConverter.panelPositionList, CSVConverter.panelsSideList);
         cameraMoving.Bind(playerBall.transform);
         CSVConverter.Bind(panelPrefab, beatMap, notes);
         uIManager.Bind(this);
@@ -77,7 +77,6 @@ public partial class GameManager : MonoBehaviour
                     //plz Destroy ingame world....
                     uIManager.SetSelectMode();
                     cameraMoving.SetSelectMode();
-                    
                 }
                 break;
             case eGameState.GAME:
@@ -87,8 +86,7 @@ public partial class GameManager : MonoBehaviour
 
                     SetBeforeGenerate();
                     GenerateWorld();
-                    
-                    Timer.MeltTime();
+
                     userScore = 0;
                     playerBall.SetBeforeRun();
                 }
@@ -113,7 +111,6 @@ public static class Timer
 
     public static void MeltTime()
     {
-        Debug.Log("gtrgrrgbgrb");
         Time.timeScale = 1;
     }
 }
