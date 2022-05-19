@@ -7,6 +7,7 @@ public class PlayerBall : MonoBehaviour
 {
     public List<Vector3> points = null;
     public List<string> sides = null;
+    public List<GameObject> panelList = null;
     public GameManager manager;
     public Transform startPos;
     public Transform BeatMap;
@@ -15,7 +16,9 @@ public class PlayerBall : MonoBehaviour
     private int currentLocation;
     private Rigidbody rigid;
     private bool isJumping;
-    private bool inputTiming;
+    public static bool inputTiming;
+    // !! TEST !!
+    public GameObject testImage;
 
     #region Initializing section
     public void Init()
@@ -27,10 +30,11 @@ public class PlayerBall : MonoBehaviour
         currentLocation = 0;
     }
 
-    public void Bind(List<Vector3> pts, List<string> sds)
+    public void Bind(List<Vector3> pts, List<string> sds, List<GameObject> plist)
     {
         points = pts;
         sides = sds;
+        panelList = plist;
     }
     #endregion
 
@@ -42,12 +46,18 @@ public class PlayerBall : MonoBehaviour
         currentLocation = 0;
         isJumping = false;
         points.Add(GameObject.FindWithTag(TagType.FINISH).transform.position);
+        panelList.Add(GameObject.FindWithTag(TagType.FINISH));
+        sides.Add(TagType.FINISH);
+        forwardSpeed = CSVConverter.mapDistance/(CSVConverter.lastTime/120)*(60/60)+1.2f;    //(60/bpm)
+        Debug.Log("forwardSpeed:"+forwardSpeed +"lTime"+ CSVConverter.lastTime);
         gameObject.SetActive(true);
     }
 
 
     void Update()
     {
+        // !! TEST FUNCTION !!
+        // testingInputTiming();
         Move();
         autoMoving();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
@@ -75,19 +85,21 @@ public class PlayerBall : MonoBehaviour
             manager.CalculateScore(transform.position.y);
         }
 
-        else if((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J)) && !inputTiming)
-        {
-            // if player tried while jump
-            Debug.Log("OOPS");
-            rigid.velocity = new Vector3(0, -10, 0);
-        }
+        // else if((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J)) && !inputTiming)
+        // {
+        //     // if player tried while jump
+        //     Debug.Log("OOPS");
+        //     rigid.velocity = new Vector3(0, -10, 0);
+        // }
 
     }
 
     #region Move control section
     private float deltaTime = 1;
-    private float forwardSpeed =  3.23f;// BPM30 1.8f; // 5.13512f; // BPM60 = 3.877308f
-    private float halfPanelSize = 0.12f;
+    
+    //private float forwardSpeed =  3.877308f;// BPM30 1.8f; // 5.13512f; // BPM60 = 3.877308f distance/time
+    private float forwardSpeed = -1;
+    private float halfPanelSize = 0.4f;
     private Vector3 nowPos;
     private Vector3 nextPos;
 
@@ -102,7 +114,6 @@ public class PlayerBall : MonoBehaviour
         Vector3 vector = rigid.velocity;
         vector.x = (nextPos.x - transform.position.x) / deltaTime;
         vector.y = -Physics.gravity.y * deltaTime / 2;
-       //  Debug.Log("여기가 포워드 스피드" + forwardSpeed);
         vector.z = forwardSpeed;
         rigid.velocity = vector;
 
@@ -120,16 +131,6 @@ public class PlayerBall : MonoBehaviour
     }
     #endregion Move control section
 
-    void OnCollisionEnter(Collision collision)
-    {
-        // if (collision.gameObject.tag == "Left" || 
-        //     collision.gameObject.tag == "Center" ||
-        //     collision.gameObject.tag == "Right") 
-        // {
-        //     isJumping = false;
-        // }
-     }
-
     void OnTriggerEnter(Collider other)
     {
 
@@ -142,11 +143,7 @@ public class PlayerBall : MonoBehaviour
         if (other.tag == TagType.WAY_POINT)
         {
             isJumping = false;
-            inputTiming = true;
-            Debug.Log("Now!!");
-
-            // next vs current
-            //Debug.Log(sides[currentLocation]);
+            panelList[currentLocation + 1].GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
             
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
@@ -154,10 +151,16 @@ public class PlayerBall : MonoBehaviour
             currentLocation++;
         }
     }
+    private void OnTriggerStay(Collider other) {
+        if(other.tag == "Item"){
+            inputTiming = true;
+        }
+    }
 
     private void OnTriggerExit(Collider other) 
     {
-        //  if(other.tag == "Way Point")
-        //      isJumping = true; 
+        if(other.tag == "Way Point")
+            inputTiming = false;
+            
     }
 }
