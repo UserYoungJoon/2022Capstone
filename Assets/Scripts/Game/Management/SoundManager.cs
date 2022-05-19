@@ -70,7 +70,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void SetVolumne(float volume)
+    public void SetVolume(float volume)
     {
         this.volume = volume;
     }

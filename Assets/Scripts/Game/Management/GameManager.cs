@@ -87,7 +87,8 @@ public partial class GameManager : MonoBehaviour
 
                     SetBeforeGenerate();
                     GenerateWorld();
-
+                    
+                    Timer.MeltTime();
                     userScore = 0;
                     playerBall.SetBeforeRun();
                 }
@@ -112,6 +113,7 @@ public static class Timer
 
     public static void MeltTime()
     {
+        Debug.Log("gtrgrrgbgrb");
         Time.timeScale = 1;
     }
 }

@@ -42,8 +42,11 @@ public class CSVConverter
 
     private const string TIME = "Time";
     private const string NOTE = "Note";
+    
+    public static float lastTime;
     public void MakeBeatMaps(string musicName)
     {
+        mapDistance = 0;
         int panelindex = 1;
         List<Dictionary<string, object>> data = ReadCSV(musicName);
 
@@ -113,6 +116,8 @@ public class CSVConverter
 
                 panelObj = null;
             }
+            lastTime = (int)data[data.Count-2]["Time"]+1;
+            
         }
 
         for (int i = 1; i < panelPositionList.Count; i++)
