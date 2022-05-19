@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SongSelctBtn
 {
-    [System.Obsolete("¹Ì±¸Çö ¹öÆ°")]
+    [System.Obsolete("ë¯¸êµ¬í˜„ ë²„íŠ¼")]
     public class SongSelect_PriorBtn : UIButton
     {
         public override void ClickEvent()
@@ -27,7 +27,7 @@ namespace SongSelctBtn
             //5/05
             GameObject.Find("Canvas")
                 .transform.Find("Select").GetComponent<StageMenu>().currentSong -= 1;
-            //ÀÌ¹ÌÁö¸¸ ¾È¹Ù²ñ..
+            //ì´ë¯¸ì§€ë§Œ ì•ˆë°”ë€œ..
 
             Debug.Log("Preivous Song");
         }

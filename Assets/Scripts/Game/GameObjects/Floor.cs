@@ -18,7 +18,7 @@ public class Floor : MonoBehaviour
     {
         int goalPosZ = (int)goal.transform.position.z;
         var size = boxCollider.size;
-        size = new Vector3(6, 0.2f, goalPosZ + 10);
+        size = new Vector3(30, 0.2f, goalPosZ + 10);
         boxCollider.size = size;
 
         var pos = transform.position;
@@ -28,7 +28,6 @@ public class Floor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Game over : Floor");
         gameManager.FinishGame(false);
     }
 }

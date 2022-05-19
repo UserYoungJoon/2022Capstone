@@ -45,7 +45,10 @@ public class ScoreUI : MonoBehaviour
         nowScore += addScore;
         score.text = nowScore.ToString();
 
+
+       
         image.sprite = scoreEffectSprites[scoreType];
         animator.SetTrigger(hit);
+
     }
 }

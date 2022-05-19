@@ -11,6 +11,7 @@ namespace SongSelctBtn
         public override void ClickEvent()
         {
             OpenUI(stageUI);
+            SoundManager.Instance.PlaySFXSound("metronome_tick");
         }
     }
 }

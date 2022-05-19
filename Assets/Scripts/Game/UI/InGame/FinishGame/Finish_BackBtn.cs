@@ -13,6 +13,7 @@ public class Finish_BackBtn : UIButton
 
     public override void ClickEvent()
     {
-        uiManager.SwitchGameStateToSelect(); //ÇöÀç ÆÇ³ÚµéÀ» Áßº¹»ý¼ºÇÏ°íÀÖÀ½. »ý¼ºÇÏ±âÀü »èÁ¦ÇØ¾ßµÊ, ¸Êµµ Áßº¹»ý¼ºÁß
+        SoundManager.Instance.PlaySFXSound("metronome_tick");
+        uiManager.SwitchGameStateToSelect(); //ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Úµï¿½ï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ßµï¿½, ï¿½Êµï¿½ ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 }

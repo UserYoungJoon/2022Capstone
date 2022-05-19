@@ -1,11 +1,13 @@
 using UnityEngine;
 
 
+
 namespace SongSelctBtn
 {
-    [System.Obsolete("¹Ì±¸Çö ¹öÆ°")]
+    [System.Obsolete("èª˜ë©¸ë„Â˜Â„ è¸°Â„ÂŠ")]
     public class SongSelect_NextBtn : UIButton
     {
+
         public StageMenu stagemenu;
         public override void ClickEvent()
         {
@@ -29,7 +31,7 @@ namespace SongSelctBtn
 
             GameObject.Find("Canvas")
                 .transform.Find("Select").GetComponent<StageMenu>().currentSong += 1;
-            //ÀÌ¹ÌÁö¸¸ ¾È¹Ù²ñ..
+            //ì´ë¯¸ì§€ë§Œ ì•ˆë°”ë€œ..
             //stagemenu = GameObject.Find("StageMenu").GetComponent<StageMenu>();
 
 

@@ -10,6 +10,7 @@ public partial class GameManager
     public Transform environmentIndexer; // not binding yet
     public Goal goal;
     public Floor floor;
+    public Beatsmap beatsmap;
     public void InitWorldGenerator()
     {
         streets         = new List<GameObject>();
@@ -25,12 +26,16 @@ public partial class GameManager
 
     }
 
+    string SELECT_SONG; // will be dynamic variable
     const string AIRPLANE = "Airplane";//temp code pls modify to make dynamically
+    const string TWINKLE_STAR = "TTLS";
+    const string SLOWAIRPLANE = "60Airplane";
     public void SetBeforeGenerate()
     {
         ClearWorld();
-        CSVConverter.MakeBeatMaps(AIRPLANE);
+        CSVConverter.MakeBeatMaps(SLOWAIRPLANE);
         floor.SetBeforeRun();
+        beatsmap.SetBeforeRun();
     }
 
     private bool isCleared = true;
@@ -38,11 +43,7 @@ public partial class GameManager
     {
         if (!isCleared)
         {
-            for(int i = 1; i <= CSVConverter.wayPointsList.Count;i++)
-            {
-                var panel = beatMap.Find("panel" +i ).gameObject;
-                Destroy(panel);
-            }
+            beatsmap.Clear();
             CSVConverter.Clear();
             Timer.MeltTime();
             isCleared = true;
@@ -56,7 +57,7 @@ public partial class GameManager
         // 1. Generate street to goals
         const int START_STREET_POS = 10;
         float nowStreetLen = START_STREET_POS;
-        while ((wholeStreetLen - nowStreetLen) > 25)// until [Street.Length > 남은 길이]일 때까지
+        while ((wholeStreetLen - nowStreetLen) > 25)// until [Street.Length > ... ]
         {
             GameObject nowStreet = Instantiate(streets[Random.Range(0, streets.Count)], environmentIndexer);
             var pos = nowStreet.transform.position;
@@ -77,9 +78,6 @@ public partial class GameManager
 
         // 3. Generate Goal
         //   - 
-
-        // 추가 목표 : 바람에 따라 떨어지는 나뭇잎?
-        // 지혼자 돌아다니는 새?
 
         isCleared = false;
     }

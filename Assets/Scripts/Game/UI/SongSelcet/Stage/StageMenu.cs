@@ -35,8 +35,7 @@ public class StageMenu : MonoBehaviour
         selectBtn.Bind(mgr);
     }
 
-
-    void SettingSong()
+    public void SettingSong()
     {
         songname.text = songList[currentSong].songname;
         composer.text = songList[currentSong].composer;
@@ -58,3 +57,4 @@ public class StageMenu : MonoBehaviour
     }
 
 }
+

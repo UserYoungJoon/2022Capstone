@@ -9,6 +9,7 @@ namespace SongSelctBtn
     {
         public override void ClickEvent()
         {
+            SoundManager.Instance.PlaySFXSound("metronome_tick");
             SceneManager.LoadScene("MainMenu");
         }
     }
