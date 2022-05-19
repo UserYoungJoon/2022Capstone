@@ -48,7 +48,7 @@ public class PlayerBall : MonoBehaviour
         points.Add(GameObject.FindWithTag(TagType.FINISH).transform.position);
         panelList.Add(GameObject.FindWithTag(TagType.FINISH));
         sides.Add(TagType.FINISH);
-        forwardSpeed = CSVConverter.mapDistance/(CSVConverter.lastTime/120)*(60/60)+1.2f;    //(60/bpm)
+        forwardSpeed = CSVConverter.mapDistance/(CSVConverter.lastTime/120)*(60/60)+2f;    //(60/bpm), 보정치2
         Debug.Log("forwardSpeed:"+forwardSpeed +"lTime"+ CSVConverter.lastTime);
         gameObject.SetActive(true);
     }
@@ -99,7 +99,7 @@ public class PlayerBall : MonoBehaviour
     
     //private float forwardSpeed =  3.877308f;// BPM30 1.8f; // 5.13512f; // BPM60 = 3.877308f distance/time
     private float forwardSpeed = -1;
-    private float halfPanelSize = 0.4f;
+    private float halfPanelSize = 0.025f;
     private Vector3 nowPos;
     private Vector3 nextPos;
 
@@ -113,7 +113,7 @@ public class PlayerBall : MonoBehaviour
         deltaTime = (nextPos.z - nowPos.z - halfPanelSize) / forwardSpeed;
         Vector3 vector = rigid.velocity;
         vector.x = (nextPos.x - transform.position.x) / deltaTime;
-        vector.y = -Physics.gravity.y * deltaTime / 2;
+        vector.y = -Physics.gravity.y * deltaTime / 2 + 0.1f;   //보정치0.1
         vector.z = forwardSpeed;
         rigid.velocity = vector;
 
