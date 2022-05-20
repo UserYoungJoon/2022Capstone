@@ -458,7 +458,6 @@ MonoBehaviour:
   manager: {fileID: 1591684630}
   startPos: {fileID: 1375018410}
   BeatMap: {fileID: 1347408985}
-  testImage: {fileID: 910600613}
 --- !u!135 &668801906
 SphereCollider:
   m_ObjectHideFlags: 0

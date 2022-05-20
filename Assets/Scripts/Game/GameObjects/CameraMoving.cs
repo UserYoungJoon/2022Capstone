@@ -46,6 +46,8 @@ public class CameraMoving : MonoBehaviour
 }
 
 
-// Position 0.04, 2.29, -1.18
-// Rotation 31, -1.937, 0
+// Position 0, 3.7, -4.63
+// Rotation 30, 0, 0
 // Scale 1, 1, 1
+
+

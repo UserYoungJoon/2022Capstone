@@ -18,6 +18,7 @@ public class PlayerBall : MonoBehaviour
     private bool isJumping;
     public static bool inputTiming;
     private bool isPressed;
+    private int sideNumber;
 
     #region Initializing section
     public void Init()
@@ -28,6 +29,8 @@ public class PlayerBall : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         points.Add(this.gameObject.transform.position);
         currentLocation = 0;
+        sideNumber = 0;
+        
     }
 
     public void Bind(List<Vector3> pts, List<string> sds, List<GameObject> plist)
@@ -48,41 +51,41 @@ public class PlayerBall : MonoBehaviour
         points.Add(GameObject.FindWithTag(TagType.FINISH).transform.position);
         panelList.Add(GameObject.FindWithTag(TagType.FINISH));
         sides.Add(TagType.FINISH);
-        forwardSpeed = CSVConverter.mapDistance/(CSVConverter.lastTime/120)*(60/60)+2.2f;    //(60/bpm), 보정치2
+        forwardSpeed = CSVConverter.mapDistance/(CSVConverter.lastTime/120)*(60/60)+2.22f;    //(60/bpm), 보정치2
         Debug.Log("forwardSpeed:"+forwardSpeed +"lTime"+ CSVConverter.lastTime);
         gameObject.SetActive(true);
     }
 
 
-    void Update()
-    {
-        Move();
-        autoMoving();
-        transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.F) && inputTiming && sides[currentLocation].Equals("Left"))
+    private void UserInput()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && inputTiming && sides[sideNumber].Equals("Left"))
         {
             // Left side panel pos.x = -1
             inputTiming = false;
             isPressed = true;
+            Debug.Log("누름");
             manager.CalculateScore(transform.position.y);
         }
         
 
-        else if (Input.GetKeyDown(KeyCode.Space) && inputTiming && sides[currentLocation].Equals("Center"))
+        else if (Input.GetKeyDown(KeyCode.Space) && inputTiming && sides[sideNumber].Equals("Center"))
         {
             // Center panel pos.x = 0
             inputTiming = false;
             isPressed = true;
+            Debug.Log("누름");
             manager.CalculateScore(transform.position.y);
         }
         
 
-        else if (Input.GetKeyDown(KeyCode.J) && inputTiming && sides[currentLocation].Equals("Right"))
+        else if (Input.GetKeyDown(KeyCode.J) && inputTiming && sides[sideNumber].Equals("Right"))
         {
             // Right side panel pos.x = 1
             inputTiming = false;
             isPressed = true;
+            Debug.Log("누름");
             manager.CalculateScore(transform.position.y);
         }
 
@@ -92,7 +95,16 @@ public class PlayerBall : MonoBehaviour
         //     Debug.Log("OOPS");
         //     rigid.velocity = new Vector3(0, -10, 0);
         // }
+    }
 
+
+
+    void Update()
+    {
+        Move();
+        autoMoving();
+        transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
+        UserInput();
     }
 
     #region Move control section
@@ -132,16 +144,9 @@ public class PlayerBall : MonoBehaviour
     }
     #endregion Move control section
 
-    int count;
-
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Item")
-        {
-            count += 1;
-            Debug.Log( count + " 번 들어감");  
-        }
-        
+
         if (other.tag == TagType.WAY_POINT && currentLocation == 0)
         {
             SoundManager.Instance.PlaySongSound();
@@ -167,8 +172,15 @@ public class PlayerBall : MonoBehaviour
 
     private void OnTriggerExit(Collider other) 
     {
-        if(other.tag == "Way Point")
+        if(other.tag == "Item")
+        {
+            if(inputTiming & !isPressed)
+            {
+                Debug.Log("외않눌음");
+            }
             inputTiming = false;
             isPressed = false;
+            sideNumber += 1;
+        }
     }
 }
