@@ -47,13 +47,14 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        selectedSong = "60AirplaneBGM";
         if (Instance != this)
         {
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject); 
 
+        // In SelectUI, when player selected specific song, get selected song name and bring here.
+        selectedSong = "AirplaneFull";
         bgmPlayer = GameObject.Find("MainMenuPlayer").GetComponent<AudioSource>();
         sfxPlayer = GameObject.Find("SFXPlayer").GetComponent<AudioSource>();
         songPlayer = GameObject.Find("SongPlayer").GetComponent<AudioSource>();
@@ -73,6 +74,10 @@ public class SoundManager : MonoBehaviour
     public void SetVolume(float volume)
     {
         this.volume = volume;
+    }
+    public void SetSongname(string name)
+    {
+        this.selectedSong = name;
     }
     public void PlaySFXSound(string name)
     {

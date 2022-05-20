@@ -134,6 +134,7 @@ public class CSVConverter
         panelObjs.Clear();
         noteList.Clear();
         panelList.Clear();
+        panelsSideList.Clear();
     }
 
     private static int before = 0;

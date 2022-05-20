@@ -113,7 +113,6 @@ public static class Timer
 
     public static void MeltTime()
     {
-        Debug.Log("gtrgrrgbgrb");
         Time.timeScale = 1;
     }
 }

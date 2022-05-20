@@ -17,14 +17,14 @@ public class PlayerBall : MonoBehaviour
     private Rigidbody rigid;
     private bool isJumping;
     public static bool inputTiming;
-    // !! TEST !!
-    public GameObject testImage;
+    private bool isPressed;
 
     #region Initializing section
     public void Init()
     {
         isJumping = false;
         inputTiming = false;
+        isPressed = false;
         rigid = GetComponent<Rigidbody>();
         points.Add(this.gameObject.transform.position);
         currentLocation = 0;
@@ -48,7 +48,7 @@ public class PlayerBall : MonoBehaviour
         points.Add(GameObject.FindWithTag(TagType.FINISH).transform.position);
         panelList.Add(GameObject.FindWithTag(TagType.FINISH));
         sides.Add(TagType.FINISH);
-        forwardSpeed = CSVConverter.mapDistance/(CSVConverter.lastTime/120)*(60/60)+2f;    //(60/bpm), 보정치2
+        forwardSpeed = CSVConverter.mapDistance/(CSVConverter.lastTime/120)*(60/60)+2.2f;    //(60/bpm), 보정치2
         Debug.Log("forwardSpeed:"+forwardSpeed +"lTime"+ CSVConverter.lastTime);
         gameObject.SetActive(true);
     }
@@ -56,8 +56,6 @@ public class PlayerBall : MonoBehaviour
 
     void Update()
     {
-        // !! TEST FUNCTION !!
-        // testingInputTiming();
         Move();
         autoMoving();
         transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
@@ -66,6 +64,7 @@ public class PlayerBall : MonoBehaviour
         {
             // Left side panel pos.x = -1
             inputTiming = false;
+            isPressed = true;
             manager.CalculateScore(transform.position.y);
         }
         
@@ -74,6 +73,7 @@ public class PlayerBall : MonoBehaviour
         {
             // Center panel pos.x = 0
             inputTiming = false;
+            isPressed = true;
             manager.CalculateScore(transform.position.y);
         }
         
@@ -82,6 +82,7 @@ public class PlayerBall : MonoBehaviour
         {
             // Right side panel pos.x = 1
             inputTiming = false;
+            isPressed = true;
             manager.CalculateScore(transform.position.y);
         }
 
@@ -131,9 +132,16 @@ public class PlayerBall : MonoBehaviour
     }
     #endregion Move control section
 
+    int count;
+
     void OnTriggerEnter(Collider other)
     {
-
+        if(other.tag == "Item")
+        {
+            count += 1;
+            Debug.Log( count + " 번 들어감");  
+        }
+        
         if (other.tag == TagType.WAY_POINT && currentLocation == 0)
         {
             SoundManager.Instance.PlaySongSound();
@@ -152,7 +160,7 @@ public class PlayerBall : MonoBehaviour
         }
     }
     private void OnTriggerStay(Collider other) {
-        if(other.tag == "Item"){
+        if(other.tag == "Item" && isPressed == false){
             inputTiming = true;
         }
     }
@@ -161,6 +169,6 @@ public class PlayerBall : MonoBehaviour
     {
         if(other.tag == "Way Point")
             inputTiming = false;
-            
+            isPressed = false;
     }
 }
