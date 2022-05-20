@@ -47,6 +47,7 @@ public class PlayerBall : MonoBehaviour
         transform.position = nowPos;
         nextPos = points[0];
         currentLocation = 0;
+        sideNumber = 0;
         isJumping = false;
         points.Add(GameObject.FindWithTag(TagType.FINISH).transform.position);
         panelList.Add(GameObject.FindWithTag(TagType.FINISH));
@@ -65,7 +66,7 @@ public class PlayerBall : MonoBehaviour
             // Left side panel pos.x = -1
             inputTiming = false;
             isPressed = true;
-            Debug.Log("누름");
+            Debug.Log("왼쪽누름");
             manager.CalculateScore(transform.position.y);
         }
         
@@ -75,7 +76,7 @@ public class PlayerBall : MonoBehaviour
             // Center panel pos.x = 0
             inputTiming = false;
             isPressed = true;
-            Debug.Log("누름");
+            Debug.Log("가운데누름");
             manager.CalculateScore(transform.position.y);
         }
         
@@ -85,7 +86,7 @@ public class PlayerBall : MonoBehaviour
             // Right side panel pos.x = 1
             inputTiming = false;
             isPressed = true;
-            Debug.Log("누름");
+            Debug.Log("오른쪽누름");
             manager.CalculateScore(transform.position.y);
         }
 
