@@ -28,6 +28,7 @@ public partial class GameManager : MonoBehaviour
         //Initial
         InitWorldGenerator();
         InitGameObj();
+        InitScoreFile();
         notes.Init();
         CSVConverter.Init();
         cameraMoving.Init();
