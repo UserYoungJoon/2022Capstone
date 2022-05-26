@@ -19,11 +19,11 @@ public class PlayerBall : MonoBehaviour
     public static bool inputTiming;
     private bool isPressed;
     private int sideNumber;
-    private int countdown;
+    private int count;
     #region Initializing section
     public void Init()
     {
-        countdown = 4;
+        count = 4;
         isJumping = false;
         inputTiming = false;
         isPressed = false;
@@ -43,6 +43,7 @@ public class PlayerBall : MonoBehaviour
 
     public void SetBeforeRun()
     {
+        count = 4;
         nowPos = startPos.position;
         transform.position = nowPos;
         nextPos = points[0];
@@ -53,8 +54,10 @@ public class PlayerBall : MonoBehaviour
         panelList.Add(GameObject.FindWithTag(TagType.FINISH));
         sides.Add(TagType.FINISH);
         forwardSpeed = CSVConverter.mapDistance/(CSVConverter.lastTime/120)*(60/60)+2.22f;    //(60/bpm), 보정치2
-        Debug.Log("forwardSpeed:"+forwardSpeed +"lTime"+ CSVConverter.lastTime);
+         // Debug.Log("forwardSpeed:"+forwardSpeed +"lTime"+ CSVConverter.lastTime);
         gameObject.SetActive(true);
+        rigid.velocity = new Vector3 (0, 0, 0);
+        StartCoroutine(Countdown());
     }
 
 
@@ -89,34 +92,29 @@ public class PlayerBall : MonoBehaviour
             Debug.Log("오른쪽누름");
             manager.CalculateScore(transform.position.y);
         }
-
-        // else if((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J)) && !inputTiming)
-        // {
-        //     // if player tried while jump
-        //     Debug.Log("OOPS");
-        //     rigid.velocity = new Vector3(0, -10, 0);
-        // }
     }
     IEnumerator Countdown()
     {
+        Debug.Log("Coroutine Working");
+        Debug.Log("Called");
         while(true)
         {
-            if(countdown <= 0)
+            yield return new WaitForSecondsRealtime(1);
+            if(count == 0)
+            {
+                Debug.Log("멈춰야됨");
                 break;
-            countdown = countdown - 1;
-            Debug.Log(countdown + "초 남음");
-            yield return new WaitForSeconds(1);
+            }
+            count = count - 1;
+            Debug.Log(count + "초 남음");
         }
     }
-    private void FixedUpdate() {
-        StartCoroutine(Countdown());
-        
-    }
 
-    void Update()
+    private void Update()
     {
-        if(countdown <= 0)
+        if(count == 0)
         {
+            StopCoroutine(Countdown());
             Move();
             autoMoving();
             transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);

@@ -1772,6 +1772,7 @@ MonoBehaviour:
   beatMap: {fileID: 1347408985}
   panelPrefab: {fileID: 7755923429572739986, guid: 8ea95caa905026546a72f2c77fc4f17f, type: 3}
   uIManager: {fileID: 118172891}
+  stgMenu: {fileID: 1590206943}
   environmentIndexer: {fileID: 1217483470}
   goal: {fileID: 1627590836}
   floor: {fileID: 796012288}
