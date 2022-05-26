@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PanelColour : MonoBehaviour
 {
-    private const string CorotineName = "Fade";
-    private bool isActvieCollide = false;
-    public Material color;
     public GameObject panel;
 
     private void OnTriggerStay(Collider other) 

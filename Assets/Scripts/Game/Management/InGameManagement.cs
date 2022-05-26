@@ -5,7 +5,6 @@ using UnityEngine;
 
 public partial class GameManager
 {
-
     // Calculate score int playing game. 
     // Called by Jump.
     public void CalculateScore(float pos)
@@ -38,7 +37,7 @@ public partial class GameManager
             resScore = 50;
         }
 
-        //ó���� ������ ���� Event
+        
         userScore += resScore;
         uIManager.UpdateScoreUI(resScore, scoreType);
     }
@@ -48,6 +47,7 @@ public partial class GameManager
         SoundManager.Instance.StopSongSound();
         uIManager.OpenFinishGameUI(userScore, isClearedGame, null);
         SaveScoreToJson();
+        Debug.Log(scoretable.score.Count);
     }
 
     Scoretable scoretable;
@@ -58,7 +58,8 @@ public partial class GameManager
             string str = File.ReadAllText(Application.dataPath + "/TestJson.json");
             
             scoretable = JsonUtility.FromJson<Scoretable>(JsonUtility.ToJson(str));
-
+            Debug.Log("Count " + scoretable.score.Count);
+            
             Debug.Log("Successfully load json file: " + str);
             return;
         }
@@ -66,7 +67,8 @@ public partial class GameManager
         else 
         {
             scoretable = new Scoretable();
-            scoretable.name = "Default";
+            scoretable.name = new List<string>();
+            scoretable.score = new List<int>();
             scoretable.AddPlayerScore(0);
             string str = JsonUtility.ToJson(scoretable);
             Debug.Log("ToJson : " + str);
@@ -79,22 +81,26 @@ public partial class GameManager
     {
         scoretable.AddPlayerScore(userScore);
         string str = JsonUtility.ToJson(scoretable);
-            File.WriteAllText(Application.dataPath + "/TestJson.json", JsonUtility.ToJson(scoretable));
+        File.WriteAllText(Application.dataPath + "/TestJson.json", JsonUtility.ToJson(scoretable));
         Debug.Log(str);
+        
+        
     }
 }
 
 class Scoretable {
-    public string name;
-    public List<int> score = new List<int>();
+    public List<string> name;
+    public List<int> score;
 
     public void printScore()
     {
         Debug.Log("Player " + name +" got " + score + "!");
     }
+    
 
     public void AddPlayerScore(int userScore)
     {
+        name.Add("Player name");
         score.Add(userScore);
     }
 }
