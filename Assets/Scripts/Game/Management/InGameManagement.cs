@@ -45,7 +45,7 @@ public partial class GameManager
     public void FinishGame(bool isClearedGame)
     {
         SoundManager.Instance.StopSongSound();
-        uIManager.OpenFinishGameUI(userScore, isClearedGame, null);
+        uIManager.OpenFinishGameUI(userScore, isClearedGame, stgMenu.imgDisk.sprite);
         SaveScoreToJson();
         Debug.Log(scoretable.score.Count);
     }

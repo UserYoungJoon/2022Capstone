@@ -16,6 +16,7 @@ public partial class GameManager : MonoBehaviour
 
     private CSVConverter CSVConverter;
     private Notes notes;
+    public StageMenu stgMenu;
 
     private int userScore = 0;
 
