@@ -53,7 +53,7 @@ public partial class GameManager
         int wholeStreetLen = (int)goal.transform.position.z;
 
         // 1. Generate street to goals
-        const int START_STREET_POS = 10;
+        const int START_STREET_POS = 0;
         float nowStreetLen = START_STREET_POS;
         while ((wholeStreetLen - nowStreetLen) > -30)// until [Street.Length > ... ]
         {
