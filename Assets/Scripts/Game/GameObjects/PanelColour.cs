@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PanelColour : MonoBehaviour
 {
-    private const string CorotineName = "Fade";
-    private bool isActvieCollide = false;
-    public Material color;
     public GameObject panel;
 
     private void OnTriggerStay(Collider other) 
@@ -15,7 +12,7 @@ public class PanelColour : MonoBehaviour
         {
             if(PlayerBall.inputTiming == true)
             {
-                panel.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                panel.transform.Find("ring").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
             }
         }
     }

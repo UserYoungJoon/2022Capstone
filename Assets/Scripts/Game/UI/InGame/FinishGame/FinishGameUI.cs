@@ -21,7 +21,7 @@ public class FinishGameUI : MonoBehaviour
         backBtn.Bind(uiManager);
     }
 
-    public void SetBeforeOpen(int resultScore,bool isClearGame,Sprite songSprite)
+    public void SetBeforeOpen(int resultScore,bool isClearGame, Sprite songSprite)
     {
         this.resultScore.text = resultScore.ToString();
         if (isClearGame)
@@ -29,6 +29,6 @@ public class FinishGameUI : MonoBehaviour
         else
             gameResult.text = OVER_MESSAGE;
 
-        //songImage.sprite = songSprite;
+        songImage.sprite = songSprite;
     }
 }

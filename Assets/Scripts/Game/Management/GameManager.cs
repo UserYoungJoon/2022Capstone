@@ -16,6 +16,7 @@ public partial class GameManager : MonoBehaviour
 
     private CSVConverter CSVConverter;
     private Notes notes;
+    public StageMenu stgMenu;
 
     private int userScore = 0;
 
@@ -28,6 +29,7 @@ public partial class GameManager : MonoBehaviour
         //Initial
         InitWorldGenerator();
         InitGameObj();
+        InitScoreFile();
         notes.Init();
         CSVConverter.Init();
         cameraMoving.Init();
@@ -113,7 +115,6 @@ public static class Timer
 
     public static void MeltTime()
     {
-        Debug.Log("gtrgrrgbgrb");
         Time.timeScale = 1;
     }
 }

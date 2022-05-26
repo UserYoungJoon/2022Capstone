@@ -28,12 +28,10 @@ public partial class GameManager
 
     string SELECT_SONG; // will be dynamic variable
     const string AIRPLANE = "Airplane";//temp code pls modify to make dynamically
-    const string TWINKLE_STAR = "TTLS";
-    const string SLOWAIRPLANE = "60Airplane";
     public void SetBeforeGenerate()
     {
         ClearWorld();
-        CSVConverter.MakeBeatMaps(SLOWAIRPLANE);
+        CSVConverter.MakeBeatMaps(AIRPLANE);
         floor.SetBeforeRun();
         beatsmap.SetBeforeRun();
     }
@@ -55,25 +53,25 @@ public partial class GameManager
         int wholeStreetLen = (int)goal.transform.position.z;
 
         // 1. Generate street to goals
-        const int START_STREET_POS = 10;
+        const int START_STREET_POS = 0;
         float nowStreetLen = START_STREET_POS;
-        while ((wholeStreetLen - nowStreetLen) > 25)// until [Street.Length > ... ]
+        while ((wholeStreetLen - nowStreetLen) > -30)// until [Street.Length > ... ]
         {
             GameObject nowStreet = Instantiate(streets[Random.Range(0, streets.Count)], environmentIndexer);
             var pos = nowStreet.transform.position;
             nowStreet.transform.position = new Vector3(pos.x, pos.y, nowStreetLen);
-            nowStreetLen += 25;
+            nowStreetLen += 10;
         }
 
         nowStreetLen -= 12.5f;
-        // 2. Generate shortStreet to goals
-        while ((wholeStreetLen - nowStreetLen) > -30)
-        {
-            GameObject nowStreet = Instantiate(shortStreets[Random.Range(0, shortStreets.Count)], environmentIndexer);
-            var pos = nowStreet.transform.position;
-            nowStreet.transform.position = new Vector3(pos.x, pos.y, nowStreetLen);
-            nowStreetLen += 12.5f;
-        }
+        // // 2. Generate shortStreet to goals
+        // while ((wholeStreetLen - nowStreetLen) > -30)
+        // {
+        //     GameObject nowStreet = Instantiate(shortStreets[Random.Range(0, shortStreets.Count)], environmentIndexer);
+        //     var pos = nowStreet.transform.position;
+        //     nowStreet.transform.position = new Vector3(pos.x, pos.y, nowStreetLen);
+        //     nowStreetLen += 12.5f;
+        // }
 
 
         // 3. Generate Goal
