@@ -58,6 +58,7 @@ public partial class GameManager
             string str = File.ReadAllText(Application.dataPath + "/TestJson.json");
             
             scoretable = JsonUtility.FromJson<Scoretable>(JsonUtility.ToJson(str));
+            
             Debug.Log("Count " + scoretable.score.Count);
             
             Debug.Log("Successfully load json file: " + str);

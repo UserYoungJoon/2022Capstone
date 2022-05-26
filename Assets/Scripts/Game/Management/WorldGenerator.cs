@@ -55,23 +55,23 @@ public partial class GameManager
         // 1. Generate street to goals
         const int START_STREET_POS = 10;
         float nowStreetLen = START_STREET_POS;
-        while ((wholeStreetLen - nowStreetLen) > 25)// until [Street.Length > ... ]
+        while ((wholeStreetLen - nowStreetLen) > -30)// until [Street.Length > ... ]
         {
             GameObject nowStreet = Instantiate(streets[Random.Range(0, streets.Count)], environmentIndexer);
             var pos = nowStreet.transform.position;
             nowStreet.transform.position = new Vector3(pos.x, pos.y, nowStreetLen);
-            nowStreetLen += 25;
+            nowStreetLen += 10;
         }
 
         nowStreetLen -= 12.5f;
-        // 2. Generate shortStreet to goals
-        while ((wholeStreetLen - nowStreetLen) > -30)
-        {
-            GameObject nowStreet = Instantiate(shortStreets[Random.Range(0, shortStreets.Count)], environmentIndexer);
-            var pos = nowStreet.transform.position;
-            nowStreet.transform.position = new Vector3(pos.x, pos.y, nowStreetLen);
-            nowStreetLen += 12.5f;
-        }
+        // // 2. Generate shortStreet to goals
+        // while ((wholeStreetLen - nowStreetLen) > -30)
+        // {
+        //     GameObject nowStreet = Instantiate(shortStreets[Random.Range(0, shortStreets.Count)], environmentIndexer);
+        //     var pos = nowStreet.transform.position;
+        //     nowStreet.transform.position = new Vector3(pos.x, pos.y, nowStreetLen);
+        //     nowStreetLen += 12.5f;
+        // }
 
 
         // 3. Generate Goal

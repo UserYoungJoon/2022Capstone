@@ -19,10 +19,11 @@ public class PlayerBall : MonoBehaviour
     public static bool inputTiming;
     private bool isPressed;
     private int sideNumber;
-
+    private int countdown;
     #region Initializing section
     public void Init()
     {
+        countdown = 4;
         isJumping = false;
         inputTiming = false;
         isPressed = false;
@@ -30,7 +31,6 @@ public class PlayerBall : MonoBehaviour
         points.Add(this.gameObject.transform.position);
         currentLocation = 0;
         sideNumber = 0;
-        
     }
 
     public void Bind(List<Vector3> pts, List<string> sds, List<GameObject> plist)
@@ -97,15 +97,31 @@ public class PlayerBall : MonoBehaviour
         //     rigid.velocity = new Vector3(0, -10, 0);
         // }
     }
-
-
+    IEnumerator Countdown()
+    {
+        while(true)
+        {
+            if(countdown <= 0)
+                break;
+            countdown = countdown - 1;
+            Debug.Log(countdown + "초 남음");
+            yield return new WaitForSeconds(1);
+        }
+    }
+    private void FixedUpdate() {
+        StartCoroutine(Countdown());
+        
+    }
 
     void Update()
     {
-        Move();
-        autoMoving();
-        transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
-        UserInput();
+        if(countdown <= 0)
+        {
+            Move();
+            autoMoving();
+            transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
+            UserInput();
+        }
     }
 
     #region Move control section
