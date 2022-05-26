@@ -165,13 +165,17 @@ public class PlayerBall : MonoBehaviour
         if (other.tag == TagType.WAY_POINT && currentLocation == 0)
         {
             SoundManager.Instance.PlaySongSound();
-            // 싱크 디버깅용. 싱크 해결 되면 아래 코드 제거할 예정
-            //GameObject.Find("SoundManager").transform.Find("Sync").gameObject.SetActive(true);
         }
         if (other.tag == TagType.WAY_POINT)
         {
             isJumping = false;
-            panelList[currentLocation + 1].GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
+            if(panelList[currentLocation + 1].gameObject.tag == "Finish")
+            {
+                panelList[currentLocation + 1].GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            }
+            else {
+                panelList[currentLocation + 1].transform.Find("ring").GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
+            }
             
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];

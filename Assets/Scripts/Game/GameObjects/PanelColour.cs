@@ -12,7 +12,7 @@ public class PanelColour : MonoBehaviour
         {
             if(PlayerBall.inputTiming == true)
             {
-                panel.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                panel.transform.Find("ring").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
             }
         }
     }

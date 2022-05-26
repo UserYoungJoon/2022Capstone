@@ -22,3 +22,6 @@ public class Panel : MonoBehaviour
         beatsmap.ShowNextBlock();
     }
 }
+
+
+// Scale 0.8 0.05 0.8
