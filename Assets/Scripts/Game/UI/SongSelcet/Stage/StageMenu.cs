@@ -45,6 +45,12 @@ public class StageMenu : MonoBehaviour
 
         //AudioManager.instance.PlayBGM("BGM" + currentSong);
     }
+
+    public string GetCurrentSong()
+    {
+        string tmp = songList[currentSong].songname;
+        return tmp;
+    }
     public void Update()
     {
         if (currentSong == songList.Length)

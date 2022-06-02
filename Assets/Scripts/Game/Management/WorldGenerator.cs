@@ -26,12 +26,16 @@ public partial class GameManager
 
     }
 
-    string SELECT_SONG; // will be dynamic variable
+    public string SELECT_SONG; // will be dynamic variable
+    public void SetSelectSong(string selectedSong)
+    {
+        this.SELECT_SONG = selectedSong;
+    }
     const string AIRPLANE = "Airplane";//temp code pls modify to make dynamically
     public void SetBeforeGenerate()
     {
         ClearWorld();
-        CSVConverter.MakeBeatMaps(AIRPLANE);
+        CSVConverter.MakeBeatMaps(SELECT_SONG);
         floor.SetBeforeRun();
         beatsmap.SetBeforeRun();
     }

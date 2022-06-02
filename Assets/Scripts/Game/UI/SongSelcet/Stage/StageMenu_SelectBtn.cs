@@ -5,6 +5,8 @@ using UnityEngine;
 public class StageMenu_SelectBtn : UIButton
 {
     private UIManager uIManager;
+    public GameManager gameManager;
+    public StageMenu stgMenu;
     public void Bind(UIManager mgr)
     {
         uIManager = mgr;
@@ -12,8 +14,10 @@ public class StageMenu_SelectBtn : UIButton
 
     public override void ClickEvent()
     {
-        
         SoundManager.Instance.PlaySFXSound("metronome_tick"); // 꼭 SoundManager에 SFX Elements List에 추가해야되요!!
+        gameManager.SetSelectSong("Airplane");
+        SoundManager.Instance.SetSongname("AirplaneFull");
+        // Debug.Log(stgMenu.GetCurrentSong());
         uIManager.SwitchGameStateToGame();
     }
 }
