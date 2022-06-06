@@ -41,14 +41,13 @@ public class StageMenu : MonoBehaviour
         composer.text = songList[currentSong].composer;
         imgDisk.sprite = songList[currentSong].sprite;
         level.text = songList[currentSong].level;
-        //maxScore.text = songList[currentSong].maxScore;
-
-        //AudioManager.instance.PlayBGM("BGM" + currentSong);
+        
+        Debug.Log(songname.text.ToString());
     }
 
     public string GetCurrentSong()
     {
-        string tmp = songList[currentSong].songname;
+        string tmp = songname.text.ToString();
         return tmp;
     }
     public void Update()

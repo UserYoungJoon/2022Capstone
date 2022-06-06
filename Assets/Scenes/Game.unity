@@ -2394,7 +2394,7 @@ PrefabInstance:
     - target: {fileID: 1094535122779378587, guid: 9cee62ffaa35fb146ba249601171981b, type: 3}
       propertyPath: stgMenu
       value: 
-      objectReference: {fileID: 1233845364}
+      objectReference: {fileID: 1590206943}
     - target: {fileID: 1094535122779378587, guid: 9cee62ffaa35fb146ba249601171981b, type: 3}
       propertyPath: gameManager
       value: 

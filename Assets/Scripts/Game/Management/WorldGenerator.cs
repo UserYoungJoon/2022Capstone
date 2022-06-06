@@ -31,7 +31,6 @@ public partial class GameManager
     {
         this.SELECT_SONG = selectedSong;
     }
-    const string AIRPLANE = "Airplane";//temp code pls modify to make dynamically
     public void SetBeforeGenerate()
     {
         ClearWorld();
