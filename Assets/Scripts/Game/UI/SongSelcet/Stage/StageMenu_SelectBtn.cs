@@ -20,9 +20,13 @@ public class StageMenu_SelectBtn : UIButton
         if(stgMenu.GetCurrentSong().Equals("Airplane"))
         {
             tmpCurrentSong = "AirplaneFull";
+            SoundManager.Instance.SetSongname(tmpCurrentSong);
+        }
+        else
+        {
+            SoundManager.Instance.SetSongname(stgMenu.GetCurrentSong());
         }
         gameManager.SetSelectSong(stgMenu.GetCurrentSong());
-        SoundManager.Instance.SetSongname(tmpCurrentSong);
         // Debug.Log(stgMenu.GetCurrentSong());
         uIManager.SwitchGameStateToGame();
     }
