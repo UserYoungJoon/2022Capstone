@@ -16,7 +16,7 @@ public class Floor : MonoBehaviour
 
     public void SetBeforeRun()
     {
-        int goalPosZ = (int)goal.transform.position.z;
+        int goalPosZ =  400; // (int)goal.transform.position.z;
         var size = boxCollider.size;
         size = new Vector3(30, 0.2f, goalPosZ + 10);
         boxCollider.size = size;
