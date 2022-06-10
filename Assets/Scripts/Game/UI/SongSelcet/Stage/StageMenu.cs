@@ -42,7 +42,6 @@ public class StageMenu : MonoBehaviour
         imgDisk.sprite = songList[currentSong].sprite;
         level.text = songList[currentSong].level;
         
-        Debug.Log(songname.text.ToString());
     }
 
     public string GetCurrentSong()

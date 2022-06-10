@@ -53,6 +53,12 @@ public partial class GameManager
 
     public void GenerateWorld()
     {
+        // 0. Generate Goal
+        Vector3 lastPanelPosition = CSVConverter.panelPositionList[CSVConverter.panelPositionList.Count - 1];
+        Vector3 goalPosition = new Vector3(0, 0, lastPanelPosition.z + 10f);
+        goal.transform.position = goalPosition;
+        
+
         int wholeStreetLen = (int)goal.transform.position.z;
 
         // 1. Generate street to goals
@@ -77,8 +83,7 @@ public partial class GameManager
         // }
 
 
-        // 3. Generate Goal
-        //   - 
+        
 
         isCleared = false;
     }

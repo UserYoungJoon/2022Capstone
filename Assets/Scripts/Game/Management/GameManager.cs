@@ -60,14 +60,6 @@ public partial class GameManager : MonoBehaviour
         NONE
     }
     private eGameState gameState;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.J) && gameState != eGameState.GAME)
-        {
-            gameState = eGameState.GAME;
-            SwitchGameState(eGameState.GAME);
-        }
-    }
 
     public void SwitchGameState(eGameState to)
     {

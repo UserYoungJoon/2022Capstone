@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
         finishGameUI.gameObject.SetActive(true);
         Timer.FreezeTime();
     }
-
+    
     public void SwitchGameStateToGame()
     {
         gameManager.SwitchGameState(GameManager.eGameState.GAME);
