@@ -20,9 +20,11 @@ public class PlayerBall : MonoBehaviour
     private bool isPressed;
     private int sideNumber;
     private int count;
+    private float velo_up;
     #region Initializing section
     public void Init()
     {
+        velo_up = 0.02f;
         count = 4;
         isJumping = false;
         inputTiming = false;
@@ -43,6 +45,7 @@ public class PlayerBall : MonoBehaviour
 
     public void SetBeforeRun()
     {
+        velo_up = 0.02f;
         count = 4;
         nowPos = startPos.position;
         transform.position = nowPos;
@@ -67,9 +70,10 @@ public class PlayerBall : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && inputTiming && sides[sideNumber].Equals("Left"))
         {
             // Left side panel pos.x = -1
+        Debug.Log(transform.position.y);
             inputTiming = false;
             isPressed = true;
-            Debug.Log("왼쪽누름");
+            //Debug.Log("왼쪽누름");
             manager.CalculateScore(transform.position.y);
         }
         
@@ -77,9 +81,10 @@ public class PlayerBall : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) && inputTiming && sides[sideNumber].Equals("Center"))
         {
             // Center panel pos.x = 0
+        Debug.Log(transform.position.y);
             inputTiming = false;
             isPressed = true;
-            Debug.Log("가운데누름");
+            //Debug.Log("가운데누름");
             manager.CalculateScore(transform.position.y);
         }
         
@@ -87,9 +92,10 @@ public class PlayerBall : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.J) && inputTiming && sides[sideNumber].Equals("Right"))
         {
             // Right side panel pos.x = 1
+        Debug.Log(transform.position.y);
             inputTiming = false;
             isPressed = true;
-            Debug.Log("오른쪽누름");
+            //Debug.Log("오른쪽누름");
             manager.CalculateScore(transform.position.y);
         }
     }
@@ -141,11 +147,17 @@ public class PlayerBall : MonoBehaviour
         deltaTime = (nextPos.z - nowPos.z - halfPanelSize) / forwardSpeed;
         Vector3 vector = rigid.velocity;
         vector.x = (nextPos.x - transform.position.x) / deltaTime;
-        vector.y = -Physics.gravity.y * deltaTime / 2 + 0.1f;   //보정치0.1
+        vector.y = -Physics.gravity.y * deltaTime / 2 + 0.1f + velo_up;   //보정치0.1
         vector.z = forwardSpeed;
         rigid.velocity = vector;
 
         isJumping = true;
+
+        if(transform.position.y <= 0.04f)
+        {
+            velo_up += 0.03f;
+            Debug.Log("Too low");
+        }
         // Debug.Log((transform.position - nowPos).z);
         // Debug.Log(transform.position.y);
         // manager.CalculateScore(transform.position.y);

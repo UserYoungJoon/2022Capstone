@@ -11,26 +11,26 @@ public partial class GameManager
     {
         int resScore = 0;
         eScoreType scoreType = eScoreType.NONE;
-        if (pos <= 0.05f)
+        if (pos <= 0.17f)
         {
             //Debug.Log("PERFECT");
             scoreType = eScoreType.PERFECT;
             resScore = 300;
             
         }
-        else if (pos <= 0.1f)
+        else if (pos <= 0.2f)
         {
             //Debug.Log("GREAT");
             scoreType = eScoreType.GREAT;
             resScore = 200;
         }
-        else if (pos <= 0.3f)
+        else if (pos <= 0.25f)
         {
             //Debug.Log("GOOD");
             scoreType = eScoreType.GOOD;
             resScore = 100;
         }
-        else if(pos <= 0.5f)
+        else
         {
             //Debug.Log("BAD");
             scoreType = eScoreType.BAD;
