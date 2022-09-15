@@ -57,7 +57,7 @@ public class PlayerBall : MonoBehaviour
         panelList.Add(GameObject.FindWithTag(TagType.FINISH));
         sides.Add(TagType.FINISH);
         forwardSpeed = CSVConverter.mapDistance/(CSVConverter.lastTime/120)*(60/60)+2.22f;    //(60/bpm), 보정치2
-         // Debug.Log("forwardSpeed:"+forwardSpeed +"lTime"+ CSVConverter.lastTime);
+        // Debug.Log("forwardSpeed:"+forwardSpeed +"lTime"+ CSVConverter.lastTime);
         gameObject.SetActive(true);
         rigid.velocity = new Vector3 (0, 0, 0);
         StartCoroutine(Countdown());
@@ -70,7 +70,7 @@ public class PlayerBall : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && inputTiming && sides[sideNumber].Equals("Left"))
         {
             // Left side panel pos.x = -1
-        Debug.Log(transform.position.y);
+            Debug.Log(transform.position.y);
             inputTiming = false;
             isPressed = true;
             //Debug.Log("왼쪽누름");
@@ -101,14 +101,11 @@ public class PlayerBall : MonoBehaviour
     }
     IEnumerator Countdown()
     {
-        Debug.Log("Coroutine Working");
-        Debug.Log("Called");
         while(true)
         {
             yield return new WaitForSecondsRealtime(1);
             if(count == 0)
             {
-                Debug.Log("멈춰야됨");
                 break;
             }
             count = count - 1;
@@ -191,7 +188,6 @@ public class PlayerBall : MonoBehaviour
             
             nowPos = points[currentLocation];
             nextPos = points[currentLocation + 1];
-            //Debug.LogFormat("{0}, {1}", nextPos.x, nextPos.z);
             currentLocation++;
         }
     }
